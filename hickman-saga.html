@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Hickman Saga — Complete Reading List</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@400;600;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=JetBrains+Mono:wght@300;400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #07070f;
+      --text: #e4d8c0;
+      --text-muted: #5e5648;
+      --border: rgba(228, 216, 192, 0.07);
+      --header-h: 58px;
+      --sidebar-w: 210px;
+      --arc-color: #ffffff;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 14px; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      min-height: 100vh;
+    }
+
+    /* GRAIN */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='250' height='250'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='250' height='250' filter='url(%23n)' opacity='0.4'/%3E%3C/svg%3E");
+      opacity: 0.04;
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    /* ─── TOP BAR ─── */
+    #top-bar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: var(--header-h);
+      background: rgba(7, 7, 15, 0.95);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      z-index: 500;
+      display: flex;
+      align-items: center;
+      padding: 0 24px;
+      gap: 20px;
+    }
+
+    .saga-wordmark {
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+    }
+    .wordmark-sub {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 7.5px;
+      letter-spacing: 0.22em;
+      color: var(--text-muted);
+      text-transform: uppercase;
+    }
+    .wordmark-main {
+      font-family: 'Cinzel Decorative', cursive;
+      font-weight: 700;
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      color: #d4c4a0;
+      white-space: nowrap;
+    }
+
+    .divider-v {
+      width: 1px;
+      height: 28px;
+      background: var(--border);
+      flex-shrink: 0;
+    }
+
+    .progress-track {
+      flex: 1;
+      height: 2px;
+      background: rgba(228, 216, 192, 0.08);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+    #global-bar {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #c89a2e 0%, #d4af37 100%);
+      border-radius: 2px;
+      transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    #progress-text {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10.5px;
+      color: var(--text-muted);
+      white-space: nowrap;
+      flex-shrink: 0;
+      letter-spacing: 0.04em;
+    }
+    #progress-text span {
+      color: #c89a2e;
+    }
+
+    /* ─── LAYOUT ─── */
+    #layout {
+      display: flex;
+      padding-top: var(--header-h);
+      min-height: 100vh;
+    }
+
+    /* ─── SIDEBAR ─── */
+    #sidebar {
+      width: var(--sidebar-w);
+      flex-shrink: 0;
+      position: sticky;
+      top: var(--header-h);
+      height: calc(100vh - var(--header-h));
+      overflow-y: auto;
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      scrollbar-width: none;
+    }
+    #sidebar::-webkit-scrollbar { display: none; }
+
+    .sidebar-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 8px;
+      letter-spacing: 0.22em;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      padding: 20px 18px 10px;
+    }
+
+    .sidebar-links { flex: 1; }
+
+    .sidebar-link {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      padding: 8px 18px;
+      text-decoration: none;
+      color: #3e3730;
+      font-size: 11.5px;
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 600;
+      transition: color 0.2s, border-color 0.2s, background 0.2s;
+      border-left: 2px solid transparent;
+      letter-spacing: 0.02em;
+    }
+    .sidebar-link:hover {
+      color: var(--text);
+      background: rgba(228, 216, 192, 0.03);
+      border-left-color: rgba(228, 216, 192, 0.15);
+    }
+    .sidebar-link.active {
+      color: var(--arc-color);
+      border-left-color: var(--arc-color);
+      background: rgba(228, 216, 192, 0.025);
+    }
+    .sidebar-roman {
+      font-family: 'Cinzel', serif;
+      font-weight: 900;
+      font-size: 9.5px;
+      color: var(--arc-color);
+      flex-shrink: 0;
+      width: 20px;
+      opacity: 0.7;
+    }
+    .sidebar-link.active .sidebar-roman { opacity: 1; }
+    .sidebar-name { flex: 1; line-height: 1.2; }
+    .sidebar-n {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
+      color: var(--text-muted);
+      flex-shrink: 0;
+    }
+
+    /* Arc progress dot row in sidebar */
+    .sidebar-dots {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2px;
+      padding: 0 18px 10px 47px;
+    }
+    .dot {
+      width: 4px; height: 4px;
+      border-radius: 50%;
+      background: rgba(228,216,192,0.12);
+      transition: background 0.3s;
+    }
+    .dot.done { background: var(--arc-color); }
+
+    .sidebar-controls {
+      padding: 14px 18px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      gap: 8px;
+    }
+    .ctrl-btn {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 8.5px;
+      letter-spacing: 0.1em;
+      padding: 6px 10px;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--text-muted);
+      cursor: pointer;
+      border-radius: 2px;
+      transition: all 0.2s;
+      flex: 1;
+      text-transform: uppercase;
+    }
+    .ctrl-btn:hover { color: var(--text); border-color: rgba(228,216,192,0.2); }
+    .ctrl-btn.danger:hover { color: #e11d48; border-color: rgba(225,29,72,0.4); }
+
+    /* ─── MAIN ─── */
+    #main-content {
+      flex: 1;
+      min-width: 0;
+      padding: 64px 52px 80px;
+    }
+
+    /* ─── ARC SECTION ─── */
+    .arc-section {
+      margin-bottom: 80px;
+      animation: fadeUp 0.6s both;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .arc-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 18px;
+      margin-bottom: 24px;
+      padding-bottom: 18px;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .arc-roman-ghost {
+      position: absolute;
+      right: -8px;
+      top: -28px;
+      font-family: 'Cinzel', serif;
+      font-weight: 900;
+      font-size: clamp(80px, 10vw, 150px);
+      color: var(--arc-color);
+      opacity: 0.045;
+      line-height: 1;
+      pointer-events: none;
+      user-select: none;
+      letter-spacing: -0.05em;
+    }
+
+    .arc-numeral {
+      font-family: 'Cinzel', serif;
+      font-weight: 900;
+      font-size: 38px;
+      color: var(--arc-color);
+      line-height: 1;
+      flex-shrink: 0;
+      width: 52px;
+      text-align: center;
+      padding-top: 3px;
+    }
+
+    .arc-info { flex: 1; }
+
+    .arc-title {
+      font-family: 'Cinzel', serif;
+      font-weight: 900;
+      font-size: clamp(18px, 2.5vw, 28px);
+      color: var(--text);
+      letter-spacing: 0.06em;
+      line-height: 1;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+    }
+
+    .arc-meta {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .arc-progress-track {
+      width: 100px;
+      height: 1.5px;
+      background: rgba(228,216,192,0.08);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+    .arc-progress-fill {
+      height: 100%;
+      width: 0%;
+      background: var(--arc-color);
+      border-radius: 2px;
+      transition: width 0.4s ease;
+    }
+
+    .arc-counter {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10.5px;
+      color: var(--arc-color);
+      letter-spacing: 0.04em;
+    }
+
+    .arc-meta-label {
+      font-size: 12px;
+      color: var(--text-muted);
+      font-style: italic;
+    }
+
+    .arc-mark-btn {
+      margin-left: auto;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 8px;
+      letter-spacing: 0.12em;
+      padding: 5px 10px;
+      border: 1px solid var(--arc-color);
+      color: var(--arc-color);
+      background: transparent;
+      cursor: pointer;
+      border-radius: 2px;
+      transition: all 0.2s;
+      text-transform: uppercase;
+      opacity: 0.5;
+    }
+    .arc-mark-btn:hover { opacity: 1; background: rgba(255,255,255,0.05); }
+
+    /* ─── GRID ─── */
+    .covers-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+      gap: 8px;
+    }
+
+    /* ─── CARD ─── */
+    .comic-card {
+      cursor: pointer;
+      border-radius: 3px;
+      overflow: hidden;
+      transition: transform 0.2s, box-shadow 0.2s;
+      background: rgba(228,216,192,0.025);
+      border: 1px solid rgba(228,216,192,0.05);
+      position: relative;
+    }
+    .comic-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.6), 0 0 0 1px var(--arc-color);
+    }
+    .comic-card:active { transform: translateY(-2px); }
+
+    .cover-wrap {
+      position: relative;
+      aspect-ratio: 2 / 3;
+      overflow: hidden;
+      background: #0c0c18;
+    }
+    .cover-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: filter 0.35s, opacity 0.35s;
+    }
+
+    /* Read state */
+    .read-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(7,7,15,0.55);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .check-icon {
+      font-family: 'Cinzel', serif;
+      font-size: 30px;
+      color: var(--arc-color);
+      line-height: 1;
+      filter: drop-shadow(0 0 10px var(--arc-color));
+    }
+    .comic-card.checked .cover-wrap img {
+      filter: grayscale(0.75) brightness(0.6);
+    }
+    .comic-card.checked .read-overlay { opacity: 1; }
+
+    /* Ext link */
+    .ext-link {
+      position: absolute;
+      bottom: 5px;
+      right: 5px;
+      width: 22px;
+      height: 22px;
+      background: rgba(7,7,15,0.88);
+      border: 1px solid rgba(228,216,192,0.15);
+      color: var(--arc-color);
+      text-decoration: none;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 2px;
+      opacity: 0;
+      transition: opacity 0.2s, border-color 0.2s;
+      z-index: 10;
+    }
+    .comic-card:hover .ext-link { opacity: 1; }
+    .ext-link:hover { border-color: var(--arc-color); }
+
+    /* Optional badge */
+    .opt-badge {
+      position: absolute;
+      top: 5px;
+      left: 5px;
+      background: rgba(7,7,15,0.88);
+      color: #c89a2e;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 7px;
+      letter-spacing: 0.12em;
+      padding: 2px 4px;
+      border-radius: 2px;
+      border: 1px solid rgba(200,154,46,0.35);
+      z-index: 5;
+    }
+
+    .card-info { padding: 5px 6px 6px; }
+    .card-title {
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 10px;
+      color: #4a4438;
+      line-height: 1.3;
+      transition: color 0.2s;
+    }
+    .comic-card:hover .card-title { color: var(--text-muted); }
+    .comic-card.checked .card-title { color: #302c26; }
+
+    /* ─── SCROLL TO TOP ─── */
+    #scroll-top {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      width: 38px;
+      height: 38px;
+      background: rgba(7,7,15,0.9);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      border-radius: 3px;
+      transition: all 0.2s;
+      opacity: 0;
+      z-index: 400;
+    }
+    #scroll-top.visible { opacity: 1; }
+    #scroll-top:hover { color: var(--text); border-color: rgba(228,216,192,0.25); }
+
+    /* ─── SCROLLBAR ─── */
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: rgba(228,216,192,0.08); border-radius: 2px; }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 800px) {
+      #sidebar { display: none; }
+      #main-content { padding: 36px 20px 60px; }
+      .covers-grid { grid-template-columns: repeat(auto-fill, minmax(82px, 1fr)); gap: 7px; }
+      .arc-mark-btn { display: none; }
+    }
+    @media (max-width: 480px) {
+      .covers-grid { grid-template-columns: repeat(auto-fill, minmax(70px, 1fr)); gap: 6px; }
+    }
+  </style>
+</head>
+<body>
+
+<div id="top-bar">
+  <div class="saga-wordmark">
+    <span class="wordmark-sub">Jonathan Hickman</span>
+    <span class="wordmark-main">THE SECRET WARS SAGA</span>
+  </div>
+  <div class="divider-v"></div>
+  <div class="progress-track">
+    <div id="global-bar"></div>
+  </div>
+  <div id="progress-text"><span id="read-count">0</span> / 254 read</div>
+</div>
+
+<div id="layout">
+  <nav id="sidebar">
+    <div class="sidebar-label">Nine Arcs</div>
+    <div class="sidebar-links" id="sidebar-links"></div>
+    <div class="sidebar-controls">
+      <button class="ctrl-btn danger" onclick="resetAll()">Reset</button>
+    </div>
+  </nav>
+  <main id="main-content"></main>
+</div>
+
+<button id="scroll-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top">↑</button>
+
+<script>
+const DATA = {"title":"Jonathan Hickman's Secret Wars Saga","source":"https://postimg.cc/SJSmWZBK","notes":"* = optional, not written by Hickman.","arcs":[{"name":"S.H.I.E.L.D.","issues":[{"id":"31599","title":"S.H.I.E.L.D. (2010) #1","series":"S.H.I.E.L.D. (2010 - 2011)","url":"https://www.marvel.com/comics/issue/31599/shield_2010_1","cover":"http://i.annihil.us/u/prod/marvel/i/mg/4/b0/5c5894693df39/portrait_incredible.jpg","releaseDate":"2010-04-07","optional":false},{"id":"30509","title":"S.H.I.E.L.D. (2010) #2","series":"S.H.I.E.L.D. (2010 - 2011)","url":"https://www.marvel.com/comics/issue/30509/shield_2010_2","cover":"http://i.annihil.us/u/prod/marvel/i/mg/6/20/5c58a263b6d40/portrait_incredible.jpg","releaseDate":"2010-06-09","optional":false},{"id":"30510","title":"S.H.I.E.L.D. (2010) #3","series":"S.H.I.E.L.D. (2010 - 2011)","url":"https://www.marvel.com/comics/issue/30510/shield_2010_3","cover":"","releaseDate":"2010-08-04","optional":false},{"id":"30511","title":"S.H.I.E.L.D. (2010) #4","series":"S.H.I.E.L.D. (2010 - 2011)","url":"https://www.marvel.com/comics/issue/30511/shield_2010_4","cover":"","releaseDate":"2010-10-06","optional":false},{"id":"30512","title":"S.H.I.E.L.D. (2010) #5","series":"S.H.I.E.L.D. (2010 - 2011)","url":"https://www.marvel.com/comics/issue/30512/shield_2010_5","cover":"","releaseDate":"2010-12-29","optional":false},{"id":"30774","title":"S.H.I.E.L.D. (2010) #6","series":"S.H.I.E.L.D. (2010 - 2011)","url":"https://www.marvel.com/comics/issue/30774/shield_2010_6","cover":"http://i.annihil.us/u/prod/marvel/i/mg/c/30/5c59adc71e3d0/portrait_incredible.jpg","releaseDate":"2011-02-16","optional":false},{"id":"38181","title":"S.H.I.E.L.D. (2011)","series":"S.H.I.E.L.D. (2011 - 2018)","url":"https://www.marvel.com/comics/issue/38181/shield_2011","cover":"http://i.annihil.us/u/prod/marvel/i/mg/9/b0/5c59b5f0e5f43/portrait_incredible.jpg","releaseDate":"2011-04-13","optional":false},{"id":"38177","title":"S.H.I.E.L.D. (2011) #1","series":"S.H.I.E.L.D. (2011 - 2018)","url":"https://www.marvel.com/comics/issue/38177/shield_2011_1","cover":"http://i.annihil.us/u/prod/marvel/i/mg/9/60/5c59c10b90fa9/portrait_incredible.jpg","releaseDate":"2011-06-01","optional":false},{"id":"38179","title":"S.H.I.E.L.D. (2011) #2","series":"S.H.I.E.L.D. (2011 - 2018)","url":"https://www.marvel.com/comics/issue/38179/shield_2011_2","cover":"http://i.annihil.us/u/prod/marvel/i/mg/4/60/5c59c988e6107/portrait_incredible.jpg","releaseDate":"2011-08-03","optional":false},{"id":"38180","title":"S.H.I.E.L.D. (2011) #3","series":"S.H.I.E.L.D. (2011 - 2018)","url":"https://www.marvel.com/comics/issue/38180/shield_2011_3","cover":"http://i.annihil.us/u/prod/marvel/i/mg/f/30/5c59e0aa4ffb3/portrait_incredible.jpg","releaseDate":"2011-10-12","optional":false},{"id":"38178","title":"S.H.I.E.L.D. (2011) #4","series":"S.H.I.E.L.D. (2011 - 2018)","url":"https://www.marvel.com/comics/issue/38178/shield_2011_4","cover":"http://i.annihil.us/u/prod/marvel/i/mg/a/b0/5c59ea987c6f7/portrait_incredible.jpg","releaseDate":"2011-12-14","optional":false},{"id":"38176","title":"S.H.I.E.L.D. (2011) #5","series":"S.H.I.E.L.D. (2011 - 2018)","url":"https://www.marvel.com/comics/issue/38176/shield_2011_5","cover":"http://i.annihil.us/u/prod/marvel/i/mg/b/e0/5afc7fd45021a/portrait_incredible.jpg","releaseDate":"2018-05-23","optional":false},{"id":"38175","title":"S.H.I.E.L.D. (2011) #6","series":"S.H.I.E.L.D. (2011 - 2018)","url":"https://www.marvel.com/comics/issue/38175/shield_2011_6","cover":"http://i.annihil.us/u/prod/marvel/i/mg/d/60/5b17054357752/portrait_incredible.jpg","releaseDate":"2018-06-13","optional":false}]},{"name":"Secret Warriors","issues":[{"id":"21211","title":"The Mighty Avengers (2007) #13","series":"The Mighty Avengers (2007 - 2010)","url":"https://www.marvel.com/comics/issue/21211/the_mighty_avengers_2007_13","cover":"http://i.annihil.us/u/prod/marvel/i/mg/c/70/58da743ca58ad/portrait_incredible.jpg","releaseDate":"2008-05-07","optional":true},{"id":"22500","title":"The Mighty Avengers (2007) #20","series":"The Mighty Avengers (2007 - 2010)","url":"https://www.marvel.com/comics/issue/22500/the_mighty_avengers_2007_20","cover":"http://i.annihil.us/u/prod/marvel/i/mg/c/70/4d24f2ecc818d/portrait_incredible.jpg","releaseDate":"2008-12-17","optional":true},{"id":"23004","title":"Dark Reign: New Nation (2008) #1","series":"Dark Reign: New Nation (2008)","url":"https://www.marvel.com/comics/issue/23004/dark_reign_new_nation_2008_1","cover":"http://i.annihil.us/u/prod/marvel/i/mg/e/90/5db1d10ac27fd/portrait_incredible.jpg","releaseDate":"2008-12-17","optional":false},{"id":"23648","title":"Secret Warriors (2009) #1","series":"Secret Warriors (2009 - 2011)","url":"https://www.marvel.com/comics/issue/23648/secret_warriors_2009_1","cover":"http://i.annihil.us/u/prod/marvel/i/mg/c/60/51f68aaba7c39/portrait_incredible.jpg","releaseDate":"2009-02-04","optional":false},{"id":"23812","title":"Secret Warriors (2009) #2","series":"Secret Warriors (2009 - 2011)","url":"https://www.marvel.com/comics/issue/23812/secret_warriors_2009_2","cover":"http://i.annihil.us/u/prod/marvel/i/mg/c/10/5a8c4e45ba54a/portrait_incredible.jpg","releaseDate":"2009-03-04","optional":false},{"id":"24002","title":"Secret Warriors (2009) #3","series":"Secret Warriors (2009 - 2011)","url":"https://www.marvel.com/comics/issue/24002/secret_warriors_2009_3","cover":"http://i.annihil.us/u/prod/marvel/i/mg/f/a0/5a8c58bb6fe5a/portrait_incredible.jpg","releaseDate":"2009-04-01","optional":false},{"id":"24208","title":"Secret Warriors (2009) #4","series":"Secret Warriors (2009 - 2011)","url":"https://www.marvel.com/comics/issue/24208/secret_warriors_2009_4","cover":"http://i.annihil.us/u/prod/marvel/i/mg/6/b0/5a8c613ca8955/portrait_incredible.jpg","releaseDate":"2009-05-13","optional":false},{"id":"26287","title":"Secret Warriors (2009) #5","series":"Secret Warriors (2009 - 2011)","url":"https://www.marvel.com/comics/issue/26287/secret_warriors_2009_5","cover":"http://i.annihil.us/u/prod/marvel/i/mg/9/40/5a8c663f0b2c6/portrait_incredible.jpg","releaseDate":"2009-06-24","optional":false},{"id":"26288","title":"Secret Warriors (2009) #6","series":"Secret Warriors (2009 - 2011)","url":"https://www.marvel.com/comics/issue/26288/secret_warriors_2009_6","cover":"http://i.annihil.us/u/prod/marvel/i/mg/6/e0/4f6752d5872ad/portrait_incredible.jpg","releaseDate":"2009-07-29","optional":false},{"id":"26289","title":"Secret Warriors (2009) #7","series":"Secret Warriors (2009 - 2011)","url":"https://www.marvel.com/comics/issue/26289/secret_warriors_2009_7","cover":"http://i.annihil.us/u/prod/marvel/i/mg/c/80/5a8c72aea559c/portrait_incredible.jpg","releaseDate":"2009-08-26","optional":false},{"id":"26290","title":"Secret Warriors (2009) #8","series":"Secret Warriors (2009 - 2011)","url":"https://www.marvel.com/comics/issue/26290/secret_warriors_2009_8","cover":"http://i.annihil.us/u/prod/marvel/i/mg/a/10/4f677cf58d50c/portrait_incredible.jpg","releaseDate":"2009-09-30","optional":false},{"id":"26291","title":"Secret Warriors (2009) #9","series":"Secret Warriors (2009 - 2011)","url":"https://www.marvel.com/comics/issue/26291/secret_warriors_2009_9","cover":"http://i.annihil.us/u/prod/marvel/i/mg/7/50/4f677e77a5a48/portrait_incredible.jpg","releaseDate":"2009-10-28","optional":false},{"id":"26283","title":"Secret Warriors (2009) #10","series":"Secret Warriors (2009 - 2011)","url":"https://www.marvel.com/comics/issue/26283/secret_warriors_2009_10","cover":"http://i.annihil.us/u/prod/marvel/i/mg/4/00/4f67809f03e81/portrait_incredible.jpg","releaseDate":"2009-11-25","optional":false},{"id":"26284","title":"Secret Warriors (2009) #11","series":"Secret Warriors (2009 - 2011)","url":"https://www.marvel.com/comics/issue/26284/secret_warriors_2009_11","cover":"http://i.annihil.us/u/prod/marvel/i/mg/7/00/51f68aa198b78/portrait_incredible.jpg","releaseDate":"2009-12-23","optional":false},{"id":"26285","title":"Secret Warriors (2009) #12","series":"Secret Warriors (2009 - 2011)","url":"https://www.marvel.com/comics/issue/26285/secret_warriors_2009_12","cover":"http://i.annihil.us/u/prod/marvel/i/mg/1/f0/4f678969265a9/portrait_incredible.jpg","releaseDate":"2010-01-27","optional":false},{"id":"30174","title":"Secret Warriors (2009) #13","series":"Secret Warriors (2009 - 2011)","url":"https://www.marvel.com/comics/issue/30174/secret_warriors_2009_13","cover":"http://i.annihil.us/u/prod/marvel/i/mg/9/c0/5a8d7f0c618e5/portrait_incredible.jpg","releaseDate":"2010-02-24","optional":false},{"id":"30175","title":"Secret Warriors (2009) #14","series":"Secret Warriors (2009 - 2011)","url":"https://www.marvel.com/comics/issue/30175/secret_warriors_2009_14","cover":"http://i.annihil.us/u/prod/marvel/i/mg/7/30/5a8d85635bd78/portrait_incredible.jpg","releaseDate":"2010-03-24","optional":false},{"id":"32559","title":"Secret Warriors (2009) #15","series":"Secret Warriors (2009 - 2011)","url":"https://www.marvel.com/comics/issue/32559/secret_warriors_2009_15","cover":"http://i.annihil.us/u/prod/marvel/i/mg/4/00/4f6792223f9d3/portrait_incredible.jpg","releaseDate":"2010-04-28","optional":false},{"id":"30177","title":"Secret Warriors (2009) #16","series":"Secret Warriors (2009 - 2011)","url":"https://www.marvel.com/comics/issue/30177/secret_warriors_2009_16","cover":"http://i.annihil.us/u/prod/marvel/i/mg/3/c0/5a8d96114784a/portrait_incredible.jpg","releaseDate":"2010-05-26","optional":false},{"id":"30714","title":"Secret Warriors (2009) #17","series":"Secret Warriors (2009 - 2011)","url":"https://www.marvel.com/comics/issue/30714/secret_warriors_2009_17","cover":"http://i.annihil.us/u/prod/marvel/i/mg/f/e0/5a8d9d81df5cc/portrait_incredible.jpg","releaseDate":"2010-06-23","optional":false},{"id":"30178","title":"Secret Warriors (2009) #18","series":"Secret Warriors (2009 - 2011)","url":"https://www.marvel.com/comics/issue/30178/secret_warriors_2009_18","cover":"http://i.annihil.us/u/prod/marvel/i/mg/4/50/4f6796327c75c/portrait_incredible.jpg","releaseDate":"2010-08-04","optional":false},{"id":"30179","title":"Secret Warriors (2009) #19","series":"Secret Warriors (2009 - 2011)","url":"https://www.marvel.com/comics/issue/30179/secret_warriors_2009_19","cover":"http://i.annihil.us/u/prod/marvel/i/mg/4/20/4f6799e4612c3/portrait_incredible.jpg","releaseDate":"2010-08-25","optional":false},{"id":"30180","title":"Secret Warriors (2009) #20","series":"Secret Warriors (2009 - 2011)","url":"https://www.marvel.com/comics/issue/30180/secret_warriors_2009_20","cover":"http://i.annihil.us/u/prod/marvel/i/mg/f/f0/5a8dae719efd6/portrait_incredible.jpg","releaseDate":"2010-09-29","optional":false},{"id":"30181","title":"Secret Warriors (2009) #21","series":"Secret Warriors (2009 - 2011)","url":"https://www.marvel.com/comics/issue/30181/secret_warriors_2009_21","cover":"http://i.annihil.us/u/prod/marvel/i/mg/9/70/4f79bef17b050/portrait_incredible.jpg","releaseDate":"2010-10-27","optional":false},{"id":"30182","title":"Secret Warriors (2009) #22","series":"Secret Warriors (2009 - 2011)","url":"https://www.marvel.com/comics/issue/30182/secret_warriors_2009_22","cover":"http://i.annihil.us/u/prod/marvel/i/mg/3/70/4f79c2b340662/portrait_incredible.jpg","releaseDate":"2010-11-24","optional":false},{"id":"30183","title":"Secret Warriors (2009) #23","series":"Secret Warriors (2009 - 2011)","url":"https://www.marvel.com/comics/issue/30183/secret_warriors_2009_23","cover":"http://i.annihil.us/u/prod/marvel/i/mg/9/f0/4f79c73bb28c6/portrait_incredible.jpg","releaseDate":"2010-12-29","optional":false},{"id":"27422","title":"Dark Reign: The List - Secret Warriors (2009) #1","series":"Dark Reign: The List - Secret Warriors (2009)","url":"https://www.marvel.com/comics/issue/27422/dark_reign_the_list_-_secret_warriors_2009_1","cover":"http://i.annihil.us/u/prod/marvel/i/mg/2/30/5b5b3caddbc88/portrait_incredible.jpg","releaseDate":"2009-10-07","optional":false},{"id":"30184","title":"Secret Warriors (2009) #24","series":"Secret Warriors (2009 - 2011)","url":"https://www.marvel.com/comics/issue/30184/secret_warriors_2009_24","cover":"http://i.annihil.us/u/prod/marvel/i/mg/a/80/4f79c918c68af/portrait_incredible.jpg","releaseDate":"2011-01-26","optional":false},{"id":"36492","title":"Secret Warriors (2009) #25","series":"Secret Warriors (2009 - 2011)","url":"https://www.marvel.com/comics/issue/36492/secret_warriors_2009_25","cover":"http://i.annihil.us/u/prod/marvel/i/mg/7/50/51f68a9595f5b/portrait_incredible.jpg","releaseDate":"2011-03-02","optional":false},{"id":"36491","title":"Secret Warriors (2009) #26","series":"Secret Warriors (2009 - 2011)","url":"https://www.marvel.com/comics/issue/36491/secret_warriors_2009_26","cover":"http://i.annihil.us/u/prod/marvel/i/mg/2/20/51f68a8968869/portrait_incredible.jpg","releaseDate":"2011-04-13","optional":false},{"id":"36493","title":"Secret Warriors (2009) #27","series":"Secret Warriors (2009 - 2011)","url":"https://www.marvel.com/comics/issue/36493/secret_warriors_2009_27","cover":"http://i.annihil.us/u/prod/marvel/i/mg/6/a0/51f68a8062d4f/portrait_incredible.jpg","releaseDate":"2011-05-25","optional":false},{"id":"36494","title":"Secret Warriors (2009) #28","series":"Secret Warriors (2009 - 2011)","url":"https://www.marvel.com/comics/issue/36494/secret_warriors_2009_28","cover":"http://i.annihil.us/u/prod/marvel/i/mg/6/a0/51f68a7199ba1/portrait_incredible.jpg","releaseDate":"2011-07-27","optional":false},{"id":"32930","title":"Siege: Secret Warriors (2010) #1","series":"Siege: Secret Warriors (2010)","url":"https://www.marvel.com/comics/issue/32930/siege_secret_warriors_2010_1","cover":"http://i.annihil.us/u/prod/marvel/i/mg/5/f0/517e8034bd15a/portrait_incredible.jpg","releaseDate":"2010-04-28","optional":false}]},{"name":"Fantastic Four & FF","issues":[{"id":"23843","title":"Dark Reign: Fantastic Four (2009) #1","series":"Dark Reign: Fantastic Four (2009)","url":"https://www.marvel.com/comics/issue/23843/dark_reign_fantastic_four_2009_1","cover":"http://i.annihil.us/u/prod/marvel/i/mg/8/f0/5b5a21fa860b7/portrait_incredible.jpg","releaseDate":"2009-03-04","optional":false},{"id":"24043","title":"Dark Reign: Fantastic Four (2009) #2","series":"Dark Reign: Fantastic Four (2009)","url":"https://www.marvel.com/comics/issue/24043/dark_reign_fantastic_four_2009_2","cover":"http://i.annihil.us/u/prod/marvel/i/mg/9/a0/5b5a26927ffe1/portrait_incredible.jpg","releaseDate":"2009-04-01","optional":false},{"id":"24245","title":"Dark Reign: Fantastic Four (2009) #3","series":"Dark Reign: Fantastic Four (2009)","url":"https://www.marvel.com/comics/issue/24245/dark_reign_fantastic_four_2009_3","cover":"http://i.annihil.us/u/prod/marvel/i/mg/3/40/5b5a26e915163/portrait_incredible.jpg","releaseDate":"2009-05-20","optional":false},{"id":"24834","title":"Dark Reign: Fantastic Four (2009) #4","series":"Dark Reign: Fantastic Four (2009)","url":"https://www.marvel.com/comics/issue/24834/dark_reign_fantastic_four_2009_4","cover":"http://i.annihil.us/u/prod/marvel/i/mg/6/f0/5b5a296835ef5/portrait_incredible.jpg","releaseDate":"2009-06-17","optional":false},{"id":"24835","title":"Dark Reign: Fantastic Four (2009) #5","series":"Dark Reign: Fantastic Four (2009)","url":"https://www.marvel.com/comics/issue/24835/dark_reign_fantastic_four_2009_5","cover":"http://i.annihil.us/u/prod/marvel/i/mg/2/30/5b5a2befc4df5/portrait_incredible.jpg","releaseDate":"2009-07-22","optional":false},{"id":"25182","title":"Fantastic Four (1998) #570","series":"Fantastic Four (1998 - 2012)","url":"https://www.marvel.com/comics/issue/25182/fantastic_four_1998_570","cover":"http://i.annihil.us/u/prod/marvel/i/mg/9/50/51db29bc24a98/portrait_incredible.jpg","releaseDate":"2009-08-26","optional":false},{"id":"25183","title":"Fantastic Four (1998) #571","series":"Fantastic Four (1998 - 2012)","url":"https://www.marvel.com/comics/issue/25183/fantastic_four_1998_571","cover":"http://i.annihil.us/u/prod/marvel/i/mg/6/80/51db29b943d55/portrait_incredible.jpg","releaseDate":"2009-09-23","optional":false},{"id":"25184","title":"Fantastic Four (1998) #572","series":"Fantastic Four (1998 - 2012)","url":"https://www.marvel.com/comics/issue/25184/fantastic_four_1998_572","cover":"http://i.annihil.us/u/prod/marvel/i/mg/9/e0/51db29a95ec69/portrait_incredible.jpg","releaseDate":"2009-10-28","optional":false},{"id":"25185","title":"Fantastic Four (1998) #573","series":"Fantastic Four (1998 - 2012)","url":"https://www.marvel.com/comics/issue/25185/fantastic_four_1998_573","cover":"http://i.annihil.us/u/prod/marvel/i/mg/8/90/51db29a7d1d00/portrait_incredible.jpg","releaseDate":"2009-11-25","optional":false},{"id":"25186","title":"Fantastic Four (1998) #574","series":"Fantastic Four (1998 - 2012)","url":"https://www.marvel.com/comics/issue/25186/fantastic_four_1998_574","cover":"http://i.annihil.us/u/prod/marvel/i/mg/c/10/5ad8ac8ad8131/portrait_incredible.jpg","releaseDate":"2009-12-23","optional":false},{"id":"25187","title":"Fantastic Four (1998) #575","series":"Fantastic Four (1998 - 2012)","url":"https://www.marvel.com/comics/issue/25187/fantastic_four_1998_575","cover":"http://i.annihil.us/u/prod/marvel/i/mg/6/00/51db2ce101887/portrait_incredible.jpg","releaseDate":"2010-01-27","optional":false},{"id":"25188","title":"Fantastic Four (1998) #576","series":"Fantastic Four (1998 - 2012)","url":"https://www.marvel.com/comics/issue/25188/fantastic_four_1998_576","cover":"http://i.annihil.us/u/prod/marvel/i/mg/9/60/51db2cd16e956/portrait_incredible.jpg","releaseDate":"2010-02-24","optional":false},{"id":"29597","title":"Fantastic Four (1998) #577","series":"Fantastic Four (1998 - 2012)","url":"https://www.marvel.com/comics/issue/29597/fantastic_four_1998_577","cover":"http://i.annihil.us/u/prod/marvel/i/mg/b/b0/51db2cd00ea78/portrait_incredible.jpg","releaseDate":"2010-03-31","optional":false},{"id":"32548","title":"Fantastic Four (1998) #578","series":"Fantastic Four (1998 - 2012)","url":"https://www.marvel.com/comics/issue/32548/fantastic_four_1998_578","cover":"http://i.annihil.us/u/prod/marvel/i/mg/b/d0/51db2cc18d3b6/portrait_incredible.jpg","releaseDate":"2010-04-28","optional":false},{"id":"29599","title":"Fantastic Four (1998) #579","series":"Fantastic Four (1998 - 2012)","url":"https://www.marvel.com/comics/issue/29599/fantastic_four_1998_579","cover":"http://i.annihil.us/u/prod/marvel/i/mg/f/70/51db2cbb9ef67/portrait_incredible.jpg","releaseDate":"2010-05-26","optional":false},{"id":"29600","title":"Fantastic Four (1998) #580","series":"Fantastic Four (1998 - 2012)","url":"https://www.marvel.com/comics/issue/29600/fantastic_four_1998_580","cover":"http://i.annihil.us/u/prod/marvel/i/mg/2/f0/51db31d705491/portrait_incredible.jpg","releaseDate":"2010-06-23","optional":false},{"id":"29601","title":"Fantastic Four (1998) #581","series":"Fantastic Four (1998 - 2012)","url":"https://www.marvel.com/comics/issue/29601/fantastic_four_1998_581","cover":"http://i.annihil.us/u/prod/marvel/i/mg/6/a0/5ad8c416528b8/portrait_incredible.jpg","releaseDate":"2010-07-28","optional":false},{"id":"29602","title":"Fantastic Four (1998) #582","series":"Fantastic Four (1998 - 2012)","url":"https://www.marvel.com/comics/issue/29602/fantastic_four_1998_582","cover":"http://i.annihil.us/u/prod/marvel/i/mg/c/c0/5ad8df8a6f505/portrait_incredible.jpg","releaseDate":"2010-08-25","optional":false},{"id":"29603","title":"Fantastic Four (1998) #583","series":"Fantastic Four (1998 - 2012)","url":"https://www.marvel.com/comics/issue/29603/fantastic_four_1998_583","cover":"http://i.annihil.us/u/prod/marvel/i/mg/e/70/5ad8ea01b2f0c/portrait_incredible.jpg","releaseDate":"2010-09-22","optional":false},{"id":"29604","title":"Fantastic Four (1998) #584","series":"Fantastic Four (1998 - 2012)","url":"https://www.marvel.com/comics/issue/29604/fantastic_four_1998_584","cover":"http://i.annihil.us/u/prod/marvel/i/mg/c/50/5ad8f25f0f6c0/portrait_incredible.jpg","releaseDate":"2010-10-27","optional":false},{"id":"29605","title":"Fantastic Four (1998) #585","series":"Fantastic Four (1998 - 2012)","url":"https://www.marvel.com/comics/issue/29605/fantastic_four_1998_585","cover":"http://i.annihil.us/u/prod/marvel/i/mg/f/20/5ad9fb0c8b0d5/portrait_incredible.jpg","releaseDate":"2010-11-24","optional":false},{"id":"29606","title":"Fantastic Four (1998) #586","series":"Fantastic Four (1998 - 2012)","url":"https://www.marvel.com/comics/issue/29606/fantastic_four_1998_586","cover":"http://i.annihil.us/u/prod/marvel/i/mg/6/40/5ada05d386392/portrait_incredible.jpg","releaseDate":"2010-12-22","optional":false},{"id":"36060","title":"Fantastic Four (1998) #587","series":"Fantastic Four (1998 - 2012)","url":"https://www.marvel.com/comics/issue/36060/fantastic_four_1998_587","cover":"http://i.annihil.us/u/prod/marvel/i/mg/8/c0/5ada1371ca196/portrait_incredible.jpg","releaseDate":"2011-01-26","optional":false},{"id":"36059","title":"Fantastic Four (1998) #588","series":"Fantastic Four (1998 - 2012)","url":"https://www.marvel.com/comics/issue/36059/fantastic_four_1998_588","cover":"http://i.annihil.us/u/prod/marvel/i/mg/e/90/5ada2dff10a81/portrait_incredible.jpg","releaseDate":"2011-02-23","optional":false},{"id":"37398","title":"FF (2011) #1","series":"FF (2011 - 2012)","url":"https://www.marvel.com/comics/issue/37398/ff_2011_1","cover":"http://i.annihil.us/u/prod/marvel/i/mg/b/d0/5ad0de1a029f6/portrait_incredible.jpg","releaseDate":"2011-03-23","optional":false},{"id":"37400","title":"FF (2011) #2","series":"FF (2011 - 2012)","url":"https://www.marvel.com/comics/issue/37400/ff_2011_2","cover":"http://i.annihil.us/u/prod/marvel/i/mg/9/30/51f68be0b365a/portrait_incredible.jpg","releaseDate":"2011-04-27","optional":false},{"id":"37404","title":"FF (2011) #3","series":"FF (2011 - 2012)","url":"https://www.marvel.com/comics/issue/37404/ff_2011_3","cover":"","releaseDate":"2011-05-11","optional":false},{"id":"37403","title":"FF (2011) #4","series":"FF (2011 - 2012)","url":"https://www.marvel.com/comics/issue/37403/ff_2011_4","cover":"http://i.annihil.us/u/prod/marvel/i/mg/b/e0/51f68bc07b1ca/portrait_incredible.jpg","releaseDate":"2011-05-25","optional":false},{"id":"37402","title":"FF (2011) #5","series":"FF (2011 - 2012)","url":"https://www.marvel.com/comics/issue/37402/ff_2011_5","cover":"http://i.annihil.us/u/prod/marvel/i/mg/6/00/51f68bb1f3412/portrait_incredible.jpg","releaseDate":"2011-06-29","optional":false},{"id":"37395","title":"FF (2011) #6","series":"FF (2011 - 2012)","url":"https://www.marvel.com/comics/issue/37395/ff_2011_6","cover":"http://i.annihil.us/u/prod/marvel/i/mg/3/20/5ad1051a44986/portrait_incredible.jpg","releaseDate":"2011-07-13","optional":false},{"id":"37401","title":"FF (2011) #7","series":"FF (2011 - 2012)","url":"https://www.marvel.com/comics/issue/37401/ff_2011_7","cover":"http://i.annihil.us/u/prod/marvel/i/mg/5/50/5ad10a055632c/portrait_incredible.jpg","releaseDate":"2011-07-27","optional":false},{"id":"37397","title":"FF (2011) #8","series":"FF (2011 - 2012)","url":"https://www.marvel.com/comics/issue/37397/ff_2011_8","cover":"http://i.annihil.us/u/prod/marvel/i/mg/2/70/5ad10fead7ff8/portrait_incredible.jpg","releaseDate":"2011-08-24","optional":false},{"id":"38609","title":"FF (2011) #9","series":"FF (2011 - 2012)","url":"https://www.marvel.com/comics/issue/38609/ff_2011_9","cover":"http://i.annihil.us/u/prod/marvel/i/mg/9/00/5ad1145b25fe6/portrait_incredible.jpg","releaseDate":"2011-09-28","optional":false},{"id":"38608","title":"FF (2011) #10","series":"FF (2011 - 2012)","url":"https://www.marvel.com/comics/issue/38608/ff_2011_10","cover":"http://i.annihil.us/u/prod/marvel/i/mg/6/70/4e8626ba91a54/portrait_incredible.jpg","releaseDate":"2011-10-12","optional":false},{"id":"38607","title":"FF (2011) #11","series":"FF (2011 - 2012)","url":"https://www.marvel.com/comics/issue/38607/ff_2011_11","cover":"http://i.annihil.us/u/prod/marvel/i/mg/9/a0/4f7de154b962b/portrait_incredible.jpg","releaseDate":"2011-10-26","optional":false},{"id":"37399","title":"Fantastic Four (1998) #600","series":"Fantastic Four (1998 - 2012)","url":"https://www.marvel.com/comics/issue/37399/fantastic_four_1998_600","cover":"","releaseDate":"2011-11-23","optional":false},{"id":"41197","title":"FF (2011) #12","series":"FF (2011 - 2012)","url":"https://www.marvel.com/comics/issue/41197/ff_2011_12","cover":"","releaseDate":"2011-11-30","optional":false},{"id":"38796","title":"Fantastic Four (1998) #601","series":"Fantastic Four (1998 - 2012)","url":"https://www.marvel.com/comics/issue/38796/fantastic_four_1998_601","cover":"http://i.annihil.us/u/prod/marvel/i/mg/8/60/51dc1b51ab390/portrait_incredible.jpg","releaseDate":"2011-12-21","optional":false},{"id":"41207","title":"FF (2011) #13","series":"FF (2011 - 2012)","url":"https://www.marvel.com/comics/issue/41207/ff_2011_13","cover":"http://i.annihil.us/u/prod/marvel/i/mg/f/40/51f68ced1e4ab/portrait_incredible.jpg","releaseDate":"2011-12-28","optional":false},{"id":"38795","title":"Fantastic Four (1998) #602","series":"Fantastic Four (1998 - 2012)","url":"https://www.marvel.com/comics/issue/38795/fantastic_four_1998_602","cover":"http://i.annihil.us/u/prod/marvel/i/mg/6/20/51dc1b58c4571/portrait_incredible.jpg","releaseDate":"2012-01-25","optional":false},{"id":"38797","title":"Fantastic Four (1998) #603","series":"Fantastic Four (1998 - 2012)","url":"https://www.marvel.com/comics/issue/38797/fantastic_four_1998_603","cover":"","releaseDate":"2012-02-22","optional":false},{"id":"40471","title":"Fantastic Four (1998) #604","series":"Fantastic Four (1998 - 2012)","url":"https://www.marvel.com/comics/issue/40471/fantastic_four_1998_604","cover":"","releaseDate":"2012-03-14","optional":false},{"id":"41206","title":"FF (2011) #14","series":"FF (2011 - 2012)","url":"https://www.marvel.com/comics/issue/41206/ff_2011_14","cover":"http://i.annihil.us/u/prod/marvel/i/mg/4/60/51f68ce553796/portrait_incredible.jpg","releaseDate":"2012-01-25","optional":false},{"id":"41204","title":"FF (2011) #15","series":"FF (2011 - 2012)","url":"https://www.marvel.com/comics/issue/41204/ff_2011_15","cover":"","releaseDate":"2012-02-29","optional":false},{"id":"41201","title":"FF (2011) #16","series":"FF (2011 - 2012)","url":"https://www.marvel.com/comics/issue/41201/ff_2011_16","cover":"http://i.annihil.us/u/prod/marvel/i/mg/9/30/5ad60e88504ca/portrait_incredible.jpg","releaseDate":"2012-03-28","optional":false},{"id":"40476","title":"Fantastic Four (1998) #605","series":"Fantastic Four (1998 - 2012)","url":"https://www.marvel.com/comics/issue/40476/fantastic_four_1998_605","cover":"http://i.annihil.us/u/prod/marvel/i/mg/2/d0/56c600eb91160/portrait_incredible.jpg","releaseDate":"2012-04-11","optional":false},{"id":"43353","title":"Fantastic Four (1998) #605.1","series":"Fantastic Four (1998 - 2012)","url":"https://www.marvel.com/comics/issue/43353/fantastic_four_1998_605.1","cover":"http://i.annihil.us/u/prod/marvel/i/mg/b/70/515b3ccd2a22e/portrait_incredible.jpg","releaseDate":"2012-05-16","optional":false},{"id":"41200","title":"FF (2011) #17","series":"FF (2011 - 2012)","url":"https://www.marvel.com/comics/issue/41200/ff_2011_17","cover":"http://i.annihil.us/u/prod/marvel/i/mg/3/00/4f9ad00302567/portrait_incredible.jpg","releaseDate":"2012-04-25","optional":false},{"id":"41203","title":"FF (2011) #18","series":"FF (2011 - 2012)","url":"https://www.marvel.com/comics/issue/41203/ff_2011_18","cover":"http://i.annihil.us/u/prod/marvel/i/mg/a/20/51f68de7f14e7/portrait_incredible.jpg","releaseDate":"2012-05-30","optional":false},{"id":"40464","title":"Fantastic Four (1998) #606","series":"Fantastic Four (1998 - 2012)","url":"https://www.marvel.com/comics/issue/40464/fantastic_four_1998_606","cover":"http://i.annihil.us/u/prod/marvel/i/mg/6/b0/51dc1c8692f28/portrait_incredible.jpg","releaseDate":"2012-05-23","optional":false},{"id":"40467","title":"Fantastic Four (1998) #607","series":"Fantastic Four (1998 - 2012)","url":"https://www.marvel.com/comics/issue/40467/fantastic_four_1998_607","cover":"http://i.annihil.us/u/prod/marvel/i/mg/9/30/51dc1c7c0d748/portrait_incredible.jpg","releaseDate":"2012-06-13","optional":false},{"id":"40474","title":"Fantastic Four (1998) #608","series":"Fantastic Four (1998 - 2012)","url":"https://www.marvel.com/comics/issue/40474/fantastic_four_1998_608","cover":"http://i.annihil.us/u/prod/marvel/i/mg/2/40/51dc1e5fadd9c/portrait_incredible.jpg","releaseDate":"2012-07-18","optional":false},{"id":"40479","title":"Fantastic Four (1998) #609","series":"Fantastic Four (1998 - 2012)","url":"https://www.marvel.com/comics/issue/40479/fantastic_four_1998_609","cover":"http://i.annihil.us/u/prod/marvel/i/mg/9/00/51dc1c950c81d/portrait_incredible.jpg","releaseDate":"2012-08-08","optional":false},{"id":"40478","title":"Fantastic Four (1998) #610","series":"Fantastic Four (1998 - 2012)","url":"https://www.marvel.com/comics/issue/40478/fantastic_four_1998_610","cover":"http://i.annihil.us/u/prod/marvel/i/mg/f/60/51dc1c76c6eed/portrait_incredible.jpg","releaseDate":"2012-09-12","optional":false},{"id":"41199","title":"FF (2011) #19","series":"FF (2011 - 2012)","url":"https://www.marvel.com/comics/issue/41199/ff_2011_19","cover":"","releaseDate":"2012-06-27","optional":false},{"id":"41202","title":"FF (2011) #20","series":"FF (2011 - 2012)","url":"https://www.marvel.com/comics/issue/41202/ff_2011_20","cover":"http://i.annihil.us/u/prod/marvel/i/mg/6/10/51f68dd003c44/portrait_incredible.jpg","releaseDate":"2012-07-25","optional":false},{"id":"41198","title":"FF (2011) #21","series":"FF (2011 - 2012)","url":"https://www.marvel.com/comics/issue/41198/ff_2011_21","cover":"http://i.annihil.us/u/prod/marvel/i/mg/3/70/51f68dc239205/portrait_incredible.jpg","releaseDate":"2012-08-29","optional":false},{"id":"41208","title":"FF (2011) #22","series":"FF (2011 - 2012)","url":"https://www.marvel.com/comics/issue/41208/ff_2011_22","cover":"","releaseDate":"2012-09-26","optional":false},{"id":"40465","title":"Fantastic Four (1998) #611","series":"Fantastic Four (1998 - 2012)","url":"https://www.marvel.com/comics/issue/40465/fantastic_four_1998_611","cover":"http://i.annihil.us/u/prod/marvel/i/mg/9/a0/51dc1c677ec93/portrait_incredible.jpg","releaseDate":"2012-10-10","optional":false},{"id":"41205","title":"FF (2011) #23","series":"FF (2011 - 2012)","url":"https://www.marvel.com/comics/issue/41205/ff_2011_23","cover":"http://i.annihil.us/u/prod/marvel/i/mg/a/20/51f68da85f9b4/portrait_incredible.jpg","releaseDate":"2012-10-24","optional":false}]},{"name":"Ultimate Universe","issues":[{"id":"33579","title":"Ultimate Comics Thor (2010) #1","series":"Ultimate Comics Thor (2010 - 2011)","url":"https://www.marvel.com/comics/issue/33579/ultimate_comics_thor_2010_1","cover":"http://i.annihil.us/u/prod/marvel/i/mg/b/90/5a8edf15a012a/portrait_incredible.jpg","releaseDate":"2010-10-06","optional":false},{"id":"33576","title":"Ultimate Comics Thor (2010) #2","series":"Ultimate Comics Thor (2010 - 2011)","url":"https://www.marvel.com/comics/issue/33576/ultimate_comics_thor_2010_2","cover":"http://i.annihil.us/u/prod/marvel/i/mg/8/f0/5a8eeb1362f11/portrait_incredible.jpg","releaseDate":"2010-11-10","optional":false},{"id":"33577","title":"Ultimate Comics Thor (2010) #3","series":"Ultimate Comics Thor (2010 - 2011)","url":"https://www.marvel.com/comics/issue/33577/ultimate_comics_thor_2010_3","cover":"http://i.annihil.us/u/prod/marvel/i/mg/c/e0/5a8efaf54d628/portrait_incredible.jpg","releaseDate":"2010-12-29","optional":false},{"id":"33578","title":"Ultimate Comics Thor (2010) #4","series":"Ultimate Comics Thor (2010 - 2011)","url":"https://www.marvel.com/comics/issue/33578/ultimate_comics_thor_2010_4","cover":"http://i.annihil.us/u/prod/marvel/i/mg/6/e0/5a8f05c7781f4/portrait_incredible.jpg","releaseDate":"2011-02-02","optional":false},{"id":"38950","title":"Ultimate Comics Hawkeye (2011) #1","series":"Ultimate Comics Hawkeye (2011)","url":"https://www.marvel.com/comics/issue/38950/ultimate_comics_hawkeye_2011_1","cover":"http://i.annihil.us/u/prod/marvel/i/mg/5/70/4e53b194c0a01/portrait_incredible.jpg","releaseDate":"2011-08-31","optional":false},{"id":"38951","title":"Ultimate Comics Hawkeye (2011) #2","series":"Ultimate Comics Hawkeye (2011)","url":"https://www.marvel.com/comics/issue/38951/ultimate_comics_hawkeye_2011_2","cover":"http://i.annihil.us/u/prod/marvel/i/mg/4/00/4e7370d0596f7/portrait_incredible.jpg","releaseDate":"2011-09-21","optional":false},{"id":"38944","title":"Ultimate Comics Hawkeye (2011) #3","series":"Ultimate Comics Hawkeye (2011)","url":"https://www.marvel.com/comics/issue/38944/ultimate_comics_hawkeye_2011_3","cover":"http://i.annihil.us/u/prod/marvel/i/mg/9/20/5a971b5176abb/portrait_incredible.jpg","releaseDate":"2011-10-19","optional":false},{"id":"38943","title":"Ultimate Comics Hawkeye (2011) #4","series":"Ultimate Comics Hawkeye (2011)","url":"https://www.marvel.com/comics/issue/38943/ultimate_comics_hawkeye_2011_4","cover":"http://i.annihil.us/u/prod/marvel/i/mg/2/60/50b5272c23e01/portrait_incredible.jpg","releaseDate":"2011-11-23","optional":false},{"id":"38693","title":"Ultimate Comics Ultimates (2011) #1","series":"Ultimate Comics Ultimates (2011 - 2013)","url":"https://www.marvel.com/comics/issue/38693/ultimate_comics_ultimates_2011_1","cover":"http://i.annihil.us/u/prod/marvel/i/mg/3/20/5a1337407cd83/portrait_incredible.jpg","releaseDate":"2011-08-24","optional":false},{"id":"38690","title":"Ultimate Comics Ultimates (2011) #2","series":"Ultimate Comics Ultimates (2011 - 2013)","url":"https://www.marvel.com/comics/issue/38690/ultimate_comics_ultimates_2011_2","cover":"http://i.annihil.us/u/prod/marvel/i/mg/7/00/4e80cb64945d9/portrait_incredible.jpg","releaseDate":"2011-09-28","optional":false},{"id":"38687","title":"Ultimate Comics Ultimates (2011) #3","series":"Ultimate Comics Ultimates (2011 - 2013)","url":"https://www.marvel.com/comics/issue/38687/ultimate_comics_ultimates_2011_3","cover":"http://i.annihil.us/u/prod/marvel/i/mg/6/30/56b38021cf7c4/portrait_incredible.jpg","releaseDate":"2011-10-26","optional":false},{"id":"38689","title":"Ultimate Comics Ultimates (2011) #4","series":"Ultimate Comics Ultimates (2011 - 2013)","url":"https://www.marvel.com/comics/issue/38689/ultimate_comics_ultimates_2011_4","cover":"http://i.annihil.us/u/prod/marvel/i/mg/c/d0/56b8cfc55e18c/portrait_incredible.jpg","releaseDate":"2011-11-30","optional":false},{"id":"38691","title":"Ultimate Comics Ultimates (2011) #5","series":"Ultimate Comics Ultimates (2011 - 2013)","url":"https://www.marvel.com/comics/issue/38691/ultimate_comics_ultimates_2011_5","cover":"http://i.annihil.us/u/prod/marvel/i/mg/b/a0/56b90af0ba42c/portrait_incredible.jpg","releaseDate":"2011-12-28","optional":false},{"id":"38695","title":"Ultimate Comics Ultimates (2011) #6","series":"Ultimate Comics Ultimates (2011 - 2013)","url":"https://www.marvel.com/comics/issue/38695/ultimate_comics_ultimates_2011_6","cover":"http://i.annihil.us/u/prod/marvel/i/mg/c/10/56bb70a84cc6a/portrait_incredible.jpg","releaseDate":"2012-01-25","optional":false},{"id":"38686","title":"Ultimate Comics Ultimates (2011) #7","series":"Ultimate Comics Ultimates (2011 - 2013)","url":"https://www.marvel.com/comics/issue/38686/ultimate_comics_ultimates_2011_7","cover":"http://i.annihil.us/u/prod/marvel/i/mg/a/30/56bbaec928986/portrait_incredible.jpg","releaseDate":"2012-02-29","optional":false},{"id":"38685","title":"Ultimate Comics Ultimates (2011) #8","series":"Ultimate Comics Ultimates (2011 - 2013)","url":"https://www.marvel.com/comics/issue/38685/ultimate_comics_ultimates_2011_8","cover":"http://i.annihil.us/u/prod/marvel/i/mg/a/b0/4f7498e46ec9d/portrait_incredible.jpg","releaseDate":"2012-03-28","optional":false},{"id":"38696","title":"Ultimate Comics Ultimates (2011) #9","series":"Ultimate Comics Ultimates (2011 - 2013)","url":"https://www.marvel.com/comics/issue/38696/ultimate_comics_ultimates_2011_9","cover":"http://i.annihil.us/u/prod/marvel/i/mg/9/50/5a9ecfb933006/portrait_incredible.jpg","releaseDate":"2012-04-25","optional":false},{"id":"38688","title":"Ultimate Comics Ultimates (2011) #10","series":"Ultimate Comics Ultimates (2011 - 2013)","url":"https://www.marvel.com/comics/issue/38688/ultimate_comics_ultimates_2011_10","cover":"http://i.annihil.us/u/prod/marvel/i/mg/6/d0/4fac0a1caaabd/portrait_incredible.jpg","releaseDate":"2012-05-09","optional":false},{"id":"38692","title":"Ultimate Comics Ultimates (2011) #11","series":"Ultimate Comics Ultimates (2011 - 2013)","url":"https://www.marvel.com/comics/issue/38692/ultimate_comics_ultimates_2011_11","cover":"http://i.annihil.us/u/prod/marvel/i/mg/f/a0/5a9ee9bb1d19d/portrait_incredible.jpg","releaseDate":"2012-05-30","optional":false},{"id":"38694","title":"Ultimate Comics Ultimates (2011) #12","series":"Ultimate Comics Ultimates (2011 - 2013)","url":"https://www.marvel.com/comics/issue/38694/ultimate_comics_ultimates_2011_12","cover":"http://i.annihil.us/u/prod/marvel/i/mg/1/04/5a9eef597c1ce/portrait_incredible.jpg","releaseDate":"2012-06-27","optional":false},{"id":"40770","title":"Ultimate Comics Ultimates (2011) #13","series":"Ultimate Comics Ultimates (2011 - 2013)","url":"https://www.marvel.com/comics/issue/40770/ultimate_comics_ultimates_2011_13","cover":"http://i.annihil.us/u/prod/marvel/i/mg/2/90/5a9f00321d531/portrait_incredible.jpg","releaseDate":"2012-07-25","optional":false},{"id":"40764","title":"Ultimate Comics Ultimates (2011) #14","series":"Ultimate Comics Ultimates (2011 - 2013)","url":"https://www.marvel.com/comics/issue/40764/ultimate_comics_ultimates_2011_14","cover":"http://i.annihil.us/u/prod/marvel/i/mg/6/b0/5a9ef2614b098/portrait_incredible.jpg","releaseDate":"2012-08-22","optional":false},{"id":"40767","title":"Ultimate Comics Ultimates (2011) #15","series":"Ultimate Comics Ultimates (2011 - 2013)","url":"https://www.marvel.com/comics/issue/40767/ultimate_comics_ultimates_2011_15","cover":"http://i.annihil.us/u/prod/marvel/i/mg/4/60/5a9f064b97875/portrait_incredible.jpg","releaseDate":"2012-09-19","optional":false},{"id":"40768","title":"Ultimate Comics Ultimates (2011) #16","series":"Ultimate Comics Ultimates (2011 - 2013)","url":"https://www.marvel.com/comics/issue/40768/ultimate_comics_ultimates_2011_16","cover":"http://i.annihil.us/u/prod/marvel/i/mg/3/f0/5a9f0b7244769/portrait_incredible.jpg","releaseDate":"2012-09-26","optional":false},{"id":"40766","title":"Ultimate Comics Ultimates (2011) #17","series":"Ultimate Comics Ultimates (2011 - 2013)","url":"https://www.marvel.com/comics/issue/40766/ultimate_comics_ultimates_2011_17","cover":"http://i.annihil.us/u/prod/marvel/i/mg/c/90/5aa14859eecb7/portrait_incredible.jpg","releaseDate":"2012-10-24","optional":false}]},{"name":"Avengers World","issues":[{"id":"43528","title":"Avengers (2012) #1","series":"Avengers (2012 - 2015)","url":"https://www.marvel.com/comics/issue/43528/avengers_2012_1","cover":"http://i.annihil.us/u/prod/marvel/i/mg/1/00/51646f8d43394/portrait_incredible.jpg","releaseDate":"2012-12-05","optional":false},{"id":"43532","title":"Avengers (2012) #2","series":"Avengers (2012 - 2015)","url":"https://www.marvel.com/comics/issue/43532/avengers_2012_2","cover":"http://i.annihil.us/u/prod/marvel/i/mg/2/c0/510940b04c75c/portrait_incredible.jpg","releaseDate":"2012-12-19","optional":false},{"id":"43533","title":"Avengers (2012) #3","series":"Avengers (2012 - 2015)","url":"https://www.marvel.com/comics/issue/43533/avengers_2012_3","cover":"http://i.annihil.us/u/prod/marvel/i/mg/6/50/51094fe042a9f/portrait_incredible.jpg","releaseDate":"2013-01-23","optional":false},{"id":"43512","title":"New Avengers (2013) #1","series":"New Avengers (2013 - 2015)","url":"https://www.marvel.com/comics/issue/43512/new_avengers_2013_1","cover":"http://i.annihil.us/u/prod/marvel/i/mg/7/03/5164719b5f233/portrait_incredible.jpg","releaseDate":"2013-01-02","optional":false},{"id":"43516","title":"New Avengers (2013) #2","series":"New Avengers (2013 - 2015)","url":"https://www.marvel.com/comics/issue/43516/new_avengers_2013_2","cover":"http://i.annihil.us/u/prod/marvel/i/mg/f/a0/510dc11490922/portrait_incredible.jpg","releaseDate":"2013-01-16","optional":false},{"id":"43517","title":"New Avengers (2013) #3","series":"New Avengers (2013 - 2015)","url":"https://www.marvel.com/comics/issue/43517/new_avengers_2013_3","cover":"http://i.annihil.us/u/prod/marvel/i/mg/9/00/510c75dd48ea0/portrait_incredible.jpg","releaseDate":"2013-02-06","optional":false},{"id":"43534","title":"Avengers (2012) #4","series":"Avengers (2012 - 2015)","url":"https://www.marvel.com/comics/issue/43534/avengers_2012_4","cover":"http://i.annihil.us/u/prod/marvel/i/mg/9/03/5109728524b9b/portrait_incredible.jpg","releaseDate":"2013-01-30","optional":false},{"id":"43535","title":"Avengers (2012) #5","series":"Avengers (2012 - 2015)","url":"https://www.marvel.com/comics/issue/43535/avengers_2012_5","cover":"http://i.annihil.us/u/prod/marvel/i/mg/3/70/51097a8cc8270/portrait_incredible.jpg","releaseDate":"2013-02-06","optional":false},{"id":"43536","title":"Avengers (2012) #6","series":"Avengers (2012 - 2015)","url":"https://www.marvel.com/comics/issue/43536/avengers_2012_6","cover":"http://i.annihil.us/u/prod/marvel/i/mg/4/10/5743669df137c/portrait_incredible.jpg","releaseDate":"2013-02-20","optional":false},{"id":"43518","title":"New Avengers (2013) #4","series":"New Avengers (2013 - 2015)","url":"https://www.marvel.com/comics/issue/43518/new_avengers_2013_4","cover":"http://i.annihil.us/u/prod/marvel/i/mg/1/00/57752b89b5155/portrait_incredible.jpg","releaseDate":"2013-03-20","optional":false},{"id":"43519","title":"New Avengers (2013) #5","series":"New Avengers (2013 - 2015)","url":"https://www.marvel.com/comics/issue/43519/new_avengers_2013_5","cover":"http://i.annihil.us/u/prod/marvel/i/mg/7/10/577538c2cc58e/portrait_incredible.jpg","releaseDate":"2013-04-24","optional":false},{"id":"43520","title":"New Avengers (2013) #6","series":"New Avengers (2013 - 2015)","url":"https://www.marvel.com/comics/issue/43520/new_avengers_2013_6","cover":"http://i.annihil.us/u/prod/marvel/i/mg/5/03/577545201b3b9/portrait_incredible.jpg","releaseDate":"2013-05-29","optional":false},{"id":"43537","title":"Avengers (2012) #7","series":"Avengers (2012 - 2015)","url":"https://www.marvel.com/comics/issue/43537/avengers_2012_7","cover":"http://i.annihil.us/u/prod/marvel/i/mg/d/a0/574367527b063/portrait_incredible.jpg","releaseDate":"2013-03-06","optional":false},{"id":"43538","title":"Avengers (2012) #8","series":"Avengers (2012 - 2015)","url":"https://www.marvel.com/comics/issue/43538/avengers_2012_8","cover":"http://i.annihil.us/u/prod/marvel/i/mg/7/40/574367c37ee7e/portrait_incredible.jpg","releaseDate":"2013-03-20","optional":false},{"id":"43539","title":"Avengers (2012) #9","series":"Avengers (2012 - 2015)","url":"https://www.marvel.com/comics/issue/43539/avengers_2012_9","cover":"http://i.annihil.us/u/prod/marvel/i/mg/3/40/57436a33a9b70/portrait_incredible.jpg","releaseDate":"2013-04-10","optional":false},{"id":"43540","title":"Avengers (2012) #10","series":"Avengers (2012 - 2015)","url":"https://www.marvel.com/comics/issue/43540/avengers_2012_10","cover":"http://i.annihil.us/u/prod/marvel/i/mg/9/c0/57445b85e2eaf/portrait_incredible.jpg","releaseDate":"2013-04-24","optional":false},{"id":"43541","title":"Avengers (2012) #11","series":"Avengers (2012 - 2015)","url":"https://www.marvel.com/comics/issue/43541/avengers_2012_11","cover":"http://i.annihil.us/u/prod/marvel/i/mg/9/40/57445c31d6ccc/portrait_incredible.jpg","releaseDate":"2013-05-08","optional":false},{"id":"43521","title":"New Avengers (2013) #7","series":"New Avengers (2013 - 2015)","url":"https://www.marvel.com/comics/issue/43521/new_avengers_2013_7","cover":"http://i.annihil.us/u/prod/marvel/i/mg/a/10/51b78bdbc8877/portrait_incredible.jpg","releaseDate":"2013-06-19","optional":false},{"id":"43522","title":"New Avengers (2013) #8","series":"New Avengers (2013 - 2015)","url":"https://www.marvel.com/comics/issue/43522/new_avengers_2013_8","cover":"http://i.annihil.us/u/prod/marvel/i/mg/9/20/51debf44a4418/portrait_incredible.jpg","releaseDate":"2013-07-24","optional":false},{"id":"43523","title":"New Avengers (2013) #9","series":"New Avengers (2013 - 2015)","url":"https://www.marvel.com/comics/issue/43523/new_avengers_2013_9","cover":"http://i.annihil.us/u/prod/marvel/i/mg/2/a0/521278dc0080a/portrait_incredible.jpg","releaseDate":"2013-08-28","optional":false}]},{"name":"Infinity","issues":[{"id":"43544","title":"Avengers (2012) #14","series":"Avengers (2012 - 2015)","url":"https://www.marvel.com/comics/issue/43544/avengers_2012_14","cover":"http://i.annihil.us/u/prod/marvel/i/mg/5/b0/51ae4b71a5505/portrait_incredible.jpg","releaseDate":"2013-06-19","optional":false},{"id":"43545","title":"Avengers (2012) #15","series":"Avengers (2012 - 2015)","url":"https://www.marvel.com/comics/issue/43545/avengers_2012_15","cover":"http://i.annihil.us/u/prod/marvel/i/mg/c/50/51c9eb8ac17b5/portrait_incredible.jpg","releaseDate":"2013-07-03","optional":false},{"id":"43546","title":"Avengers (2012) #16","series":"Avengers (2012 - 2015)","url":"https://www.marvel.com/comics/issue/43546/avengers_2012_16","cover":"http://i.annihil.us/u/prod/marvel/i/mg/6/10/51d32d095b2b9/portrait_incredible.jpg","releaseDate":"2013-07-17","optional":false},{"id":"43547","title":"Avengers (2012) #17","series":"Avengers (2012 - 2015)","url":"https://www.marvel.com/comics/issue/43547/avengers_2012_17","cover":"http://i.annihil.us/u/prod/marvel/i/mg/7/20/51ed8ee693059/portrait_incredible.jpg","releaseDate":"2013-08-07","optional":false},{"id":"43523","title":"New Avengers (2013) #9","series":"New Avengers (2013 - 2015)","url":"https://www.marvel.com/comics/issue/43523/new_avengers_2013_9","cover":"http://i.annihil.us/u/prod/marvel/i/mg/2/a0/521278dc0080a/portrait_incredible.jpg","releaseDate":"2013-08-28","optional":false},{"id":"47120","title":"Infinity (2013) #1","series":"Infinity (2013)","url":"https://www.marvel.com/comics/issue/47120/infinity_2013_1","cover":"","releaseDate":"2013-08-14","optional":false},{"id":"43548","title":"Avengers (2012) #18","series":"Avengers (2012 - 2015)","url":"https://www.marvel.com/comics/issue/43548/avengers_2012_18","cover":"http://i.annihil.us/u/prod/marvel/i/mg/6/40/51ffc0f097620/portrait_incredible.jpg","releaseDate":"2013-08-21","optional":false},{"id":"43524","title":"New Avengers (2013) #10","series":"New Avengers (2013 - 2015)","url":"https://www.marvel.com/comics/issue/43524/new_avengers_2013_10","cover":"","releaseDate":"2013-09-18","optional":false},{"id":"47123","title":"Infinity (2013) #2","series":"Infinity (2013)","url":"https://www.marvel.com/comics/issue/47123/infinity_2013_2","cover":"http://i.annihil.us/u/prod/marvel/i/mg/9/60/5abc01d6c9793/portrait_incredible.jpg","releaseDate":"2013-09-04","optional":false},{"id":"43549","title":"Avengers (2012) #19","series":"Avengers (2012 - 2015)","url":"https://www.marvel.com/comics/issue/43549/avengers_2012_19","cover":"http://i.annihil.us/u/prod/marvel/i/mg/d/10/522631288109a/portrait_incredible.jpg","releaseDate":"2013-09-11","optional":false},{"id":"43525","title":"New Avengers (2013) #11","series":"New Avengers (2013 - 2015)","url":"https://www.marvel.com/comics/issue/43525/new_avengers_2013_11","cover":"http://i.annihil.us/u/prod/marvel/i/mg/4/80/57757dcd74891/portrait_incredible.jpg","releaseDate":"2013-10-16","optional":false},{"id":"47124","title":"Infinity (2013) #3","series":"Infinity (2013)","url":"https://www.marvel.com/comics/issue/47124/infinity_2013_3","cover":"","releaseDate":"2013-09-18","optional":false},{"id":"37174","title":"Avengers Annual (2012) #1","series":"Avengers Annual (2012)","url":"https://www.marvel.com/comics/issue/37174/avengers_annual_2012_1","cover":"http://i.annihil.us/u/prod/marvel/i/mg/c/40/5a1eba1836e9d/portrait_incredible.jpg","releaseDate":"2012-01-04","optional":false},{"id":"43550","title":"Avengers (2012) #20","series":"Avengers (2012 - 2015)","url":"https://www.marvel.com/comics/issue/43550/avengers_2012_20","cover":"http://i.annihil.us/u/prod/marvel/i/mg/d/40/523211c544696/portrait_incredible.jpg","releaseDate":"2013-09-25","optional":false},{"id":"43526","title":"New Avengers (2013) #12","series":"New Avengers (2013 - 2015)","url":"https://www.marvel.com/comics/issue/43526/new_avengers_2013_12","cover":"http://i.annihil.us/u/prod/marvel/i/mg/7/40/528a7e752ff49/portrait_incredible.jpg","releaseDate":"2013-11-27","optional":false},{"id":"47125","title":"Infinity (2013) #4","series":"Infinity (2013)","url":"https://www.marvel.com/comics/issue/47125/infinity_2013_4","cover":"http://i.annihil.us/u/prod/marvel/i/mg/8/d0/5abc031296f2d/portrait_incredible.jpg","releaseDate":"2013-10-09","optional":false},{"id":"46927","title":"Avengers (2012) #21","series":"Avengers (2012 - 2015)","url":"https://www.marvel.com/comics/issue/46927/avengers_2012_21","cover":"","releaseDate":"2013-10-16","optional":false},{"id":"47126","title":"Infinity (2013) #5","series":"Infinity (2013)","url":"https://www.marvel.com/comics/issue/47126/infinity_2013_5","cover":"http://i.annihil.us/u/prod/marvel/i/mg/b/60/5abc036c50a6b/portrait_incredible.jpg","releaseDate":"2013-10-30","optional":false},{"id":"46928","title":"Avengers (2012) #22","series":"Avengers (2012 - 2015)","url":"https://www.marvel.com/comics/issue/46928/avengers_2012_22","cover":"http://i.annihil.us/u/prod/marvel/i/mg/1/60/526578847a65e/portrait_incredible.jpg","releaseDate":"2013-10-30","optional":false},{"id":"47127","title":"Infinity (2013) #6","series":"Infinity (2013)","url":"https://www.marvel.com/comics/issue/47127/infinity_2013_6","cover":"http://i.annihil.us/u/prod/marvel/i/mg/b/80/5abc03d24ae81/portrait_incredible.jpg","releaseDate":"2013-11-27","optional":false},{"id":"46930","title":"Avengers (2012) #23","series":"Avengers (2012 - 2015)","url":"https://www.marvel.com/comics/issue/46930/avengers_2012_23","cover":"http://i.annihil.us/u/prod/marvel/i/mg/f/f0/527bf83f6dfcd/portrait_incredible.jpg","releaseDate":"2013-11-20","optional":false}]},{"name":"The Incursions","issues":[{"id":"48745","title":"Avengers World (2014) #1","series":"Avengers World (2014 - 2015)","url":"https://www.marvel.com/comics/issue/48745/avengers_world_2014_1","cover":"http://i.annihil.us/u/prod/marvel/i/mg/6/40/52bc8387d321c/portrait_incredible.jpg","releaseDate":"2014-01-08","optional":true},{"id":"48746","title":"Avengers World (2014) #2","series":"Avengers World (2014 - 2015)","url":"https://www.marvel.com/comics/issue/48746/avengers_world_2014_2","cover":"http://i.annihil.us/u/prod/marvel/i/mg/e/60/52d5bb0a1dad6/portrait_incredible.jpg","releaseDate":"2014-01-22","optional":true},{"id":"48747","title":"Avengers World (2014) #3","series":"Avengers World (2014 - 2015)","url":"https://www.marvel.com/comics/issue/48747/avengers_world_2014_3","cover":"http://i.annihil.us/u/prod/marvel/i/mg/3/20/528655c4ae041/portrait_incredible.jpg","releaseDate":"2014-02-19","optional":true},{"id":"48748","title":"Avengers World (2014) #4","series":"Avengers World (2014 - 2015)","url":"https://www.marvel.com/comics/issue/48748/avengers_world_2014_4","cover":"http://i.annihil.us/u/prod/marvel/i/mg/f/00/5318cc4ea3fda/portrait_incredible.jpg","releaseDate":"2014-03-19","optional":true},{"id":"48749","title":"Avengers World (2014) #5","series":"Avengers World (2014 - 2015)","url":"https://www.marvel.com/comics/issue/48749/avengers_world_2014_5","cover":"http://i.annihil.us/u/prod/marvel/i/mg/9/20/5356aa1a95f2d/portrait_incredible.jpg","releaseDate":"2014-04-30","optional":true},{"id":"50589","title":"Avengers World (2014) #6","series":"Avengers World (2014 - 2015)","url":"https://www.marvel.com/comics/issue/50589/avengers_world_2014_6","cover":"http://i.annihil.us/u/prod/marvel/i/mg/9/00/536cfd24d313c/portrait_incredible.jpg","releaseDate":"2014-05-21","optional":true},{"id":"50590","title":"Avengers World (2014) #7","series":"Avengers World (2014 - 2015)","url":"https://www.marvel.com/comics/issue/50590/avengers_world_2014_7","cover":"http://i.annihil.us/u/prod/marvel/i/mg/f/20/5384bbe16feaa/portrait_incredible.jpg","releaseDate":"2014-06-04","optional":true},{"id":"50591","title":"Avengers World (2014) #8","series":"Avengers World (2014 - 2015)","url":"https://www.marvel.com/comics/issue/50591/avengers_world_2014_8","cover":"http://i.annihil.us/u/prod/marvel/i/mg/2/f0/539218b309b1a/portrait_incredible.jpg","releaseDate":"2014-06-18","optional":true},{"id":"50592","title":"Avengers World (2014) #9","series":"Avengers World (2014 - 2015)","url":"https://www.marvel.com/comics/issue/50592/avengers_world_2014_9","cover":"http://i.annihil.us/u/prod/marvel/i/mg/1/d0/53baef51e1ceb/portrait_incredible.jpg","releaseDate":"2014-07-16","optional":true},{"id":"50593","title":"Avengers World (2014) #10","series":"Avengers World (2014 - 2015)","url":"https://www.marvel.com/comics/issue/50593/avengers_world_2014_10","cover":"http://i.annihil.us/u/prod/marvel/i/mg/f/a0/53cd39acc8f5d/portrait_incredible.jpg","releaseDate":"2014-07-30","optional":true},{"id":"50594","title":"Avengers World (2014) #11","series":"Avengers World (2014 - 2015)","url":"https://www.marvel.com/comics/issue/50594/avengers_world_2014_11","cover":"http://i.annihil.us/u/prod/marvel/i/mg/f/f0/53dfadd64df69/portrait_incredible.jpg","releaseDate":"2014-08-13","optional":true},{"id":"50595","title":"Avengers World (2014) #12","series":"Avengers World (2014 - 2015)","url":"https://www.marvel.com/comics/issue/50595/avengers_world_2014_12","cover":"http://i.annihil.us/u/prod/marvel/i/mg/9/30/53fce65c206f0/portrait_incredible.jpg","releaseDate":"2014-09-03","optional":true},{"id":"50596","title":"Avengers World (2014) #13","series":"Avengers World (2014 - 2015)","url":"https://www.marvel.com/comics/issue/50596/avengers_world_2014_13","cover":"http://i.annihil.us/u/prod/marvel/i/mg/a/03/54106784df444/portrait_incredible.jpg","releaseDate":"2014-09-17","optional":true},{"id":"50597","title":"Avengers World (2014) #14","series":"Avengers World (2014 - 2015)","url":"https://www.marvel.com/comics/issue/50597/avengers_world_2014_14","cover":"http://i.annihil.us/u/prod/marvel/i/mg/c/00/5c1b9cea912a5/portrait_incredible.jpg","releaseDate":"2014-10-15","optional":true},{"id":"43527","title":"New Avengers (2013) #13","series":"New Avengers (2013 - 2015)","url":"https://www.marvel.com/comics/issue/43527/new_avengers_2013_13","cover":"","releaseDate":"2013-12-31","optional":false},{"id":"48784","title":"New Avengers (2013) #14","series":"New Avengers (2013 - 2015)","url":"https://www.marvel.com/comics/issue/48784/new_avengers_2013_14","cover":"http://i.annihil.us/u/prod/marvel/i/mg/6/30/52e6ca21298c3/portrait_incredible.jpg","releaseDate":"2014-02-05","optional":false},{"id":"48785","title":"New Avengers (2013) #15","series":"New Avengers (2013 - 2015)","url":"https://www.marvel.com/comics/issue/48785/new_avengers_2013_15","cover":"http://i.annihil.us/u/prod/marvel/i/mg/3/70/577580a3bd921/portrait_incredible.jpg","releaseDate":"2014-03-19","optional":false},{"id":"48786","title":"New Avengers (2013) #16","series":"New Avengers (2013 - 2015)","url":"https://www.marvel.com/comics/issue/48786/new_avengers_2013_16","cover":"http://i.annihil.us/u/prod/marvel/i/mg/6/00/5322065bc6e3e/portrait_incredible.jpg","releaseDate":"2014-03-26","optional":false},{"id":"48787","title":"New Avengers (2013) #17","series":"New Avengers (2013 - 2015)","url":"https://www.marvel.com/comics/issue/48787/new_avengers_2013_17","cover":"http://i.annihil.us/u/prod/marvel/i/mg/1/a0/577582b58679b/portrait_incredible.jpg","releaseDate":"2014-04-30","optional":false},{"id":"48788","title":"New Avengers (2013) #18","series":"New Avengers (2013 - 2015)","url":"https://www.marvel.com/comics/issue/48788/new_avengers_2013_18","cover":"http://i.annihil.us/u/prod/marvel/i/mg/e/50/5369445139c97/portrait_incredible.jpg","releaseDate":"2014-05-14","optional":false},{"id":"48789","title":"New Avengers (2013) #19","series":"New Avengers (2013 - 2015)","url":"https://www.marvel.com/comics/issue/48789/new_avengers_2013_19","cover":"http://i.annihil.us/u/prod/marvel/i/mg/6/b0/538f824b9b06c/portrait_incredible.jpg","releaseDate":"2014-06-11","optional":false},{"id":"48790","title":"New Avengers (2013) #20","series":"New Avengers (2013 - 2015)","url":"https://www.marvel.com/comics/issue/48790/new_avengers_2013_20","cover":"http://i.annihil.us/u/prod/marvel/i/mg/3/f0/5399e4ea43590/portrait_incredible.jpg","releaseDate":"2014-06-25","optional":false},{"id":"48791","title":"New Avengers (2013) #21","series":"New Avengers (2013 - 2015)","url":"https://www.marvel.com/comics/issue/48791/new_avengers_2013_21","cover":"http://i.annihil.us/u/prod/marvel/i/mg/6/b0/53ce7617680fa/portrait_incredible.jpg","releaseDate":"2014-07-30","optional":false},{"id":"48792","title":"New Avengers (2013) #22","series":"New Avengers (2013 - 2015)","url":"https://www.marvel.com/comics/issue/48792/new_avengers_2013_22","cover":"","releaseDate":"2014-08-06","optional":false},{"id":"50095","title":"New Avengers (2013) #23","series":"New Avengers (2013 - 2015)","url":"https://www.marvel.com/comics/issue/50095/new_avengers_2013_23","cover":"http://i.annihil.us/u/prod/marvel/i/mg/1/10/53f34c0999706/portrait_incredible.jpg","releaseDate":"2014-08-20","optional":false},{"id":"50096","title":"New Avengers (2013) #24","series":"New Avengers (2013 - 2015)","url":"https://www.marvel.com/comics/issue/50096/new_avengers_2013_24","cover":"http://i.annihil.us/u/prod/marvel/i/mg/d/50/54174364c0258/portrait_incredible.jpg","releaseDate":"2014-09-24","optional":false},{"id":"50973","title":"New Avengers (2013) #25","series":"New Avengers (2013 - 2015)","url":"https://www.marvel.com/comics/issue/50973/new_avengers_2013_25","cover":"http://i.annihil.us/u/prod/marvel/i/mg/8/a0/543431ed1b3ae/portrait_incredible.jpg","releaseDate":"2014-10-15","optional":false},{"id":"52257","title":"New Avengers (2013) #26","series":"New Avengers (2013 - 2015)","url":"https://www.marvel.com/comics/issue/52257/new_avengers_2013_26","cover":"http://i.annihil.us/u/prod/marvel/i/mg/6/80/5464fca1a9672/portrait_incredible.jpg","releaseDate":"2014-11-19","optional":false},{"id":"52259","title":"New Avengers (2013) #27","series":"New Avengers (2013 - 2015)","url":"https://www.marvel.com/comics/issue/52259/new_avengers_2013_27","cover":"http://i.annihil.us/u/prod/marvel/i/mg/f/60/546bbcfa7f23f/portrait_incredible.jpg","releaseDate":"2014-11-26","optional":false},{"id":"51172","title":"New Avengers (2013) #28","series":"New Avengers (2013 - 2015)","url":"https://www.marvel.com/comics/issue/51172/new_avengers_2013_28","cover":"http://i.annihil.us/u/prod/marvel/i/mg/6/70/670687d0b0cf5/portrait_incredible.jpg","releaseDate":"2014-12-24","optional":false},{"id":"52261","title":"New Avengers (2013) #29","series":"New Avengers (2013 - 2015)","url":"https://www.marvel.com/comics/issue/52261/new_avengers_2013_29","cover":"","releaseDate":"2015-01-28","optional":false},{"id":"46931","title":"Avengers (2012) #24","series":"Avengers (2012 - 2015)","url":"https://www.marvel.com/comics/issue/46931/avengers_2012_24","cover":"http://i.annihil.us/u/prod/marvel/i/mg/5/90/52af620531f1b/portrait_incredible.jpg","releaseDate":"2013-12-25","optional":false},{"id":"46933","title":"Avengers (2012) #25","series":"Avengers (2012 - 2015)","url":"https://www.marvel.com/comics/issue/46933/avengers_2012_25","cover":"","releaseDate":"2014-01-22","optional":false},{"id":"46934","title":"Avengers (2012) #26","series":"Avengers (2012 - 2015)","url":"https://www.marvel.com/comics/issue/46934/avengers_2012_26","cover":"http://i.annihil.us/u/prod/marvel/i/mg/b/e0/52fa84c4b0de1/portrait_incredible.jpg","releaseDate":"2014-02-12","optional":false},{"id":"48381","title":"Avengers (2012) #27","series":"Avengers (2012 - 2015)","url":"https://www.marvel.com/comics/issue/48381/avengers_2012_27","cover":"http://i.annihil.us/u/prod/marvel/i/mg/4/30/531f3757869cc/portrait_incredible.jpg","releaseDate":"2014-03-26","optional":false},{"id":"48382","title":"Avengers (2012) #28","series":"Avengers (2012 - 2015)","url":"https://www.marvel.com/comics/issue/48382/avengers_2012_28","cover":"http://i.annihil.us/u/prod/marvel/i/mg/6/40/5745c1f6a19a2/portrait_incredible.jpg","releaseDate":"2014-04-30","optional":false},{"id":"48383","title":"Avengers (2012) #29","series":"Avengers (2012 - 2015)","url":"https://www.marvel.com/comics/issue/48383/avengers_2012_29","cover":"http://i.annihil.us/u/prod/marvel/i/mg/7/10/574468a7c66be/portrait_incredible.jpg","releaseDate":"2014-05-14","optional":false},{"id":"48384","title":"Avengers (2012) #30","series":"Avengers (2012 - 2015)","url":"https://www.marvel.com/comics/issue/48384/avengers_2012_30","cover":"http://i.annihil.us/u/prod/marvel/i/mg/3/70/5373c9684ca11/portrait_incredible.jpg","releaseDate":"2014-05-28","optional":false},{"id":"48385","title":"Avengers (2012) #31","series":"Avengers (2012 - 2015)","url":"https://www.marvel.com/comics/issue/48385/avengers_2012_31","cover":"http://i.annihil.us/u/prod/marvel/i/mg/8/b0/5392161bbd1ae/portrait_incredible.jpg","releaseDate":"2014-06-18","optional":false},{"id":"48386","title":"Avengers (2012) #32","series":"Avengers (2012 - 2015)","url":"https://www.marvel.com/comics/issue/48386/avengers_2012_32","cover":"http://i.annihil.us/u/prod/marvel/i/mg/8/c0/53b2c02428aef/portrait_incredible.jpg","releaseDate":"2014-07-09","optional":false},{"id":"48387","title":"Avengers (2012) #33","series":"Avengers (2012 - 2015)","url":"https://www.marvel.com/comics/issue/48387/avengers_2012_33","cover":"http://i.annihil.us/u/prod/marvel/i/mg/6/40/53cd3764c3f13/portrait_incredible.jpg","releaseDate":"2014-07-30","optional":false},{"id":"48388","title":"Avengers (2012) #34","series":"Avengers (2012 - 2015)","url":"https://www.marvel.com/comics/issue/48388/avengers_2012_34","cover":"http://i.annihil.us/u/prod/marvel/i/mg/6/30/53f5002b88ac7/portrait_incredible.jpg","releaseDate":"2014-08-27","optional":false},{"id":"48389","title":"Avengers (2012) #35","series":"Avengers (2012 - 2015)","url":"https://www.marvel.com/comics/issue/48389/avengers_2012_35","cover":"","releaseDate":"2014-09-17","optional":false},{"id":"48390","title":"Avengers (2012) #36","series":"Avengers (2012 - 2015)","url":"https://www.marvel.com/comics/issue/48390/avengers_2012_36","cover":"http://i.annihil.us/u/prod/marvel/i/mg/1/20/54299756a3c92/portrait_incredible.jpg","releaseDate":"2014-10-08","optional":false},{"id":"48391","title":"Avengers (2012) #37","series":"Avengers (2012 - 2015)","url":"https://www.marvel.com/comics/issue/48391/avengers_2012_37","cover":"http://i.annihil.us/u/prod/marvel/i/mg/6/60/54383a52ce8a5/portrait_incredible.jpg","releaseDate":"2014-10-22","optional":false},{"id":"48392","title":"Avengers (2012) #38","series":"Avengers (2012 - 2015)","url":"https://www.marvel.com/comics/issue/48392/avengers_2012_38","cover":"","releaseDate":"2014-11-19","optional":true},{"id":"48393","title":"Avengers (2012) #39","series":"Avengers (2012 - 2015)","url":"https://www.marvel.com/comics/issue/48393/avengers_2012_39","cover":"http://i.annihil.us/u/prod/marvel/i/mg/b/03/54822674178ac/portrait_incredible.jpg","releaseDate":"2014-12-10","optional":true},{"id":"48394","title":"Avengers (2012) #40","series":"Avengers (2012 - 2015)","url":"https://www.marvel.com/comics/issue/48394/avengers_2012_40","cover":"http://i.annihil.us/u/prod/marvel/i/mg/c/10/54abfb471a37e/portrait_incredible.jpg","releaseDate":"2015-01-14","optional":true},{"id":"48395","title":"Avengers (2012) #41","series":"Avengers (2012 - 2015)","url":"https://www.marvel.com/comics/issue/48395/avengers_2012_41","cover":"http://i.annihil.us/u/prod/marvel/i/mg/8/e0/54c147ab537ab/portrait_incredible.jpg","releaseDate":"2015-02-04","optional":true},{"id":"48396","title":"Avengers (2012) #42","series":"Avengers (2012 - 2015)","url":"https://www.marvel.com/comics/issue/48396/avengers_2012_42","cover":"","releaseDate":"2015-03-04","optional":true},{"id":"48397","title":"Avengers (2012) #43","series":"Avengers (2012 - 2015)","url":"https://www.marvel.com/comics/issue/48397/avengers_2012_43","cover":"http://i.annihil.us/u/prod/marvel/i/mg/3/03/55119c23c6219/portrait_incredible.jpg","releaseDate":"2015-04-01","optional":true},{"id":"48398","title":"Avengers (2012) #44","series":"Avengers (2012 - 2015)","url":"https://www.marvel.com/comics/issue/48398/avengers_2012_44","cover":"http://i.annihil.us/u/prod/marvel/i/mg/c/20/553e4ecf080cb/portrait_incredible.jpg","releaseDate":"2015-04-29","optional":true}]},{"name":"Time Runs Out","issues":[{"id":"50096","title":"New Avengers (2013) #24","series":"New Avengers (2013 - 2015)","url":"https://www.marvel.com/comics/issue/50096/new_avengers_2013_24","cover":"http://i.annihil.us/u/prod/marvel/i/mg/d/50/54174364c0258/portrait_incredible.jpg","releaseDate":"2014-09-24","optional":false},{"id":"48389","title":"Avengers (2012) #35","series":"Avengers (2012 - 2015)","url":"https://www.marvel.com/comics/issue/48389/avengers_2012_35","cover":"","releaseDate":"2014-09-17","optional":false},{"id":"50973","title":"New Avengers (2013) #25","series":"New Avengers (2013 - 2015)","url":"https://www.marvel.com/comics/issue/50973/new_avengers_2013_25","cover":"http://i.annihil.us/u/prod/marvel/i/mg/8/a0/543431ed1b3ae/portrait_incredible.jpg","releaseDate":"2014-10-15","optional":false},{"id":"52257","title":"New Avengers (2013) #26","series":"New Avengers (2013 - 2015)","url":"https://www.marvel.com/comics/issue/52257/new_avengers_2013_26","cover":"http://i.annihil.us/u/prod/marvel/i/mg/6/80/5464fca1a9672/portrait_incredible.jpg","releaseDate":"2014-11-19","optional":false},{"id":"52259","title":"New Avengers (2013) #27","series":"New Avengers (2013 - 2015)","url":"https://www.marvel.com/comics/issue/52259/new_avengers_2013_27","cover":"http://i.annihil.us/u/prod/marvel/i/mg/f/60/546bbcfa7f23f/portrait_incredible.jpg","releaseDate":"2014-11-26","optional":false},{"id":"51172","title":"New Avengers (2013) #28","series":"New Avengers (2013 - 2015)","url":"https://www.marvel.com/comics/issue/51172/new_avengers_2013_28","cover":"http://i.annihil.us/u/prod/marvel/i/mg/6/70/670687d0b0cf5/portrait_incredible.jpg","releaseDate":"2014-12-24","optional":false},{"id":"52261","title":"New Avengers (2013) #29","series":"New Avengers (2013 - 2015)","url":"https://www.marvel.com/comics/issue/52261/new_avengers_2013_29","cover":"","releaseDate":"2015-01-28","optional":false},{"id":"48390","title":"Avengers (2012) #36","series":"Avengers (2012 - 2015)","url":"https://www.marvel.com/comics/issue/48390/avengers_2012_36","cover":"http://i.annihil.us/u/prod/marvel/i/mg/1/20/54299756a3c92/portrait_incredible.jpg","releaseDate":"2014-10-08","optional":false},{"id":"48391","title":"Avengers (2012) #37","series":"Avengers (2012 - 2015)","url":"https://www.marvel.com/comics/issue/48391/avengers_2012_37","cover":"http://i.annihil.us/u/prod/marvel/i/mg/6/60/54383a52ce8a5/portrait_incredible.jpg","releaseDate":"2014-10-22","optional":false},{"id":"52263","title":"New Avengers (2013) #30","series":"New Avengers (2013 - 2015)","url":"https://www.marvel.com/comics/issue/52263/new_avengers_2013_30","cover":"http://i.annihil.us/u/prod/marvel/i/mg/3/50/54e6090362ff0/portrait_incredible.jpg","releaseDate":"2015-02-25","optional":false},{"id":"52265","title":"New Avengers (2013) #31","series":"New Avengers (2013 - 2015)","url":"https://www.marvel.com/comics/issue/52265/new_avengers_2013_31","cover":"http://i.annihil.us/u/prod/marvel/i/mg/f/a0/54fdaec70d4e9/portrait_incredible.jpg","releaseDate":"2015-03-11","optional":false},{"id":"52266","title":"New Avengers (2013) #32","series":"New Avengers (2013 - 2015)","url":"https://www.marvel.com/comics/issue/52266/new_avengers_2013_32","cover":"http://i.annihil.us/u/prod/marvel/i/mg/6/50/5506fe05e43f2/portrait_incredible.jpg","releaseDate":"2015-03-25","optional":false},{"id":"48392","title":"Avengers (2012) #38","series":"Avengers (2012 - 2015)","url":"https://www.marvel.com/comics/issue/48392/avengers_2012_38","cover":"","releaseDate":"2014-11-19","optional":false},{"id":"48393","title":"Avengers (2012) #39","series":"Avengers (2012 - 2015)","url":"https://www.marvel.com/comics/issue/48393/avengers_2012_39","cover":"http://i.annihil.us/u/prod/marvel/i/mg/b/03/54822674178ac/portrait_incredible.jpg","releaseDate":"2014-12-10","optional":false},{"id":"48394","title":"Avengers (2012) #40","series":"Avengers (2012 - 2015)","url":"https://www.marvel.com/comics/issue/48394/avengers_2012_40","cover":"http://i.annihil.us/u/prod/marvel/i/mg/c/10/54abfb471a37e/portrait_incredible.jpg","releaseDate":"2015-01-14","optional":false},{"id":"52267","title":"New Avengers (2013) #33","series":"New Avengers (2013 - 2015)","url":"https://www.marvel.com/comics/issue/52267/new_avengers_2013_33","cover":"http://i.annihil.us/u/prod/marvel/i/mg/7/10/552e8ee78b219/portrait_incredible.jpg","releaseDate":"2015-04-29","optional":false},{"id":"48395","title":"Avengers (2012) #41","series":"Avengers (2012 - 2015)","url":"https://www.marvel.com/comics/issue/48395/avengers_2012_41","cover":"http://i.annihil.us/u/prod/marvel/i/mg/8/e0/54c147ab537ab/portrait_incredible.jpg","releaseDate":"2015-02-04","optional":false},{"id":"48396","title":"Avengers (2012) #42","series":"Avengers (2012 - 2015)","url":"https://www.marvel.com/comics/issue/48396/avengers_2012_42","cover":"","releaseDate":"2015-03-04","optional":false},{"id":"48397","title":"Avengers (2012) #43","series":"Avengers (2012 - 2015)","url":"https://www.marvel.com/comics/issue/48397/avengers_2012_43","cover":"http://i.annihil.us/u/prod/marvel/i/mg/3/03/55119c23c6219/portrait_incredible.jpg","releaseDate":"2015-04-01","optional":false},{"id":"48398","title":"Avengers (2012) #44","series":"Avengers (2012 - 2015)","url":"https://www.marvel.com/comics/issue/48398/avengers_2012_44","cover":"http://i.annihil.us/u/prod/marvel/i/mg/c/20/553e4ecf080cb/portrait_incredible.jpg","releaseDate":"2015-04-29","optional":false}]},{"name":"Secret Wars","issues":[{"id":"52986","title":"Free Comic Book Day 2015 (Secret Wars) #0","series":"Free Comic Book Day (2015)","url":"https://www.marvel.com/comics/issue/52986/free_comic_book_day_2015_0_2015","cover":"http://i.annihil.us/u/prod/marvel/i/mg/e/30/5649f78660027/portrait_incredible.jpg","releaseDate":"2015-05-02","optional":false},{"id":"52447","title":"Secret Wars (2015) #1","series":"Secret Wars (2015 - 2016)","url":"https://www.marvel.com/comics/issue/52447/secret_wars_2015_1","cover":"http://i.annihil.us/u/prod/marvel/i/mg/c/70/5cb736a3cdd49/portrait_incredible.jpg","releaseDate":"2015-05-06","optional":false},{"id":"52450","title":"Secret Wars (2015) #2","series":"Secret Wars (2015 - 2016)","url":"https://www.marvel.com/comics/issue/52450/secret_wars_2015_2","cover":"http://i.annihil.us/u/prod/marvel/i/mg/9/40/5cb737237a2de/portrait_incredible.jpg","releaseDate":"2015-05-13","optional":false},{"id":"52451","title":"Secret Wars (2015) #3","series":"Secret Wars (2015 - 2016)","url":"https://www.marvel.com/comics/issue/52451/secret_wars_2015_3","cover":"http://i.annihil.us/u/prod/marvel/i/mg/f/03/5cb7377845092/portrait_incredible.jpg","releaseDate":"2015-06-03","optional":false},{"id":"52452","title":"Secret Wars (2015) #4","series":"Secret Wars (2015 - 2016)","url":"https://www.marvel.com/comics/issue/52452/secret_wars_2015_4","cover":"http://i.annihil.us/u/prod/marvel/i/mg/3/a0/5cb73456184e4/portrait_incredible.jpg","releaseDate":"2015-07-01","optional":false},{"id":"52453","title":"Secret Wars (2015) #5","series":"Secret Wars (2015 - 2016)","url":"https://www.marvel.com/comics/issue/52453/secret_wars_2015_5","cover":"http://i.annihil.us/u/prod/marvel/i/mg/6/a0/5cb736208d76d/portrait_incredible.jpg","releaseDate":"2015-08-12","optional":false},{"id":"52454","title":"Secret Wars (2015) #6","series":"Secret Wars (2015 - 2016)","url":"https://www.marvel.com/comics/issue/52454/secret_wars_2015_6","cover":"http://i.annihil.us/u/prod/marvel/i/mg/8/e0/5cb73a17a642c/portrait_incredible.jpg","releaseDate":"2015-10-07","optional":false},{"id":"52455","title":"Secret Wars (2015) #7","series":"Secret Wars (2015 - 2016)","url":"https://www.marvel.com/comics/issue/52455/secret_wars_2015_7","cover":"http://i.annihil.us/u/prod/marvel/i/mg/c/30/5cb73c66beb33/portrait_incredible.jpg","releaseDate":"2015-11-11","optional":false},{"id":"52456","title":"Secret Wars (2015) #8","series":"Secret Wars (2015 - 2016)","url":"https://www.marvel.com/comics/issue/52456/secret_wars_2015_8","cover":"http://i.annihil.us/u/prod/marvel/i/mg/f/80/564ce8a2d5cde/portrait_incredible.jpg","releaseDate":"2015-12-09","optional":false},{"id":"57620","title":"Secret Wars (2015) #9","series":"Secret Wars (2015 - 2016)","url":"https://www.marvel.com/comics/issue/57620/secret_wars_2015_9","cover":"http://i.annihil.us/u/prod/marvel/i/mg/3/70/569040820cfb9/portrait_incredible.jpg","releaseDate":"2016-01-13","optional":false}]}]};
+
+const ARC_COLORS = [
+  '#c89a2e', // S.H.I.E.L.D. — brass
+  '#cc1a2e', // Secret Warriors — blood red
+  '#2068c4', // Fantastic Four — royal blue
+  '#00bcd4', // Ultimate Universe — electric cyan
+  '#10b97e', // Avengers World — emerald
+  '#8b5cf6', // Infinity — violet
+  '#ea580c', // The Incursions — amber-orange
+  '#e11d48', // Time Runs Out — crimson
+  '#d4af37', // Secret Wars — gold
+];
+
+const ROMAN = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX'];
+const TOTAL = DATA.arcs.reduce((s, a) => s + a.issues.length, 0);
+
+const STATE_KEY = 'hickman-saga-v1';
+let state = {};
+try { state = JSON.parse(localStorage.getItem(STATE_KEY) || '{}'); } catch(e) {}
+function save() { localStorage.setItem(STATE_KEY, JSON.stringify(state)); }
+
+function arcSlug(name) {
+  return 'arc-' + name.replace(/[^a-z0-9]+/gi, '-').toLowerCase().replace(/-+$/,'');
+}
+
+function toggle(id, arcIdx) {
+  state[id] = !state[id];
+  if (!state[id]) delete state[id];
+  save();
+  document.querySelectorAll(`.comic-card[data-id="${id}"]`).forEach(el => {
+    el.classList.toggle('checked', !!state[id]);
+  });
+  updateProgress(arcIdx);
+}
+
+function resetAll() {
+  if (!confirm('Reset all reading progress?')) return;
+  state = {};
+  save();
+  document.querySelectorAll('.comic-card.checked').forEach(el => el.classList.remove('checked'));
+  DATA.arcs.forEach((_, i) => updateProgress(i));
+  updateGlobal();
+}
+
+function markArc(arcIdx, markRead) {
+  const arc = DATA.arcs[arcIdx];
+  arc.issues.forEach(issue => {
+    if (markRead) state[issue.id] = true;
+    else delete state[issue.id];
+  });
+  save();
+  const slug = arcSlug(arc.name);
+  arc.issues.forEach(issue => {
+    document.querySelectorAll(`.comic-card[data-id="${issue.id}"]`).forEach(el => {
+      el.classList.toggle('checked', !!state[issue.id]);
+    });
+  });
+  updateProgress(arcIdx);
+  updateGlobal();
+}
+
+function updateProgress(arcIdx) {
+  const arc = DATA.arcs[arcIdx];
+  const slug = arcSlug(arc.name);
+  const arcRead = arc.issues.filter(i => state[i.id]).length;
+  const pct = arc.issues.length ? (arcRead / arc.issues.length) * 100 : 0;
+
+  const counter = document.querySelector(`#${slug} .arc-counter`);
+  if (counter) counter.textContent = `${arcRead} / ${arc.issues.length}`;
+
+  const fill = document.querySelector(`#${slug} .arc-progress-fill`);
+  if (fill) fill.style.width = pct + '%';
+
+  // Update sidebar dots
+  const dotsEl = document.querySelector(`.sidebar-dots[data-arc="${arcIdx}"]`);
+  if (dotsEl) {
+    const dots = dotsEl.querySelectorAll('.dot');
+    let di = 0;
+    arc.issues.forEach((issue, ii) => {
+      if (dots[ii]) dots[ii].classList.toggle('done', !!state[issue.id]);
+    });
+  }
+
+  updateGlobal();
+}
+
+function updateGlobal() {
+  const read = DATA.arcs.reduce((s, a) => s + a.issues.filter(i => state[i.id]).length, 0);
+  document.getElementById('global-bar').style.width = `${(read / TOTAL) * 100}%`;
+  document.getElementById('read-count').textContent = read;
+}
+
+function shortTitle(title) {
+  return title
+    .replace(/\s*\(\d{4}(?:\s*[-–]\s*(?:\d{4}|present))?\)\s*/i, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function render() {
+  const sidebarLinks = document.getElementById('sidebar-links');
+  const main = document.getElementById('main-content');
+
+  DATA.arcs.forEach((arc, idx) => {
+    const color = ARC_COLORS[idx];
+    const roman = ROMAN[idx];
+    const slug = arcSlug(arc.name);
+
+    // ── Sidebar link
+    const link = document.createElement('a');
+    link.href = `#${slug}`;
+    link.className = 'sidebar-link';
+    link.style.setProperty('--arc-color', color);
+    link.dataset.arc = slug;
+    link.innerHTML = `
+      <span class="sidebar-roman">${roman}</span>
+      <span class="sidebar-name">${arc.name}</span>
+      <span class="sidebar-n">${arc.issues.length}</span>
+    `;
+    sidebarLinks.appendChild(link);
+
+    // ── Arc section
+    const section = document.createElement('section');
+    section.id = slug;
+    section.className = 'arc-section';
+    section.style.setProperty('--arc-color', color);
+    section.style.animationDelay = `${idx * 0.07}s`;
+
+    section.innerHTML = `
+      <div class="arc-header">
+        <span class="arc-roman-ghost">${roman}</span>
+        <div class="arc-numeral">${roman}</div>
+        <div class="arc-info">
+          <h2 class="arc-title">${arc.name}</h2>
+          <div class="arc-meta">
+            <div class="arc-progress-track"><div class="arc-progress-fill"></div></div>
+            <span class="arc-counter">0 / ${arc.issues.length}</span>
+            <span class="arc-meta-label">${arc.issues.length === 1 ? 'issue' : 'issues'}</span>
+            <button class="arc-mark-btn" onclick="markArc(${idx}, true)">Mark All Read</button>
+          </div>
+        </div>
+      </div>
+      <div class="covers-grid" id="grid-${slug}"></div>
+    `;
+    main.appendChild(section);
+
+    const grid = section.querySelector('.covers-grid');
+    arc.issues.forEach((issue) => {
+      const card = document.createElement('div');
+      card.className = `comic-card${state[issue.id] ? ' checked' : ''}${issue.optional ? ' optional' : ''}`;
+      card.dataset.id = issue.id;
+      card.onclick = () => toggle(issue.id, idx);
+      card.title = `${issue.title}${issue.releaseDate ? '  ·  ' + issue.releaseDate : ''}`;
+
+      const st = shortTitle(issue.title);
+
+      card.innerHTML = `
+        <div class="cover-wrap">
+          <img src="${issue.cover}" alt="${issue.title.replace(/"/g, '&quot;')}" loading="lazy"
+               onerror="this.style.visibility='hidden'">
+          <div class="read-overlay"><span class="check-icon">✓</span></div>
+          <a class="ext-link" href="${issue.url}" target="_blank" rel="noopener"
+             onclick="event.stopPropagation()" title="Open on Marvel.com">↗</a>
+          ${issue.optional ? '<span class="opt-badge">OPT</span>' : ''}
+        </div>
+        <div class="card-info"><span class="card-title">${st}</span></div>
+      `;
+      grid.appendChild(card);
+    });
+  });
+
+  // Initialize all progress displays
+  DATA.arcs.forEach((_, i) => updateProgress(i));
+
+  // Scroll spy
+  setupScrollSpy();
+
+  // Scroll-to-top button
+  window.addEventListener('scroll', () => {
+    document.getElementById('scroll-top').classList.toggle('visible', window.scrollY > 400);
+  }, { passive: true });
+}
+
+function setupScrollSpy() {
+  const sections = document.querySelectorAll('.arc-section');
+  const links = document.querySelectorAll('.sidebar-link');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        links.forEach(l => l.classList.remove('active'));
+        const activeLink = document.querySelector(`.sidebar-link[data-arc="${entry.target.id}"]`);
+        if (activeLink) {
+          activeLink.classList.add('active');
+          activeLink.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+        }
+      }
+    });
+  }, { rootMargin: '-15% 0px -75% 0px', threshold: 0 });
+
+  sections.forEach(s => observer.observe(s));
+}
+
+render();
+</script>
+</body>
+</html>
