@@ -510,6 +510,51 @@
     }
     #about-link:hover { color: var(--text); border-bottom-color: rgba(200,154,46,0.5); }
 
+    /* ── COLLAPSE ── */
+    .arc-collapse-btn {
+      margin-left: auto;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--text-muted);
+      padding: 4px 6px;
+      display: flex;
+      align-items: center;
+      transition: color 0.2s;
+      flex-shrink: 0;
+    }
+    .arc-collapse-btn:hover { color: var(--text); }
+    .arc-collapse-chevron {
+      display: block;
+      width: 10px;
+      height: 10px;
+      border-right: 1.5px solid currentColor;
+      border-bottom: 1.5px solid currentColor;
+      transform: rotate(45deg);
+      transition: transform 0.3s ease;
+      margin-top: -4px;
+    }
+    .arc-section.collapsed .arc-collapse-chevron {
+      transform: rotate(-135deg);
+      margin-top: 4px;
+    }
+    .arc-grid-wrap {
+      display: grid;
+      grid-template-rows: 1fr;
+      transition: grid-template-rows 0.35s ease;
+    }
+    .arc-section.collapsed .arc-grid-wrap {
+      grid-template-rows: 0fr;
+    }
+    .arc-grid-inner {
+      overflow: hidden;
+      min-height: 0;
+    }
+    .arc-grid-inner .covers-grid {
+      padding-bottom: 2px;
+    }
+
+
     /* ── ZOOM SLIDER ── */
     .zoom-control {
       display: flex;
@@ -691,6 +736,15 @@ function shortTitle(title) {
     .trim();
 }
 
+function toggleCollapse(arcIdx) {
+  const slug = arcSlug(DATA.arcs[arcIdx].name);
+  const section = document.getElementById(slug);
+  const isCollapsed = section.classList.toggle('collapsed');
+  const collapsedState = JSON.parse(localStorage.getItem('hickman-collapsed') || '{}');
+  collapsedState[arcIdx] = isCollapsed;
+  localStorage.setItem('hickman-collapsed', JSON.stringify(collapsedState));
+}
+
 function render() {
   const sidebarLinks = document.getElementById('sidebar-links');
   const main = document.getElementById('main-content');
@@ -721,7 +775,7 @@ function render() {
     section.style.animationDelay = `${idx * 0.07}s`;
 
     section.innerHTML = `
-      <div class="arc-header">
+      <div class="arc-header" style="cursor:pointer" onclick="toggleCollapse(${idx})">
         <span class="arc-roman-ghost">${roman}</span>
         <div class="arc-numeral">${roman}</div>
         <div class="arc-info">
@@ -730,11 +784,18 @@ function render() {
             <div class="arc-progress-track"><div class="arc-progress-fill"></div></div>
             <span class="arc-counter">0 / ${arc.issues.length}</span>
             <span class="arc-meta-label">${arc.issues.length === 1 ? 'issue' : 'issues'}</span>
-            <button class="arc-mark-btn" onclick="markArc(${idx}, true)">Mark All Read</button>
+            <button class="arc-mark-btn" onclick="event.stopPropagation(); markArc(${idx}, true)">Mark All Read</button>
           </div>
         </div>
+        <button class="arc-collapse-btn" onclick="event.stopPropagation(); toggleCollapse(${idx})" title="Collapse section">
+          <span class="arc-collapse-chevron"></span>
+        </button>
       </div>
-      <div class="covers-grid" id="grid-${slug}"></div>
+      <div class="arc-grid-wrap">
+        <div class="arc-grid-inner">
+          <div class="covers-grid" id="grid-${slug}"></div>
+        </div>
+      </div>
     `;
     main.appendChild(section);
 
@@ -801,6 +862,14 @@ fetch('hickman-reading-list.json')
     DATA = data;
     TOTAL = DATA.arcs.reduce((s, a) => s + a.issues.length, 0);
     render();
+    // Restore collapsed sections
+    const collapsedState = JSON.parse(localStorage.getItem('hickman-collapsed') || '{}');
+    DATA.arcs.forEach((arc, idx) => {
+      if (collapsedState[idx]) {
+        const slug = arcSlug(arc.name);
+        document.getElementById(slug)?.classList.add('collapsed');
+      }
+    });
   });
   // Zoom slider
   const slider = document.getElementById('zoom-slider');
