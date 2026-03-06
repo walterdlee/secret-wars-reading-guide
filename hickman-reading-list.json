@@ -228,6 +228,15 @@
           "optional": false
         },
         {
+          "id": "27422",
+          "title": "Dark Reign: The List - Secret Warriors (2009) #1",
+          "series": "Dark Reign: The List - Secret Warriors (2009)",
+          "url": "https://www.marvel.com/comics/issue/27422/dark_reign_the_list_-_secret_warriors_2009_1",
+          "cover": "http://i.annihil.us/u/prod/marvel/i/mg/2/30/5b5b3caddbc88/portrait_incredible.jpg",
+          "releaseDate": "2009-10-07",
+          "optional": false
+        },
+        {
           "id": "26291",
           "title": "Secret Warriors (2009) #9",
           "series": "Secret Warriors (2009 - 2011)",
@@ -279,6 +288,15 @@
           "url": "https://www.marvel.com/comics/issue/30175/secret_warriors_2009_14",
           "cover": "http://i.annihil.us/u/prod/marvel/i/mg/7/30/5a8d85635bd78/portrait_incredible.jpg",
           "releaseDate": "2010-03-24",
+          "optional": false
+        },
+        {
+          "id": "32930",
+          "title": "Siege: Secret Warriors (2010) #1",
+          "series": "Siege: Secret Warriors (2010)",
+          "url": "https://www.marvel.com/comics/issue/32930/siege_secret_warriors_2010_1",
+          "cover": "http://i.annihil.us/u/prod/marvel/i/mg/5/f0/517e8034bd15a/portrait_incredible.jpg",
+          "releaseDate": "2010-04-28",
           "optional": false
         },
         {
@@ -363,15 +381,6 @@
           "optional": false
         },
         {
-          "id": "27422",
-          "title": "Dark Reign: The List - Secret Warriors (2009) #1",
-          "series": "Dark Reign: The List - Secret Warriors (2009)",
-          "url": "https://www.marvel.com/comics/issue/27422/dark_reign_the_list_-_secret_warriors_2009_1",
-          "cover": "http://i.annihil.us/u/prod/marvel/i/mg/2/30/5b5b3caddbc88/portrait_incredible.jpg",
-          "releaseDate": "2009-10-07",
-          "optional": false
-        },
-        {
           "id": "30184",
           "title": "Secret Warriors (2009) #24",
           "series": "Secret Warriors (2009 - 2011)",
@@ -414,15 +423,6 @@
           "url": "https://www.marvel.com/comics/issue/36494/secret_warriors_2009_28",
           "cover": "http://i.annihil.us/u/prod/marvel/i/mg/6/a0/51f68a7199ba1/portrait_incredible.jpg",
           "releaseDate": "2011-07-27",
-          "optional": false
-        },
-        {
-          "id": "32930",
-          "title": "Siege: Secret Warriors (2010) #1",
-          "series": "Siege: Secret Warriors (2010)",
-          "url": "https://www.marvel.com/comics/issue/32930/siege_secret_warriors_2010_1",
-          "cover": "http://i.annihil.us/u/prod/marvel/i/mg/5/f0/517e8034bd15a/portrait_incredible.jpg",
-          "releaseDate": "2010-04-28",
           "optional": false
         }
       ]
