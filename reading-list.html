@@ -524,6 +524,91 @@
     }
     #about-link:hover { color: var(--text); border-bottom-color: rgba(200,154,46,0.5); }
 
+    /* ── RESET CONFIRM MODAL ── */
+    #reset-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 10000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease;
+    }
+    #reset-modal.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+    .reset-backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(4, 4, 10, 0.85);
+      backdrop-filter: blur(4px);
+    }
+    .reset-dialog {
+      position: relative;
+      background: #0d0d1a;
+      border: 1px solid rgba(225, 29, 72, 0.25);
+      padding: 36px 40px;
+      max-width: 360px;
+      width: 90%;
+      text-align: center;
+      animation: scReveal 0.25s both;
+    }
+    .reset-dialog h3 {
+      font-family: 'Cinzel', serif;
+      font-weight: 900;
+      font-size: 16px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text);
+      margin-bottom: 12px;
+    }
+    .reset-dialog p {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 16px;
+      font-style: italic;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 28px;
+    }
+    .reset-actions {
+      display: flex;
+      gap: 10px;
+    }
+    .reset-cancel {
+      flex: 1;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 8.5px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 10px;
+      background: transparent;
+      border: 1px solid var(--border-mid);
+      color: var(--text-muted);
+      cursor: pointer;
+      border-radius: 2px;
+      transition: all 0.2s;
+    }
+    .reset-cancel:hover { color: var(--text); border-color: rgba(228,216,192,0.3); }
+    .reset-confirm {
+      flex: 1;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 8.5px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 10px;
+      background: transparent;
+      border: 1px solid rgba(225,29,72,0.4);
+      color: #e11d48;
+      cursor: pointer;
+      border-radius: 2px;
+      transition: all 0.2s;
+    }
+    .reset-confirm:hover { background: rgba(225,29,72,0.08); border-color: #e11d48; }
+
+
     /* ── EASTER EGG ── */
     #saga-complete {
       position: fixed;
@@ -584,8 +669,8 @@
     .sc-title {
       font-family: 'Cinzel Decorative', cursive;
       font-weight: 900;
-      font-size: clamp(52px, 10vw, 100px);
-      line-height: 1.05;
+      font-size: clamp(40px, 7vw, 72px);
+      line-height: 1.1;
       background: linear-gradient(135deg, #c89a2e 0%, #d4af37 40%, #e8cc6a 60%, #c89a2e 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -837,7 +922,15 @@ function checkComplete() {
 
 
 function resetAll() {
-  if (!confirm('Reset all reading progress?')) return;
+  document.getElementById('reset-modal').classList.add('open');
+}
+
+function closeResetModal() {
+  document.getElementById('reset-modal').classList.remove('open');
+}
+
+function confirmReset() {
+  closeResetModal();
   state = {};
   save();
   document.querySelectorAll('.comic-card.checked').forEach(el => el.classList.remove('checked'));
@@ -1085,6 +1178,19 @@ fetch('hickman-reading-list.json')
     <button class="sc-close" onclick="document.getElementById('saga-complete').classList.remove('sc-visible')">
       Close
     </button>
+  </div>
+</div>
+
+<!-- ── RESET CONFIRM MODAL ── -->
+<div id="reset-modal">
+  <div class="reset-backdrop" onclick="closeResetModal()"></div>
+  <div class="reset-dialog">
+    <h3>Reset Progress</h3>
+    <p>This will clear all your reading progress. This cannot be undone.</p>
+    <div class="reset-actions">
+      <button class="reset-cancel" onclick="closeResetModal()">Cancel</button>
+      <button class="reset-confirm" onclick="confirmReset()">Reset</button>
+    </div>
   </div>
 </div>
 </body>
