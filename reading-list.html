@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Hickman Saga — Complete Reading List</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@400;600;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=JetBrains+Mono:wght@300;400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #07070f;
+      --text: #e4d8c0;
+      --text-muted: #5e5648;
+      --border: rgba(228, 216, 192, 0.07);
+      --header-h: 58px;
+      --sidebar-w: 210px;
+      --arc-color: #ffffff;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 14px; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      min-height: 100vh;
+    }
+
+    /* GRAIN */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='250' height='250'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='250' height='250' filter='url(%23n)' opacity='0.4'/%3E%3C/svg%3E");
+      opacity: 0.04;
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    /* ─── TOP BAR ─── */
+    #top-bar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: var(--header-h);
+      background: rgba(7, 7, 15, 0.95);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      z-index: 500;
+      display: flex;
+      align-items: center;
+      padding: 0 24px;
+      gap: 20px;
+    }
+
+    .saga-wordmark {
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+    }
+    .wordmark-sub {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 7.5px;
+      letter-spacing: 0.22em;
+      color: var(--text-muted);
+      text-transform: uppercase;
+    }
+    .wordmark-main {
+      font-family: 'Cinzel Decorative', cursive;
+      font-weight: 700;
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      color: #d4c4a0;
+      white-space: nowrap;
+    }
+
+    .divider-v {
+      width: 1px;
+      height: 28px;
+      background: var(--border);
+      flex-shrink: 0;
+    }
+
+    .progress-track {
+      flex: 1;
+      height: 2px;
+      background: rgba(228, 216, 192, 0.08);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+    #global-bar {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #c89a2e 0%, #d4af37 100%);
+      border-radius: 2px;
+      transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    #progress-text {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10.5px;
+      color: var(--text-muted);
+      white-space: nowrap;
+      flex-shrink: 0;
+      letter-spacing: 0.04em;
+    }
+    #progress-text span {
+      color: #c89a2e;
+    }
+
+    /* ─── LAYOUT ─── */
+    #layout {
+      display: flex;
+      padding-top: var(--header-h);
+      min-height: 100vh;
+    }
+
+    /* ─── SIDEBAR ─── */
+    #sidebar {
+      width: var(--sidebar-w);
+      flex-shrink: 0;
+      position: sticky;
+      top: var(--header-h);
+      height: calc(100vh - var(--header-h));
+      overflow-y: auto;
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      scrollbar-width: none;
+    }
+    #sidebar::-webkit-scrollbar { display: none; }
+
+    .sidebar-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 8px;
+      letter-spacing: 0.22em;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      padding: 20px 18px 10px;
+    }
+
+    .sidebar-links { flex: 1; }
+
+    .sidebar-link {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      padding: 8px 18px;
+      text-decoration: none;
+      color: #3e3730;
+      font-size: 11.5px;
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 600;
+      transition: color 0.2s, border-color 0.2s, background 0.2s;
+      border-left: 2px solid transparent;
+      letter-spacing: 0.02em;
+    }
+    .sidebar-link:hover {
+      color: var(--text);
+      background: rgba(228, 216, 192, 0.03);
+      border-left-color: rgba(228, 216, 192, 0.15);
+    }
+    .sidebar-link.active {
+      color: var(--arc-color);
+      border-left-color: var(--arc-color);
+      background: rgba(228, 216, 192, 0.025);
+    }
+    .sidebar-roman {
+      font-family: 'Cinzel', serif;
+      font-weight: 900;
+      font-size: 9.5px;
+      color: var(--arc-color);
+      flex-shrink: 0;
+      width: 20px;
+      opacity: 0.7;
+    }
+    .sidebar-link.active .sidebar-roman { opacity: 1; }
+    .sidebar-name { flex: 1; line-height: 1.2; }
+    .sidebar-n {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
+      color: var(--text-muted);
+      flex-shrink: 0;
+    }
+
+    /* Arc progress dot row in sidebar */
+    .sidebar-dots {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2px;
+      padding: 0 18px 10px 47px;
+    }
+    .dot {
+      width: 4px; height: 4px;
+      border-radius: 50%;
+      background: rgba(228,216,192,0.12);
+      transition: background 0.3s;
+    }
+    .dot.done { background: var(--arc-color); }
+
+    .sidebar-controls {
+      padding: 14px 18px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      gap: 8px;
+    }
+    .ctrl-btn {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 8.5px;
+      letter-spacing: 0.1em;
+      padding: 6px 10px;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--text-muted);
+      cursor: pointer;
+      border-radius: 2px;
+      transition: all 0.2s;
+      flex: 1;
+      text-transform: uppercase;
+    }
+    .ctrl-btn:hover { color: var(--text); border-color: rgba(228,216,192,0.2); }
+    .ctrl-btn.danger:hover { color: #e11d48; border-color: rgba(225,29,72,0.4); }
+
+    /* ─── MAIN ─── */
+    #main-content {
+      flex: 1;
+      min-width: 0;
+      padding: 64px 52px 80px;
+    }
+
+    /* ─── ARC SECTION ─── */
+    .arc-section {
+      margin-bottom: 80px;
+      animation: fadeUp 0.6s both;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .arc-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 18px;
+      margin-bottom: 24px;
+      padding-bottom: 18px;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .arc-roman-ghost {
+      position: absolute;
+      right: -8px;
+      top: -28px;
+      font-family: 'Cinzel', serif;
+      font-weight: 900;
+      font-size: clamp(80px, 10vw, 150px);
+      color: var(--arc-color);
+      opacity: 0.045;
+      line-height: 1;
+      pointer-events: none;
+      user-select: none;
+      letter-spacing: -0.05em;
+    }
+
+    .arc-numeral {
+      font-family: 'Cinzel', serif;
+      font-weight: 900;
+      font-size: 38px;
+      color: var(--arc-color);
+      line-height: 1;
+      flex-shrink: 0;
+      width: 52px;
+      text-align: center;
+      padding-top: 3px;
+    }
+
+    .arc-info { flex: 1; }
+
+    .arc-title {
+      font-family: 'Cinzel', serif;
+      font-weight: 900;
+      font-size: clamp(18px, 2.5vw, 28px);
+      color: var(--text);
+      letter-spacing: 0.06em;
+      line-height: 1;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+    }
+
+    .arc-meta {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .arc-progress-track {
+      width: 100px;
+      height: 1.5px;
+      background: rgba(228,216,192,0.08);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+    .arc-progress-fill {
+      height: 100%;
+      width: 0%;
+      background: var(--arc-color);
+      border-radius: 2px;
+      transition: width 0.4s ease;
+    }
+
+    .arc-counter {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10.5px;
+      color: var(--arc-color);
+      letter-spacing: 0.04em;
+    }
+
+    .arc-meta-label {
+      font-size: 12px;
+      color: var(--text-muted);
+      font-style: italic;
+    }
+
+    .arc-mark-btn {
+      margin-left: auto;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 8px;
+      letter-spacing: 0.12em;
+      padding: 5px 10px;
+      border: 1px solid var(--arc-color);
+      color: var(--arc-color);
+      background: transparent;
+      cursor: pointer;
+      border-radius: 2px;
+      transition: all 0.2s;
+      text-transform: uppercase;
+      opacity: 0.5;
+    }
+    .arc-mark-btn:hover { opacity: 1; background: rgba(255,255,255,0.05); }
+
+    /* ─── GRID ─── */
+    .covers-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+      gap: 8px;
+    }
+
+    /* ─── CARD ─── */
+    .comic-card {
+      cursor: pointer;
+      border-radius: 3px;
+      overflow: hidden;
+      transition: transform 0.2s, box-shadow 0.2s;
+      background: rgba(228,216,192,0.025);
+      border: 1px solid rgba(228,216,192,0.05);
+      position: relative;
+    }
+    .comic-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.6), 0 0 0 1px var(--arc-color);
+    }
+    .comic-card:active { transform: translateY(-2px); }
+
+    .cover-wrap {
+      position: relative;
+      aspect-ratio: 2 / 3;
+      overflow: hidden;
+      background: #0c0c18;
+    }
+    .cover-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: filter 0.35s, opacity 0.35s;
+    }
+
+    /* Read state */
+    .read-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(7,7,15,0.55);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .check-icon {
+      font-family: 'Cinzel', serif;
+      font-size: 30px;
+      color: var(--arc-color);
+      line-height: 1;
+      filter: drop-shadow(0 0 10px var(--arc-color));
+    }
+    .comic-card.checked .cover-wrap img {
+      filter: grayscale(0.75) brightness(0.6);
+    }
+    .comic-card.checked .read-overlay { opacity: 1; }
+
+    /* Ext link */
+    .ext-link {
+      position: absolute;
+      bottom: 5px;
+      right: 5px;
+      width: 22px;
+      height: 22px;
+      background: rgba(7,7,15,0.88);
+      border: 1px solid rgba(228,216,192,0.15);
+      color: var(--arc-color);
+      text-decoration: none;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 2px;
+      opacity: 0;
+      transition: opacity 0.2s, border-color 0.2s;
+      z-index: 10;
+    }
+    .comic-card:hover .ext-link { opacity: 1; }
+    .ext-link:hover { border-color: var(--arc-color); }
+
+    /* Optional badge */
+    .opt-badge {
+      position: absolute;
+      top: 5px;
+      left: 5px;
+      background: rgba(7,7,15,0.88);
+      color: #c89a2e;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 7px;
+      letter-spacing: 0.12em;
+      padding: 2px 4px;
+      border-radius: 2px;
+      border: 1px solid rgba(200,154,46,0.35);
+      z-index: 5;
+    }
+
+    .card-info { padding: 5px 6px 6px; }
+    .card-title {
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 10px;
+      color: #4a4438;
+      line-height: 1.3;
+      transition: color 0.2s;
+    }
+    .comic-card:hover .card-title { color: var(--text-muted); }
+    .comic-card.checked .card-title { color: #302c26; }
+
+    /* ─── SCROLL TO TOP ─── */
+    #scroll-top {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      width: 38px;
+      height: 38px;
+      background: rgba(7,7,15,0.9);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      border-radius: 3px;
+      transition: all 0.2s;
+      opacity: 0;
+      z-index: 400;
+    }
+    #scroll-top.visible { opacity: 1; }
+    #scroll-top:hover { color: var(--text); border-color: rgba(228,216,192,0.25); }
+
+    /* ─── SCROLLBAR ─── */
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: rgba(228,216,192,0.08); border-radius: 2px; }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 800px) {
+      #sidebar { display: none; }
+      #main-content { padding: 36px 20px 60px; }
+      .covers-grid { grid-template-columns: repeat(auto-fill, minmax(82px, 1fr)); gap: 7px; }
+      .arc-mark-btn { display: none; }
+    }
+    @media (max-width: 480px) {
+      .covers-grid { grid-template-columns: repeat(auto-fill, minmax(70px, 1fr)); gap: 6px; }
+    }
+
+    #about-link {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      text-decoration: none;
+      flex-shrink: 0;
+      transition: color 0.2s;
+      padding-bottom: 1px;
+      border-bottom: 1px solid transparent;
+    }
+    #about-link:hover { color: var(--text); border-bottom-color: rgba(200,154,46,0.5); }
+  </style>
+</head>
+<body>
+
+<div id="top-bar">
+  <div class="saga-wordmark">
+    <span class="wordmark-sub">Jonathan Hickman</span>
+    <span class="wordmark-main">THE SECRET WARS SAGA</span>
+  </div>
+  <div class="divider-v"></div>
+  <div class="progress-track">
+    <div id="global-bar"></div>
+  </div>
+  <div id="progress-text"><span id="read-count">0</span> / 254 read</div>
+  <a href="index.html" id="about-link">About</a>
+</div>
+
+<div id="layout">
+  <nav id="sidebar">
+    <div class="sidebar-label">Nine Arcs</div>
+    <div class="sidebar-links" id="sidebar-links"></div>
+    <div class="sidebar-controls">
+      <button class="ctrl-btn danger" onclick="resetAll()">Reset</button>
+    </div>
+  </nav>
+  <main id="main-content"></main>
+</div>
+
+<button id="scroll-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top">↑</button>
+
+<script>
+
+const ARC_COLORS = [
+  '#c89a2e', // S.H.I.E.L.D. — brass
+  '#cc1a2e', // Secret Warriors — blood red
+  '#2068c4', // Fantastic Four — royal blue
+  '#00bcd4', // Ultimate Universe — electric cyan
+  '#10b97e', // Avengers World — emerald
+  '#8b5cf6', // Infinity — violet
+  '#ea580c', // The Incursions — amber-orange
+  '#e11d48', // Time Runs Out — crimson
+  '#d4af37', // Secret Wars — gold
+];
+
+const ROMAN = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX'];
+let DATA, TOTAL;
+
+const STATE_KEY = 'hickman-saga-v1';
+let state = {};
+try { state = JSON.parse(localStorage.getItem(STATE_KEY) || '{}'); } catch(e) {}
+function save() { localStorage.setItem(STATE_KEY, JSON.stringify(state)); }
+
+function arcSlug(name) {
+  return 'arc-' + name.replace(/[^a-z0-9]+/gi, '-').toLowerCase().replace(/-+$/,'');
+}
+
+function toggle(id, arcIdx) {
+  state[id] = !state[id];
+  if (!state[id]) delete state[id];
+  save();
+  document.querySelectorAll(`.comic-card[data-id="${id}"]`).forEach(el => {
+    el.classList.toggle('checked', !!state[id]);
+  });
+  updateProgress(arcIdx);
+}
+
+function resetAll() {
+  if (!confirm('Reset all reading progress?')) return;
+  state = {};
+  save();
+  document.querySelectorAll('.comic-card.checked').forEach(el => el.classList.remove('checked'));
+  DATA.arcs.forEach((_, i) => updateProgress(i));
+  updateGlobal();
+}
+
+function markArc(arcIdx, markRead) {
+  const arc = DATA.arcs[arcIdx];
+  arc.issues.forEach(issue => {
+    if (markRead) state[issue.id] = true;
+    else delete state[issue.id];
+  });
+  save();
+  const slug = arcSlug(arc.name);
+  arc.issues.forEach(issue => {
+    document.querySelectorAll(`.comic-card[data-id="${issue.id}"]`).forEach(el => {
+      el.classList.toggle('checked', !!state[issue.id]);
+    });
+  });
+  updateProgress(arcIdx);
+  updateGlobal();
+}
+
+function updateProgress(arcIdx) {
+  const arc = DATA.arcs[arcIdx];
+  const slug = arcSlug(arc.name);
+  const arcRead = arc.issues.filter(i => state[i.id]).length;
+  const pct = arc.issues.length ? (arcRead / arc.issues.length) * 100 : 0;
+
+  const counter = document.querySelector(`#${slug} .arc-counter`);
+  if (counter) counter.textContent = `${arcRead} / ${arc.issues.length}`;
+
+  const fill = document.querySelector(`#${slug} .arc-progress-fill`);
+  if (fill) fill.style.width = pct + '%';
+
+  // Update sidebar dots
+  const dotsEl = document.querySelector(`.sidebar-dots[data-arc="${arcIdx}"]`);
+  if (dotsEl) {
+    const dots = dotsEl.querySelectorAll('.dot');
+    let di = 0;
+    arc.issues.forEach((issue, ii) => {
+      if (dots[ii]) dots[ii].classList.toggle('done', !!state[issue.id]);
+    });
+  }
+
+  updateGlobal();
+}
+
+function updateGlobal() {
+  const read = DATA.arcs.reduce((s, a) => s + a.issues.filter(i => state[i.id]).length, 0);
+  document.getElementById('global-bar').style.width = `${(read / TOTAL) * 100}%`;
+  document.getElementById('read-count').textContent = read;
+}
+
+function shortTitle(title) {
+  return title
+    .replace(/\s*\(\d{4}(?:\s*[-–]\s*(?:\d{4}|present))?\)\s*/i, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function render() {
+  const sidebarLinks = document.getElementById('sidebar-links');
+  const main = document.getElementById('main-content');
+
+  DATA.arcs.forEach((arc, idx) => {
+    const color = ARC_COLORS[idx];
+    const roman = ROMAN[idx];
+    const slug = arcSlug(arc.name);
+
+    // ── Sidebar link
+    const link = document.createElement('a');
+    link.href = `#${slug}`;
+    link.className = 'sidebar-link';
+    link.style.setProperty('--arc-color', color);
+    link.dataset.arc = slug;
+    link.innerHTML = `
+      <span class="sidebar-roman">${roman}</span>
+      <span class="sidebar-name">${arc.name}</span>
+      <span class="sidebar-n">${arc.issues.length}</span>
+    `;
+    sidebarLinks.appendChild(link);
+
+    // ── Arc section
+    const section = document.createElement('section');
+    section.id = slug;
+    section.className = 'arc-section';
+    section.style.setProperty('--arc-color', color);
+    section.style.animationDelay = `${idx * 0.07}s`;
+
+    section.innerHTML = `
+      <div class="arc-header">
+        <span class="arc-roman-ghost">${roman}</span>
+        <div class="arc-numeral">${roman}</div>
+        <div class="arc-info">
+          <h2 class="arc-title">${arc.name}</h2>
+          <div class="arc-meta">
+            <div class="arc-progress-track"><div class="arc-progress-fill"></div></div>
+            <span class="arc-counter">0 / ${arc.issues.length}</span>
+            <span class="arc-meta-label">${arc.issues.length === 1 ? 'issue' : 'issues'}</span>
+            <button class="arc-mark-btn" onclick="markArc(${idx}, true)">Mark All Read</button>
+          </div>
+        </div>
+      </div>
+      <div class="covers-grid" id="grid-${slug}"></div>
+    `;
+    main.appendChild(section);
+
+    const grid = section.querySelector('.covers-grid');
+    arc.issues.forEach((issue) => {
+      const card = document.createElement('div');
+      card.className = `comic-card${state[issue.id] ? ' checked' : ''}${issue.optional ? ' optional' : ''}`;
+      card.dataset.id = issue.id;
+      card.onclick = () => toggle(issue.id, idx);
+      card.title = `${issue.title}${issue.releaseDate ? '  ·  ' + issue.releaseDate : ''}`;
+
+      const st = shortTitle(issue.title);
+
+      card.innerHTML = `
+        <div class="cover-wrap">
+          <img src="${issue.cover}" alt="${issue.title.replace(/"/g, '&quot;')}" loading="lazy"
+               onerror="this.style.visibility='hidden'">
+          <div class="read-overlay"><span class="check-icon">✓</span></div>
+          <a class="ext-link" href="${issue.url}" target="_blank" rel="noopener"
+             onclick="event.stopPropagation()" title="Open on Marvel.com">↗</a>
+          ${issue.optional ? '<span class="opt-badge">OPT</span>' : ''}
+        </div>
+        <div class="card-info"><span class="card-title">${st}</span></div>
+      `;
+      grid.appendChild(card);
+    });
+  });
+
+  // Initialize all progress displays
+  DATA.arcs.forEach((_, i) => updateProgress(i));
+
+  // Scroll spy
+  setupScrollSpy();
+
+  // Scroll-to-top button
+  window.addEventListener('scroll', () => {
+    document.getElementById('scroll-top').classList.toggle('visible', window.scrollY > 400);
+  }, { passive: true });
+}
+
+function setupScrollSpy() {
+  const sections = document.querySelectorAll('.arc-section');
+  const links = document.querySelectorAll('.sidebar-link');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        links.forEach(l => l.classList.remove('active'));
+        const activeLink = document.querySelector(`.sidebar-link[data-arc="${entry.target.id}"]`);
+        if (activeLink) {
+          activeLink.classList.add('active');
+          activeLink.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+        }
+      }
+    });
+  }, { rootMargin: '-15% 0px -75% 0px', threshold: 0 });
+
+  sections.forEach(s => observer.observe(s));
+}
+
+fetch('hickman-reading-list.json')
+  .then(r => r.json())
+  .then(data => {
+    DATA = data;
+    TOTAL = DATA.arcs.reduce((s, a) => s + a.issues.length, 0);
+    render();
+  });
+</script>
+</body>
+</html>
