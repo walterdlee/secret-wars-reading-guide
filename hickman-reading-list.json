@@ -1012,6 +1012,51 @@
           "optional": false
         },
         {
+          "id": "39966",
+          "title": "Ultimate Fallout (2011) #2",
+          "series": "Ultimate Fallout (2011)",
+          "url": "https://www.marvel.com/comics/issue/39966/ultimate_fallout_2011_2",
+          "cover": "http://i.annihil.us/u/prod/marvel/i/mg/c/b0/5a8edda615e76/portrait_incredible.jpg",
+          "releaseDate": "2011-07-20",
+          "optional": false
+        },
+        {
+          "id": "39965",
+          "title": "Ultimate Fallout (2011) #3",
+          "series": "Ultimate Fallout (2011)",
+          "url": "https://www.marvel.com/comics/issue/39965/ultimate_fallout_2011_3",
+          "cover": "http://i.annihil.us/u/prod/marvel/i/mg/4/00/5915d72665ef2/portrait_incredible.jpg",
+          "releaseDate": "2011-07-27",
+          "optional": false
+        },
+        {
+          "id": "39962",
+          "title": "Ultimate Fallout (2011) #4",
+          "series": "Ultimate Fallout (2011)",
+          "url": "https://www.marvel.com/comics/issue/39962/ultimate_fallout_2011_4",
+          "cover": "http://i.annihil.us/u/prod/marvel/i/mg/6/c0/5915d778aff00/portrait_incredible.jpg",
+          "releaseDate": "2011-08-03",
+          "optional": false
+        },
+        {
+          "id": "39963",
+          "title": "Ultimate Fallout (2011) #5",
+          "series": "Ultimate Fallout (2011)",
+          "url": "https://www.marvel.com/comics/issue/39963/ultimate_fallout_2011_5",
+          "cover": "http://i.annihil.us/u/prod/marvel/i/mg/6/e0/5915d7884dd1a/portrait_incredible.jpg",
+          "releaseDate": "2011-08-10",
+          "optional": false
+        },
+        {
+          "id": "39964",
+          "title": "Ultimate Fallout (2011) #6",
+          "series": "Ultimate Fallout (2011)",
+          "url": "https://www.marvel.com/comics/issue/39964/ultimate_fallout_2011_6",
+          "cover": "http://i.annihil.us/u/prod/marvel/i/mg/7/00/5915d75fa6c38/portrait_incredible.jpg",
+          "releaseDate": "2011-08-17",
+          "optional": false
+        },
+        {
           "id": "38950",
           "title": "Ultimate Comics Hawkeye (2011) #1",
           "series": "Ultimate Comics Hawkeye (2011)",
@@ -1153,51 +1198,6 @@
           "url": "https://www.marvel.com/comics/issue/38694/ultimate_comics_ultimates_2011_12",
           "cover": "http://i.annihil.us/u/prod/marvel/i/mg/1/04/5a9eef597c1ce/portrait_incredible.jpg",
           "releaseDate": "2012-06-27",
-          "optional": false
-        },
-        {
-          "id": "40770",
-          "title": "Ultimate Comics Ultimates (2011) #13",
-          "series": "Ultimate Comics Ultimates (2011 - 2013)",
-          "url": "https://www.marvel.com/comics/issue/40770/ultimate_comics_ultimates_2011_13",
-          "cover": "http://i.annihil.us/u/prod/marvel/i/mg/2/90/5a9f00321d531/portrait_incredible.jpg",
-          "releaseDate": "2012-07-25",
-          "optional": false
-        },
-        {
-          "id": "40764",
-          "title": "Ultimate Comics Ultimates (2011) #14",
-          "series": "Ultimate Comics Ultimates (2011 - 2013)",
-          "url": "https://www.marvel.com/comics/issue/40764/ultimate_comics_ultimates_2011_14",
-          "cover": "http://i.annihil.us/u/prod/marvel/i/mg/6/b0/5a9ef2614b098/portrait_incredible.jpg",
-          "releaseDate": "2012-08-22",
-          "optional": false
-        },
-        {
-          "id": "40767",
-          "title": "Ultimate Comics Ultimates (2011) #15",
-          "series": "Ultimate Comics Ultimates (2011 - 2013)",
-          "url": "https://www.marvel.com/comics/issue/40767/ultimate_comics_ultimates_2011_15",
-          "cover": "http://i.annihil.us/u/prod/marvel/i/mg/4/60/5a9f064b97875/portrait_incredible.jpg",
-          "releaseDate": "2012-09-19",
-          "optional": false
-        },
-        {
-          "id": "40768",
-          "title": "Ultimate Comics Ultimates (2011) #16",
-          "series": "Ultimate Comics Ultimates (2011 - 2013)",
-          "url": "https://www.marvel.com/comics/issue/40768/ultimate_comics_ultimates_2011_16",
-          "cover": "http://i.annihil.us/u/prod/marvel/i/mg/3/f0/5a9f0b7244769/portrait_incredible.jpg",
-          "releaseDate": "2012-09-26",
-          "optional": false
-        },
-        {
-          "id": "40766",
-          "title": "Ultimate Comics Ultimates (2011) #17",
-          "series": "Ultimate Comics Ultimates (2011 - 2013)",
-          "url": "https://www.marvel.com/comics/issue/40766/ultimate_comics_ultimates_2011_17",
-          "cover": "http://i.annihil.us/u/prod/marvel/i/mg/c/90/5aa14859eecb7/portrait_incredible.jpg",
-          "releaseDate": "2012-10-24",
           "optional": false
         }
       ]
