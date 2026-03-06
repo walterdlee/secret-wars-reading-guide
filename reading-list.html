@@ -15,6 +15,7 @@
       --header-h: 58px;
       --sidebar-w: 210px;
       --arc-color: #ffffff;
+      --card-min: 100px;
     }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; font-size: 14px; }
@@ -344,7 +345,7 @@
     /* ─── GRID ─── */
     .covers-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(var(--card-min), 1fr));
       gap: 8px;
     }
 
@@ -508,6 +509,52 @@
       border-bottom: 1px solid transparent;
     }
     #about-link:hover { color: var(--text); border-bottom-color: rgba(200,154,46,0.5); }
+
+    /* ── ZOOM SLIDER ── */
+    .zoom-control {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+    .zoom-icon {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
+      color: var(--text-muted);
+      user-select: none;
+      line-height: 1;
+    }
+    #zoom-slider {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 72px;
+      height: 2px;
+      background: rgba(228, 216, 192, 0.1);
+      border-radius: 2px;
+      outline: none;
+      cursor: pointer;
+    }
+    #zoom-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #c89a2e;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s;
+    }
+    #zoom-slider::-webkit-slider-thumb:hover {
+      background: #d4af37;
+      transform: scale(1.2);
+    }
+    #zoom-slider::-moz-range-thumb {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #c89a2e;
+      border: none;
+      cursor: pointer;
+    }
   </style>
 </head>
 <body>
@@ -522,6 +569,12 @@
     <div id="global-bar"></div>
   </div>
   <div id="progress-text"><span id="read-count">0</span> / 254 read</div>
+  <div class="divider-v"></div>
+  <div class="zoom-control">
+    <span class="zoom-icon">⊖</span>
+    <input type="range" id="zoom-slider" min="60" max="180" value="100" step="5">
+    <span class="zoom-icon">⊕</span>
+  </div>
   <a href="index.html" id="about-link">About</a>
 </div>
 
@@ -749,6 +802,18 @@ fetch('hickman-reading-list.json')
     TOTAL = DATA.arcs.reduce((s, a) => s + a.issues.length, 0);
     render();
   });
+  // Zoom slider
+  const slider = document.getElementById('zoom-slider');
+  const savedZoom = localStorage.getItem('hickman-zoom');
+  if (savedZoom) {
+    slider.value = savedZoom;
+    document.documentElement.style.setProperty('--card-min', savedZoom + 'px');
+  }
+  slider.addEventListener('input', () => {
+    document.documentElement.style.setProperty('--card-min', slider.value + 'px');
+    localStorage.setItem('hickman-zoom', slider.value);
+  });
+
 </script>
 </body>
 </html>
