@@ -1283,15 +1283,6 @@
           "optional": false
         },
         {
-          "id": "43536",
-          "title": "Avengers (2012) #6",
-          "series": "Avengers (2012 - 2015)",
-          "url": "https://www.marvel.com/comics/issue/43536/avengers_2012_6",
-          "cover": "http://i.annihil.us/u/prod/marvel/i/mg/4/10/5743669df137c/portrait_incredible.jpg",
-          "releaseDate": "2013-02-20",
-          "optional": false
-        },
-        {
           "id": "43518",
           "title": "New Avengers (2013) #4",
           "series": "New Avengers (2013 - 2015)",
@@ -1316,6 +1307,15 @@
           "url": "https://www.marvel.com/comics/issue/43520/new_avengers_2013_6",
           "cover": "http://i.annihil.us/u/prod/marvel/i/mg/5/03/577545201b3b9/portrait_incredible.jpg",
           "releaseDate": "2013-05-29",
+          "optional": false
+        },
+        {
+          "id": "43536",
+          "title": "Avengers (2012) #6",
+          "series": "Avengers (2012 - 2015)",
+          "url": "https://www.marvel.com/comics/issue/43536/avengers_2012_6",
+          "cover": "http://i.annihil.us/u/prod/marvel/i/mg/4/10/5743669df137c/portrait_incredible.jpg",
+          "releaseDate": "2013-02-20",
           "optional": false
         },
         {
@@ -1364,30 +1364,30 @@
           "optional": false
         },
         {
+          "id": 43542,
+          "title": "Avengers (2012) #12",
+          "series": "Avengers (2012 - 2015)",
+          "url": "https://www.marvel.com/comics/issue/43542/avengers_2012_12",
+          "cover": "http://i.annihil.us/u/prod/marvel/i/mg/d/b0/518814782506c/portrait_incredible.jpg",
+          "releaseDate": "2013-05-22",
+          "optional": false
+        },
+        {
+          "id": 43543,
+          "title": "Avengers (2012) #13",
+          "series": "Avengers (2012 - 2015)",
+          "url": "https://www.marvel.com/comics/issue/43543/avengers_2012_13",
+          "cover": "http://i.annihil.us/u/prod/marvel/i/mg/3/90/51968d1a3608d/portrait_incredible.jpg",
+          "releaseDate": "2013-06-05",
+          "optional": false
+        },
+        {
           "id": "43521",
           "title": "New Avengers (2013) #7",
           "series": "New Avengers (2013 - 2015)",
           "url": "https://www.marvel.com/comics/issue/43521/new_avengers_2013_7",
           "cover": "http://i.annihil.us/u/prod/marvel/i/mg/a/10/51b78bdbc8877/portrait_incredible.jpg",
           "releaseDate": "2013-06-19",
-          "optional": false
-        },
-        {
-          "id": "43522",
-          "title": "New Avengers (2013) #8",
-          "series": "New Avengers (2013 - 2015)",
-          "url": "https://www.marvel.com/comics/issue/43522/new_avengers_2013_8",
-          "cover": "http://i.annihil.us/u/prod/marvel/i/mg/9/20/51debf44a4418/portrait_incredible.jpg",
-          "releaseDate": "2013-07-24",
-          "optional": false
-        },
-        {
-          "id": "43523",
-          "title": "New Avengers (2013) #9",
-          "series": "New Avengers (2013 - 2015)",
-          "url": "https://www.marvel.com/comics/issue/43523/new_avengers_2013_9",
-          "cover": "http://i.annihil.us/u/prod/marvel/i/mg/2/a0/521278dc0080a/portrait_incredible.jpg",
-          "releaseDate": "2013-08-28",
           "optional": false
         }
       ]
