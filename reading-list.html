@@ -628,6 +628,8 @@
     <div class="sidebar-label">Nine Arcs</div>
     <div class="sidebar-links" id="sidebar-links"></div>
     <div class="sidebar-controls">
+      <button class="ctrl-btn" onclick="collapseAll()">Collapse All</button>
+      <button class="ctrl-btn" onclick="expandAll()">Expand All</button>
       <button class="ctrl-btn danger" onclick="resetAll()">Reset</button>
     </div>
   </nav>
@@ -734,6 +736,22 @@ function shortTitle(title) {
     .replace(/\s*\(\d{4}(?:\s*[-–]\s*(?:\d{4}|present))?\)\s*/i, ' ')
     .replace(/\s+/g, ' ')
     .trim();
+}
+
+function collapseAll() {
+  const collapsedState = {};
+  DATA.arcs.forEach((arc, idx) => {
+    document.getElementById(arcSlug(arc.name))?.classList.add('collapsed');
+    collapsedState[idx] = true;
+  });
+  localStorage.setItem('hickman-collapsed', JSON.stringify(collapsedState));
+}
+
+function expandAll() {
+  DATA.arcs.forEach(arc => {
+    document.getElementById(arcSlug(arc.name))?.classList.remove('collapsed');
+  });
+  localStorage.setItem('hickman-collapsed', '{}');
 }
 
 function toggleCollapse(arcIdx) {
