@@ -1964,6 +1964,15 @@
       "name": "Time Runs Out",
       "issues": [
         {
+          "id": "48389",
+          "title": "Avengers (2012) #35",
+          "series": "Avengers (2012 - 2015)",
+          "url": "https://www.marvel.com/comics/issue/48389/avengers_2012_35",
+          "cover": "https://cdn.marvel.com/u/prod/marvel/i/mg/8/a0/5410aed23a94b/portrait_incredible.jpg",
+          "releaseDate": "2014-09-17",
+          "optional": false
+        },
+        {
           "id": "50096",
           "title": "New Avengers (2013) #24",
           "series": "New Avengers (2013 - 2015)",
@@ -1973,12 +1982,12 @@
           "optional": false
         },
         {
-          "id": "48389",
-          "title": "Avengers (2012) #35",
+          "id": "48390",
+          "title": "Avengers (2012) #36",
           "series": "Avengers (2012 - 2015)",
-          "url": "https://www.marvel.com/comics/issue/48389/avengers_2012_35",
-          "cover": "https://cdn.marvel.com/u/prod/marvel/i/mg/8/a0/5410aed23a94b/portrait_incredible.jpg",
-          "releaseDate": "2014-09-17",
+          "url": "https://www.marvel.com/comics/issue/48390/avengers_2012_36",
+          "cover": "http://i.annihil.us/u/prod/marvel/i/mg/1/20/54299756a3c92/portrait_incredible.jpg",
+          "releaseDate": "2014-10-08",
           "optional": false
         },
         {
@@ -1991,11 +2000,29 @@
           "optional": false
         },
         {
+          "id": "48391",
+          "title": "Avengers (2012) #37",
+          "series": "Avengers (2012 - 2015)",
+          "url": "https://www.marvel.com/comics/issue/48391/avengers_2012_37",
+          "cover": "http://i.annihil.us/u/prod/marvel/i/mg/6/60/54383a52ce8a5/portrait_incredible.jpg",
+          "releaseDate": "2014-10-22",
+          "optional": false
+        },
+        {
           "id": "52257",
           "title": "New Avengers (2013) #26",
           "series": "New Avengers (2013 - 2015)",
           "url": "https://www.marvel.com/comics/issue/52257/new_avengers_2013_26",
           "cover": "http://i.annihil.us/u/prod/marvel/i/mg/6/80/5464fca1a9672/portrait_incredible.jpg",
+          "releaseDate": "2014-11-19",
+          "optional": false
+        },
+        {
+          "id": "48392",
+          "title": "Avengers (2012) #38",
+          "series": "Avengers (2012 - 2015)",
+          "url": "https://www.marvel.com/comics/issue/48392/avengers_2012_38",
+          "cover": "https://cdn.marvel.com/u/prod/marvel/i/mg/3/10/54622b38a92d0/portrait_incredible.jpg",
           "releaseDate": "2014-11-19",
           "optional": false
         },
@@ -2009,12 +2036,30 @@
           "optional": false
         },
         {
+          "id": "48393",
+          "title": "Avengers (2012) #39",
+          "series": "Avengers (2012 - 2015)",
+          "url": "https://www.marvel.com/comics/issue/48393/avengers_2012_39",
+          "cover": "http://i.annihil.us/u/prod/marvel/i/mg/b/03/54822674178ac/portrait_incredible.jpg",
+          "releaseDate": "2014-12-10",
+          "optional": false
+        },
+        {
           "id": "51172",
           "title": "New Avengers (2013) #28",
           "series": "New Avengers (2013 - 2015)",
           "url": "https://www.marvel.com/comics/issue/51172/new_avengers_2013_28",
           "cover": "http://i.annihil.us/u/prod/marvel/i/mg/6/70/670687d0b0cf5/portrait_incredible.jpg",
           "releaseDate": "2014-12-24",
+          "optional": false
+        },
+        {
+          "id": "48394",
+          "title": "Avengers (2012) #40",
+          "series": "Avengers (2012 - 2015)",
+          "url": "https://www.marvel.com/comics/issue/48394/avengers_2012_40",
+          "cover": "http://i.annihil.us/u/prod/marvel/i/mg/c/10/54abfb471a37e/portrait_incredible.jpg",
+          "releaseDate": "2015-01-14",
           "optional": false
         },
         {
@@ -2027,21 +2072,12 @@
           "optional": false
         },
         {
-          "id": "48390",
-          "title": "Avengers (2012) #36",
+          "id": "48395",
+          "title": "Avengers (2012) #41",
           "series": "Avengers (2012 - 2015)",
-          "url": "https://www.marvel.com/comics/issue/48390/avengers_2012_36",
-          "cover": "http://i.annihil.us/u/prod/marvel/i/mg/1/20/54299756a3c92/portrait_incredible.jpg",
-          "releaseDate": "2014-10-08",
-          "optional": false
-        },
-        {
-          "id": "48391",
-          "title": "Avengers (2012) #37",
-          "series": "Avengers (2012 - 2015)",
-          "url": "https://www.marvel.com/comics/issue/48391/avengers_2012_37",
-          "cover": "http://i.annihil.us/u/prod/marvel/i/mg/6/60/54383a52ce8a5/portrait_incredible.jpg",
-          "releaseDate": "2014-10-22",
+          "url": "https://www.marvel.com/comics/issue/48395/avengers_2012_41",
+          "cover": "http://i.annihil.us/u/prod/marvel/i/mg/8/e0/54c147ab537ab/portrait_incredible.jpg",
+          "releaseDate": "2015-02-04",
           "optional": false
         },
         {
@@ -2051,6 +2087,15 @@
           "url": "https://www.marvel.com/comics/issue/52263/new_avengers_2013_30",
           "cover": "http://i.annihil.us/u/prod/marvel/i/mg/3/50/54e6090362ff0/portrait_incredible.jpg",
           "releaseDate": "2015-02-25",
+          "optional": false
+        },
+        {
+          "id": "48396",
+          "title": "Avengers (2012) #42",
+          "series": "Avengers (2012 - 2015)",
+          "url": "https://www.marvel.com/comics/issue/48396/avengers_2012_42",
+          "cover": "https://cdn.marvel.com/u/prod/marvel/i/mg/c/50/54ece6c21db84/portrait_incredible.jpg",
+          "releaseDate": "2015-03-04",
           "optional": false
         },
         {
@@ -2072,30 +2117,12 @@
           "optional": false
         },
         {
-          "id": "48392",
-          "title": "Avengers (2012) #38",
+          "id": "48397",
+          "title": "Avengers (2012) #43",
           "series": "Avengers (2012 - 2015)",
-          "url": "https://www.marvel.com/comics/issue/48392/avengers_2012_38",
-          "cover": "https://cdn.marvel.com/u/prod/marvel/i/mg/3/10/54622b38a92d0/portrait_incredible.jpg",
-          "releaseDate": "2014-11-19",
-          "optional": false
-        },
-        {
-          "id": "48393",
-          "title": "Avengers (2012) #39",
-          "series": "Avengers (2012 - 2015)",
-          "url": "https://www.marvel.com/comics/issue/48393/avengers_2012_39",
-          "cover": "http://i.annihil.us/u/prod/marvel/i/mg/b/03/54822674178ac/portrait_incredible.jpg",
-          "releaseDate": "2014-12-10",
-          "optional": false
-        },
-        {
-          "id": "48394",
-          "title": "Avengers (2012) #40",
-          "series": "Avengers (2012 - 2015)",
-          "url": "https://www.marvel.com/comics/issue/48394/avengers_2012_40",
-          "cover": "http://i.annihil.us/u/prod/marvel/i/mg/c/10/54abfb471a37e/portrait_incredible.jpg",
-          "releaseDate": "2015-01-14",
+          "url": "https://www.marvel.com/comics/issue/48397/avengers_2012_43",
+          "cover": "http://i.annihil.us/u/prod/marvel/i/mg/3/03/55119c23c6219/portrait_incredible.jpg",
+          "releaseDate": "2015-04-01",
           "optional": false
         },
         {
@@ -2108,33 +2135,6 @@
           "optional": false
         },
         {
-          "id": "48395",
-          "title": "Avengers (2012) #41",
-          "series": "Avengers (2012 - 2015)",
-          "url": "https://www.marvel.com/comics/issue/48395/avengers_2012_41",
-          "cover": "http://i.annihil.us/u/prod/marvel/i/mg/8/e0/54c147ab537ab/portrait_incredible.jpg",
-          "releaseDate": "2015-02-04",
-          "optional": false
-        },
-        {
-          "id": "48396",
-          "title": "Avengers (2012) #42",
-          "series": "Avengers (2012 - 2015)",
-          "url": "https://www.marvel.com/comics/issue/48396/avengers_2012_42",
-          "cover": "https://cdn.marvel.com/u/prod/marvel/i/mg/c/50/54ece6c21db84/portrait_incredible.jpg",
-          "releaseDate": "2015-03-04",
-          "optional": false
-        },
-        {
-          "id": "48397",
-          "title": "Avengers (2012) #43",
-          "series": "Avengers (2012 - 2015)",
-          "url": "https://www.marvel.com/comics/issue/48397/avengers_2012_43",
-          "cover": "http://i.annihil.us/u/prod/marvel/i/mg/3/03/55119c23c6219/portrait_incredible.jpg",
-          "releaseDate": "2015-04-01",
-          "optional": false
-        },
-        {
           "id": "48398",
           "title": "Avengers (2012) #44",
           "series": "Avengers (2012 - 2015)",
@@ -2142,6 +2142,51 @@
           "cover": "http://i.annihil.us/u/prod/marvel/i/mg/c/20/553e4ecf080cb/portrait_incredible.jpg",
           "releaseDate": "2015-04-29",
           "optional": false
+        },
+        {
+          "id": 51445,
+          "title": "Avengers World (2014) #17",
+          "series": "Avengers World (2014 - 2015)",
+          "url": "https://www.marvel.com/comics/issue/51445/avengers_world_2014_17",
+          "cover": "http://i.annihil.us/u/prod/marvel/i/mg/3/50/54d4f238241e4/portrait_incredible.jpg",
+          "releaseDate": "2015-02-18",
+          "optional": true
+        },
+        {
+          "id": 51446,
+          "title": "Avengers World (2014) #18",
+          "series": "Avengers World (2014 - 2015)",
+          "url": "https://www.marvel.com/comics/issue/51446/avengers_world_2014_18",
+          "cover": "http://i.annihil.us/u/prod/marvel/i/mg/6/d0/54f0a75656fd5/portrait_incredible.jpg",
+          "releaseDate": "2015-03-04",
+          "optional": true
+        },
+        {
+          "id": 51447,
+          "title": "Avengers World (2014) #19",
+          "series": "Avengers World (2014 - 2015)",
+          "url": "https://www.marvel.com/comics/issue/51447/avengers_world_2014_19",
+          "cover": "http://i.annihil.us/u/prod/marvel/i/mg/9/70/551ac205e9c9f/portrait_incredible.jpg",
+          "releaseDate": "2015-04-08",
+          "optional": true
+        },
+        {
+          "id": 51448,
+          "title": "Avengers World (2014) #20",
+          "series": "Avengers World (2014 - 2015)",
+          "url": "https://www.marvel.com/comics/issue/51448/avengers_world_2014_20",
+          "cover": "http://i.annihil.us/u/prod/marvel/i/mg/9/40/552ff5e441ae2/portrait_incredible.jpg",
+          "releaseDate": "2015-04-22",
+          "optional": true
+        },
+        {
+          "id": 51449,
+          "title": "Avengers World (2014) #21",
+          "series": "Avengers World (2014 - 2015)",
+          "url": "https://www.marvel.com/comics/issue/51449/avengers_world_2014_21",
+          "cover": "http://i.annihil.us/u/prod/marvel/i/mg/9/f0/5554d27ad86ef/portrait_incredible.jpg",
+          "releaseDate": "2015-05-20",
+          "optional": true
         }
       ]
     },
