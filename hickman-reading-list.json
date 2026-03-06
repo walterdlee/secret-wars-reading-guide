@@ -135,7 +135,7 @@
           "url": "https://www.marvel.com/comics/issue/21211/the_mighty_avengers_2007_13",
           "cover": "http://i.annihil.us/u/prod/marvel/i/mg/c/70/58da743ca58ad/portrait_incredible.jpg",
           "releaseDate": "2008-05-07",
-          "optional": false
+          "optional": true
         },
         {
           "id": "21969",
@@ -1018,7 +1018,8 @@
           "url": "https://www.marvel.com/comics/issue/39966/ultimate_fallout_2011_2",
           "cover": "http://i.annihil.us/u/prod/marvel/i/mg/c/b0/5a8edda615e76/portrait_incredible.jpg",
           "releaseDate": "2011-07-20",
-          "optional": false
+          "optional": false,
+          "note": "Hickman stories only"
         },
         {
           "id": "39965",
@@ -1027,7 +1028,8 @@
           "url": "https://www.marvel.com/comics/issue/39965/ultimate_fallout_2011_3",
           "cover": "http://i.annihil.us/u/prod/marvel/i/mg/4/00/5915d72665ef2/portrait_incredible.jpg",
           "releaseDate": "2011-07-27",
-          "optional": false
+          "optional": false,
+          "note": "Hickman stories only"
         },
         {
           "id": "39962",
@@ -1036,7 +1038,8 @@
           "url": "https://www.marvel.com/comics/issue/39962/ultimate_fallout_2011_4",
           "cover": "http://i.annihil.us/u/prod/marvel/i/mg/6/c0/5915d778aff00/portrait_incredible.jpg",
           "releaseDate": "2011-08-03",
-          "optional": false
+          "optional": false,
+          "note": "Hickman stories only"
         },
         {
           "id": "39963",
@@ -1045,7 +1048,8 @@
           "url": "https://www.marvel.com/comics/issue/39963/ultimate_fallout_2011_5",
           "cover": "http://i.annihil.us/u/prod/marvel/i/mg/6/e0/5915d7884dd1a/portrait_incredible.jpg",
           "releaseDate": "2011-08-10",
-          "optional": false
+          "optional": false,
+          "note": "Hickman stories only"
         },
         {
           "id": "39964",
@@ -1054,7 +1058,8 @@
           "url": "https://www.marvel.com/comics/issue/39964/ultimate_fallout_2011_6",
           "cover": "http://i.annihil.us/u/prod/marvel/i/mg/7/00/5915d75fa6c38/portrait_incredible.jpg",
           "releaseDate": "2011-08-17",
-          "optional": false
+          "optional": false,
+          "note": "Hickman stories only"
         },
         {
           "id": "38950",
@@ -1178,7 +1183,7 @@
           "title": "Ultimate Comics Ultimates (2011) #10",
           "series": "Ultimate Comics Ultimates (2011 - 2013)",
           "url": "https://www.marvel.com/comics/issue/38688/ultimate_comics_ultimates_2011_10",
-          "cover": "http://i.annihil.us/u/prod/marvel/i/mg/6/d0/4fac0a1caaabd/portrait_incredible.jpg",
+          "cover": "https://cdn.marvel.com/u/prod/marvel/i/mg/6/d0/4fac0a1caaabd/portrait_incredible.jpg",
           "releaseDate": "2012-05-09",
           "optional": false
         },
