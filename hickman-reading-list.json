@@ -791,24 +791,6 @@
           "optional": false
         },
         {
-          "id": "38797",
-          "title": "Fantastic Four (1998) #603",
-          "series": "Fantastic Four (1998 - 2012)",
-          "url": "https://www.marvel.com/comics/issue/38797/fantastic_four_1998_603",
-          "cover": "https://cdn.marvel.com/u/prod/marvel/i/mg/8/80/51dc1b442b14f/portrait_incredible.jpg",
-          "releaseDate": "2012-02-22",
-          "optional": false
-        },
-        {
-          "id": "40471",
-          "title": "Fantastic Four (1998) #604",
-          "series": "Fantastic Four (1998 - 2012)",
-          "url": "https://www.marvel.com/comics/issue/40471/fantastic_four_1998_604",
-          "cover": "https://cdn.marvel.com/u/prod/marvel/i/mg/c/90/56bcad8b08e57/portrait_incredible.jpg",
-          "releaseDate": "2012-03-14",
-          "optional": false
-        },
-        {
           "id": "41206",
           "title": "FF (2011) #14",
           "series": "FF (2011 - 2012)",
@@ -818,12 +800,30 @@
           "optional": false
         },
         {
+          "id": "38797",
+          "title": "Fantastic Four (1998) #603",
+          "series": "Fantastic Four (1998 - 2012)",
+          "url": "https://www.marvel.com/comics/issue/38797/fantastic_four_1998_603",
+          "cover": "https://cdn.marvel.com/u/prod/marvel/i/mg/8/80/51dc1b442b14f/portrait_incredible.jpg",
+          "releaseDate": "2012-02-22",
+          "optional": false
+        },
+        {
           "id": "41204",
           "title": "FF (2011) #15",
           "series": "FF (2011 - 2012)",
           "url": "https://www.marvel.com/comics/issue/41204/ff_2011_15",
           "cover": "https://cdn.marvel.com/u/prod/marvel/i/mg/6/60/51f68cd654a40/portrait_incredible.jpg",
           "releaseDate": "2012-02-29",
+          "optional": false
+        },
+        {
+          "id": "40471",
+          "title": "Fantastic Four (1998) #604",
+          "series": "Fantastic Four (1998 - 2012)",
+          "url": "https://www.marvel.com/comics/issue/40471/fantastic_four_1998_604",
+          "cover": "https://cdn.marvel.com/u/prod/marvel/i/mg/c/90/56bcad8b08e57/portrait_incredible.jpg",
+          "releaseDate": "2012-03-14",
           "optional": false
         },
         {
@@ -854,6 +854,15 @@
           "optional": false
         },
         {
+          "id": "40464",
+          "title": "Fantastic Four (1998) #606",
+          "series": "Fantastic Four (1998 - 2012)",
+          "url": "https://www.marvel.com/comics/issue/40464/fantastic_four_1998_606",
+          "cover": "http://i.annihil.us/u/prod/marvel/i/mg/6/b0/51dc1c8692f28/portrait_incredible.jpg",
+          "releaseDate": "2012-05-23",
+          "optional": false
+        },
+        {
           "id": "41200",
           "title": "FF (2011) #17",
           "series": "FF (2011 - 2012)",
@@ -872,15 +881,6 @@
           "optional": false
         },
         {
-          "id": "40464",
-          "title": "Fantastic Four (1998) #606",
-          "series": "Fantastic Four (1998 - 2012)",
-          "url": "https://www.marvel.com/comics/issue/40464/fantastic_four_1998_606",
-          "cover": "http://i.annihil.us/u/prod/marvel/i/mg/6/b0/51dc1c8692f28/portrait_incredible.jpg",
-          "releaseDate": "2012-05-23",
-          "optional": false
-        },
-        {
           "id": "40467",
           "title": "Fantastic Four (1998) #607",
           "series": "Fantastic Four (1998 - 2012)",
@@ -896,24 +896,6 @@
           "url": "https://www.marvel.com/comics/issue/40474/fantastic_four_1998_608",
           "cover": "http://i.annihil.us/u/prod/marvel/i/mg/2/40/51dc1e5fadd9c/portrait_incredible.jpg",
           "releaseDate": "2012-07-18",
-          "optional": false
-        },
-        {
-          "id": "40479",
-          "title": "Fantastic Four (1998) #609",
-          "series": "Fantastic Four (1998 - 2012)",
-          "url": "https://www.marvel.com/comics/issue/40479/fantastic_four_1998_609",
-          "cover": "http://i.annihil.us/u/prod/marvel/i/mg/9/00/51dc1c950c81d/portrait_incredible.jpg",
-          "releaseDate": "2012-08-08",
-          "optional": false
-        },
-        {
-          "id": "40478",
-          "title": "Fantastic Four (1998) #610",
-          "series": "Fantastic Four (1998 - 2012)",
-          "url": "https://www.marvel.com/comics/issue/40478/fantastic_four_1998_610",
-          "cover": "http://i.annihil.us/u/prod/marvel/i/mg/f/60/51dc1c76c6eed/portrait_incredible.jpg",
-          "releaseDate": "2012-09-12",
           "optional": false
         },
         {
@@ -941,6 +923,24 @@
           "url": "https://www.marvel.com/comics/issue/41198/ff_2011_21",
           "cover": "http://i.annihil.us/u/prod/marvel/i/mg/3/70/51f68dc239205/portrait_incredible.jpg",
           "releaseDate": "2012-08-29",
+          "optional": false
+        },
+        {
+          "id": "40479",
+          "title": "Fantastic Four (1998) #609",
+          "series": "Fantastic Four (1998 - 2012)",
+          "url": "https://www.marvel.com/comics/issue/40479/fantastic_four_1998_609",
+          "cover": "http://i.annihil.us/u/prod/marvel/i/mg/9/00/51dc1c950c81d/portrait_incredible.jpg",
+          "releaseDate": "2012-08-08",
+          "optional": false
+        },
+        {
+          "id": "40478",
+          "title": "Fantastic Four (1998) #610",
+          "series": "Fantastic Four (1998 - 2012)",
+          "url": "https://www.marvel.com/comics/issue/40478/fantastic_four_1998_610",
+          "cover": "http://i.annihil.us/u/prod/marvel/i/mg/f/60/51dc1c76c6eed/portrait_incredible.jpg",
+          "releaseDate": "2012-09-12",
           "optional": false
         },
         {
