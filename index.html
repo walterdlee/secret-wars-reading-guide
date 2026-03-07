@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>The Hickman Saga — About</title>
+  <title>Jonathan Hickman's Secret Wars Saga — About</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@400;600;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=JetBrains+Mono:wght@300;400;700&display=swap" rel="stylesheet">
   <style>
@@ -56,12 +56,26 @@
     }
 
     .nav-wordmark {
-      font-family: 'Cinzel Decorative', cursive;
-      font-size: 10px;
-      font-weight: 700;
-      color: #d4c4a0;
-      letter-spacing: 0.1em;
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
       text-decoration: none;
+      color: inherit;
+    }
+    .wordmark-sub {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 7.5px;
+      letter-spacing: 0.22em;
+      color: var(--text-muted);
+      text-transform: uppercase;
+    }
+    .wordmark-main {
+      font-family: 'Cinzel Decorative', cursive;
+      font-weight: 700;
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      color: #d4c4a0;
+      white-space: nowrap;
     }
 
     .nav-link {
@@ -273,7 +287,7 @@
 
     .section-eyebrow {
       font-family: 'JetBrains Mono', monospace;
-      font-size: 8.5px;
+      font-size: 13px;
       letter-spacing: 0.32em;
       text-transform: uppercase;
       color: var(--gold);
@@ -308,15 +322,17 @@
       align-items: start;
     }
 
-    .about-body p {
-      font-size: 18px;
+    .about-body p,
+    p.about-body {
+      font-size: 20px;
       font-weight: 300;
       line-height: 1.9;
       color: rgba(228, 216, 192, 0.65);
       margin-bottom: 22px;
     }
     .about-body p:last-child { margin-bottom: 0; }
-    .about-body strong {
+    .about-body strong,
+    p.about-body strong {
       font-weight: 600;
       color: rgba(228, 216, 192, 0.9);
     }
@@ -476,13 +492,66 @@
       margin-bottom: 52px;
     }
 
+    /* ── CREDITS ── */
+    .credits-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 36px;
+    }
+    .credit-item {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .credit-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 8px;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+    .credit-name {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(20px, 2.5vw, 28px);
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: 0.04em;
+      line-height: 1.2;
+    }
+    .credit-link {
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .credit-link:hover { color: var(--gold); }
+    .credit-desc {
+      font-size: 20px;
+      font-weight: 300;
+      line-height: 1.9;
+      color: rgba(228, 216, 192, 0.65);
+      margin-top: 4px;
+    }
+
     /* ── FOOTER ── */
     footer {
       border-top: 1px solid var(--border);
-      padding: 28px 40px;
+      padding: 28px 40px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .footer-top {
       display: flex;
       align-items: center;
       justify-content: space-between;
+    }
+    .footer-disclaimer {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 7px;
+      letter-spacing: 0.08em;
+      color: rgba(228, 216, 192, 0.25);
+      line-height: 1.7;
+      border-top: 1px solid var(--border);
+      padding-top: 14px;
     }
 
     .footer-word {
@@ -526,7 +595,8 @@
       .numbers-grid { grid-template-columns: 1fr; }
       .arc-item { grid-template-columns: 40px 1fr 8px; gap: 14px; }
       .final-cta { padding: 80px 24px; }
-      footer { padding: 24px 20px; flex-direction: column; gap: 8px; text-align: center; }
+      footer { padding: 24px 20px; text-align: center; }
+      .footer-top { flex-direction: column; gap: 8px; }
       .hero-cta-wrap { flex-direction: column; align-items: center; }
     }
   </style>
@@ -534,7 +604,10 @@
 <body>
 
 <nav>
-  <a class="nav-wordmark" href="index.html">The Hickman Saga</a>
+  <a class="nav-wordmark" href="index.html">
+    <span class="wordmark-sub">Jonathan Hickman</span>
+    <span class="wordmark-main">SECRET WARS SAGA</span>
+  </a>
   <a class="nav-link" href="reading-list.html">Reading List →</a>
 </nav>
 
@@ -547,16 +620,16 @@
   <p class="hero-label">Jonathan Hickman &nbsp;·&nbsp; Marvel Comics &nbsp;·&nbsp; 2010 – 2015</p>
 
   <h1 class="hero-title">
-    <span class="hero-title-line1">The Hickman</span>
+    <span class="hero-title-line1">Secret Wars</span>
     <span class="hero-title-line2">Saga</span>
   </h1>
 
-  <p class="hero-subtitle">A Complete Reading Guide</p>
+  <p class="hero-subtitle">A Complete Digital Reading Guide</p>
   <div class="hero-rule"></div>
 
   <p class="hero-tagline">
-    Five years. Nine arcs. Two hundred and fifty-four issues.<br>
-    One of the most ambitious stories ever told in comics.
+    An interactive reading tracker for the complete<br>
+    Jonathan Hickman Secret Wars reading order.
   </p>
 
   <div class="hero-cta-wrap">
@@ -571,40 +644,35 @@
 
 <!-- ABOUT -->
 <section id="about">
-  <p class="section-eyebrow reveal">About This Saga</p>
-  <h2 class="section-heading reveal">An Epic Five Years<br>in the Making</h2>
+  <p class="section-eyebrow reveal">About</p>
 
-  <div class="about-layout">
-    <div class="about-body">
-      <p class="reveal">
-        Beginning in 2010 with <strong>S.H.I.E.L.D.</strong>, Jonathan Hickman embarked on one of the most
-        ambitious long-form narratives in Marvel's history. Over five years, he quietly wove together
-        a vast tapestry — threading through secret societies, the fall of the Fantastic Four,
-        the formation of the Illuminati, and the birth of a new Avengers — all converging on a single,
-        inevitable endpoint.
-      </p>
-      <p class="reveal">
-        What separates Hickman's run is its <strong>architectural patience</strong>. Seeds planted in early
-        S.H.I.E.L.D. issues bloom chapters later. Characters in Fantastic Four carry grief into Avengers.
-        The incursions that begin as background noise become an existential countdown. Every arc
-        is a piece of the same machine — reading in order reveals a masterwork of long-form
-        storytelling that rewards the committed reader completely.
-      </p>
-      <p class="reveal">
-        It all culminates in <strong>Secret Wars (2015)</strong> — a collision of every Marvel universe, the
-        payoff for every thread laid across five years. Widely regarded as one of the most
-        structurally daring event comics ever published, and entirely earned by everything that came before.
-      </p>
+  <p class="about-body reveal">
+    This is an interactive site to track your progress through Jonathan Hickman's Secret Wars saga.
+    It's based on the reading list by <strong>/u/bfred</strong> on r/MarvelUnlimited —
+    <a href="https://www.reddit.com/r/MarvelUnlimited/comments/1iyevvt/updated_secret_wars_reading_guide_hickmans_saga/" target="_blank" rel="noopener">view the original guide here</a>.
+    Each issue is linked to where you can read it on Marvel Unlimited. Mark issues as you read them, track your progress, and work your way through
+    all 254 issues across nine story arcs.
+  </p>
+</section>
+
+<div class="divider"></div>
+
+<!-- CREDITS -->
+<section id="credits">
+  <p class="section-eyebrow reveal">Credits</p>
+  <div class="credits-grid reveal">
+    <div class="credit-item">
+      <span class="credit-label">Reading List</span>
+      <span class="credit-name">@bfred & @Thorn</span>
+      <span class="credit-desc">This site is solely a digital checklist version of the <a href="https://www.reddit.com/r/MarvelUnlimited/comments/1iyevvt/updated_secret_wars_reading_guide_hickmans_saga/" target="_blank" rel="noopener">reading guide</a> curated by @bfred and @Thorn. Additional credit to /u/mistaketheory, /u/canyonjump, /u/CorrupedEvil, /u/ShinCoal &amp; /u/GamiSB for v2 (as noted on the guide).</span>
     </div>
-
-    <div class="reveal">
-      <blockquote class="pullquote">
-        <p>"Everything dies. You. Me. Everyone on this planet. Our sun. Our galaxy. And, eventually,
-        the universe itself. This is simply how things are."</p>
-        <cite>— Jonathan Hickman, New Avengers #1</cite>
-      </blockquote>
+    <div class="credit-item">
+      <span class="credit-label">Marvel Comic Metadata API</span>
+      <span class="credit-name">emreparker</span>
+      <span class="credit-desc">Emreparker's <a href="https://marvel.emreparker.com/" target="_blank" rel="noopener">Marvel Comics Metadata API</a> was used to collect all the metadata needed to build the reading list (cover art, links to Marvel Unlimited, release dates).</span>
     </div>
   </div>
+  <p class="about-body reveal" style="margin-top: 36px;">Thanks to both for making it possible to create this digital reading guide!</p>
 </section>
 
 <div class="divider"></div>
@@ -618,7 +686,6 @@
     <span class="arc-roman" style="color:#c89a2e">I</span>
     <div class="arc-body">
       <span class="arc-name" style="color:rgba(228,216,192,0.72)">S.H.I.E.L.D.</span>
-      <span class="arc-desc">Ancient mysteries beneath a secret organisation — the first thread pulled.</span>
     </div>
     <span class="arc-dot" style="background:#c89a2e"></span>
   </div>
@@ -627,7 +694,6 @@
     <span class="arc-roman" style="color:#cc1a2e">II</span>
     <div class="arc-body">
       <span class="arc-name" style="color:rgba(228,216,192,0.72)">Secret Warriors</span>
-      <span class="arc-desc">Nick Fury's hidden war against Hydra in the shadows of the world.</span>
     </div>
     <span class="arc-dot" style="background:#cc1a2e"></span>
   </div>
@@ -636,7 +702,6 @@
     <span class="arc-roman" style="color:#2068c4">III</span>
     <div class="arc-body">
       <span class="arc-name" style="color:rgba(228,216,192,0.72)">Fantastic Four &amp; FF</span>
-      <span class="arc-desc">The first family fractures. The Future Foundation rises from the ashes.</span>
     </div>
     <span class="arc-dot" style="background:#2068c4"></span>
   </div>
@@ -645,7 +710,6 @@
     <span class="arc-roman" style="color:#00bcd4">IV</span>
     <div class="arc-body">
       <span class="arc-name" style="color:rgba(228,216,192,0.72)">Ultimate Universe</span>
-      <span class="arc-desc">A parallel world on the brink — the first incursion makes contact.</span>
     </div>
     <span class="arc-dot" style="background:#00bcd4"></span>
   </div>
@@ -654,7 +718,6 @@
     <span class="arc-roman" style="color:#10b97e">V</span>
     <div class="arc-body">
       <span class="arc-name" style="color:rgba(228,216,192,0.72)">Avengers World</span>
-      <span class="arc-desc">Stark and Rogers build a machine the size of the world — but the universe is bigger.</span>
     </div>
     <span class="arc-dot" style="background:#10b97e"></span>
   </div>
@@ -663,7 +726,6 @@
     <span class="arc-roman" style="color:#8b5cf6">VI</span>
     <div class="arc-body">
       <span class="arc-name" style="color:rgba(228,216,192,0.72)">Infinity</span>
-      <span class="arc-desc">Thanos comes for Earth while its mightiest defenders are lost in space.</span>
     </div>
     <span class="arc-dot" style="background:#8b5cf6"></span>
   </div>
@@ -672,7 +734,6 @@
     <span class="arc-roman" style="color:#ea580c">VII</span>
     <div class="arc-body">
       <span class="arc-name" style="color:rgba(228,216,192,0.72)">The Incursions</span>
-      <span class="arc-desc">Universes collide. The Illuminati face impossible choices. Worlds die.</span>
     </div>
     <span class="arc-dot" style="background:#ea580c"></span>
   </div>
@@ -681,7 +742,6 @@
     <span class="arc-roman" style="color:#e11d48">VIII</span>
     <div class="arc-body">
       <span class="arc-name" style="color:rgba(228,216,192,0.72)">Time Runs Out</span>
-      <span class="arc-desc">Eight months to the end of everything. The Avengers shattered. The clock is gone.</span>
     </div>
     <span class="arc-dot" style="background:#e11d48"></span>
   </div>
@@ -690,30 +750,8 @@
     <span class="arc-roman" style="color:#d4af37">IX</span>
     <div class="arc-body">
       <span class="arc-name" style="color:rgba(228,216,192,0.72)">Secret Wars</span>
-      <span class="arc-desc">The multiverse ends. Doom remakes everything. One world. Battleworld. The final chapter.</span>
     </div>
     <span class="arc-dot" style="background:#d4af37"></span>
-  </div>
-</section>
-
-<div class="divider"></div>
-
-<!-- BY THE NUMBERS -->
-<section>
-  <p class="section-eyebrow reveal">By the Numbers</p>
-  <div class="numbers-grid reveal">
-    <div class="number-cell">
-      <span class="number-val">254</span>
-      <span class="number-lbl">Issues</span>
-    </div>
-    <div class="number-cell">
-      <span class="number-val">IX</span>
-      <span class="number-lbl">Story Arcs</span>
-    </div>
-    <div class="number-cell">
-      <span class="number-val">5</span>
-      <span class="number-lbl">Years in the Making</span>
-    </div>
   </div>
 </section>
 
@@ -731,8 +769,15 @@
 
 <!-- FOOTER -->
 <footer>
-  <span class="footer-word">The Hickman Saga</span>
-  <span class="footer-note">All comics © Marvel Entertainment. Fan-made reading guide.</span>
+  <div class="footer-top">
+    <span class="footer-word">Jonathan Hickman's Secret Wars Saga</span>
+    <span class="footer-note">Fan-made reading guide. Not affiliated with Marvel.</span>
+  </div>
+  <p class="footer-disclaimer">
+    This is an independent, non-commercial fan project created for personal use. It is not affiliated with, endorsed by, or connected to
+    Marvel Entertainment, LLC, Marvel Studios, or The Walt Disney Company. All comic titles, characters, and related indicia are trademarks
+    and © Marvel Entertainment, LLC. No copyright infringement is intended. Reading list based on a community guide by /u/bred on r/MarvelUnlimited.
+  </p>
 </footer>
 
 <script>

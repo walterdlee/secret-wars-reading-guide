@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>The Hickman Saga — Complete Reading List</title>
+  <title>Jonathan Hickman's Secret Wars Saga — Complete Reading List</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@400;600;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=JetBrains+Mono:wght@300;400;700&display=swap" rel="stylesheet">
   <style>
@@ -57,6 +57,9 @@
       display: flex;
       flex-direction: column;
       gap: 1px;
+      text-decoration: none;
+      color: inherit;
+      cursor: pointer;
     }
     .wordmark-sub {
       font-family: 'JetBrains Mono', monospace;
@@ -139,7 +142,7 @@
       padding: 20px 18px 10px;
     }
 
-    .sidebar-links { flex: 1; }
+    .sidebar-links { }
 
     .sidebar-link {
       display: flex;
@@ -243,7 +246,7 @@
     .arc-header {
       display: flex;
       align-items: flex-start;
-      gap: 18px;
+      gap: 24px;
       margin-bottom: 24px;
       padding-bottom: 18px;
       border-bottom: 1px solid var(--border);
@@ -273,7 +276,7 @@
       color: var(--arc-color);
       line-height: 1;
       flex-shrink: 0;
-      width: 52px;
+      width: 64px;
       text-align: center;
       padding-top: 3px;
     }
@@ -843,10 +846,10 @@
 <body>
 
 <div id="top-bar">
-  <div class="saga-wordmark">
+  <a href="index.html" class="saga-wordmark">
     <span class="wordmark-sub">Jonathan Hickman</span>
-    <span class="wordmark-main">THE SECRET WARS SAGA</span>
-  </div>
+    <span class="wordmark-main">SECRET WARS SAGA</span>
+  </a>
   <div class="divider-v"></div>
   <div class="progress-track">
     <div id="global-bar"></div>
@@ -970,6 +973,7 @@ function markArc(arcIdx, markRead) {
   });
   updateProgress(arcIdx);
   updateGlobal();
+  if (markRead) checkComplete();
 }
 
 function updateProgress(arcIdx) {
@@ -1181,16 +1185,16 @@ fetch('hickman-reading-list.json')
   <div class="sc-content">
     <div class="sc-particles" id="sc-particles"></div>
     <p class="sc-eyebrow">2010 — 2015</p>
-    <h2 class="sc-title">Everything<br>Dies.</h2>
+    <h2 class="sc-title">Everything<br>Lives.</h2>
     <p class="sc-body">
-      But not before you witnessed all of it.<br>
+      And you witnessed all of it.<br>
       254 issues. Nine arcs. One saga. Complete.
     </p>
     <blockquote class="sc-quote">
       "Everything dies. You. Me. Everyone on this planet. Our sun.<br>
       Our galaxy. And, eventually, the universe itself.<br>
       This is simply how things are."
-      <cite>— Jonathan Hickman, New Avengers #1</cite>
+      <cite>— Reed Richards, New Avengers #1</cite>
     </blockquote>
     <button class="sc-close" onclick="document.getElementById('saga-complete').classList.remove('sc-visible')">
       Close
