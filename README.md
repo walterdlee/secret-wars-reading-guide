@@ -25,9 +25,9 @@ This site lets you track your reading progress through Hickman's Marvel run issu
 
 This site is solely a digital checklist version of the [reading guide](https://www.reddit.com/r/MarvelUnlimited/comments/1iyevvt/updated_secret_wars_reading_guide_hickmans_saga/) curated by @bfred and @Thorn on r/MarvelUnlimited. Additional credit to /u/mistaketheory, /u/canyonjump, /u/CorrupedEvil, /u/ShinCoal & /u/GamiSB for v2 (as noted on the guide).
 
-### Marvel Comics Metadata API — emreparker
+### Marvel Comics Metadata API — /u/Foxklau
 
-Emreparker's [Marvel Comics Metadata API](https://marvel.emreparker.com/) was used to collect all the metadata needed to build the reading list (cover art, links to Marvel Unlimited, release dates).
+/u/Foxklau's [Marvel Comics Metadata API](https://marvel.emreparker.com/) was used to collect all the metadata needed to build the reading list (cover art, links to Marvel Unlimited, release dates).
 
 Thanks to both for making it possible to create this digital reading guide!
 
