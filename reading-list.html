@@ -1148,6 +1148,19 @@ function setupScrollSpy() {
   }, { rootMargin: '-15% 0px -75% 0px', threshold: 0 });
 
   sections.forEach(s => observer.observe(s));
+
+  // When scrolled to the bottom, force-activate the last arc
+  window.addEventListener('scroll', () => {
+    const atBottom = window.innerHeight + window.scrollY >= document.body.scrollHeight - 8;
+    if (atBottom) {
+      links.forEach(l => l.classList.remove('active'));
+      const lastLink = links[links.length - 1];
+      if (lastLink) {
+        lastLink.classList.add('active');
+        lastLink.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+      }
+    }
+  }, { passive: true });
 }
 
 fetch('hickman-reading-list.json')
