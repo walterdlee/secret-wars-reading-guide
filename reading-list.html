@@ -841,7 +841,70 @@
       border: none;
       cursor: pointer;
     }
+
+    /* ── AUTH UI ── */
+    #auth-area {
+      display: flex;
+      align-items: center;
+      flex-shrink: 0;
+    }
+    #sign-in-btn {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      padding: 5px 10px;
+      border: 1px solid rgba(200,154,46,0.4);
+      background: transparent;
+      color: #c89a2e;
+      cursor: pointer;
+      border-radius: 2px;
+      transition: all 0.2s;
+    }
+    #sign-in-btn:hover {
+      border-color: #c89a2e;
+      background: rgba(200,154,46,0.08);
+    }
+    #user-info {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    #user-avatar {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: rgba(200,154,46,0.2);
+      border: 1px solid rgba(200,154,46,0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
+      color: #c89a2e;
+      flex-shrink: 0;
+    }
+    #sign-out-btn {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 4px 8px;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--text-muted);
+      cursor: pointer;
+      border-radius: 2px;
+      transition: all 0.2s;
+    }
+    #sign-out-btn:hover { color: var(--text); border-color: rgba(228,216,192,0.2); }
   </style>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script>
+    const SUPABASE_URL = '__SUPABASE_URL__';
+    const SUPABASE_KEY = '__SUPABASE_KEY__';
+    const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+  </script>
 </head>
 <body>
 
@@ -862,6 +925,14 @@
     <span class="zoom-icon">⊕</span>
   </div>
   <a href="index.html" id="about-link">About</a>
+  <div class="divider-v"></div>
+  <div id="auth-area">
+    <button id="sign-in-btn" onclick="signIn()" style="display:none">Sign In</button>
+    <div id="user-info" style="display:none">
+      <span id="user-avatar"></span>
+      <button id="sign-out-btn" onclick="signOut()">Sign Out</button>
+    </div>
+  </div>
 </div>
 
 <div id="layout">
@@ -899,7 +970,80 @@ let DATA, TOTAL;
 const STATE_KEY = 'hickman-saga-v1';
 let state = {};
 try { state = JSON.parse(localStorage.getItem(STATE_KEY) || '{}'); } catch(e) {}
-function save() { localStorage.setItem(STATE_KEY, JSON.stringify(state)); }
+
+let currentUser = null;
+let syncTimeout = null;
+
+function save() {
+  localStorage.setItem(STATE_KEY, JSON.stringify(state));
+  syncToRemote();
+}
+
+async function signIn() {
+  await sb.auth.signInWithOAuth({
+    provider: 'google',
+    options: { redirectTo: window.location.href }
+  });
+}
+
+async function signOut() {
+  await sb.auth.signOut();
+  currentUser = null;
+  updateAuthUI(null);
+}
+
+async function loadRemoteProgress(userId) {
+  const { data } = await sb.from('progress').select('state').eq('user_id', userId).single();
+  if (data?.state) {
+    state = { ...state, ...data.state };
+    save();
+    Object.keys(state).forEach(id => {
+      document.querySelectorAll(`.comic-card[data-id="${id}"]`).forEach(el => el.classList.add('checked'));
+    });
+    if (DATA) {
+      DATA.arcs.forEach((_, i) => updateProgress(i));
+      updateGlobal();
+    }
+  }
+}
+
+function syncToRemote() {
+  if (!currentUser) return;
+  clearTimeout(syncTimeout);
+  syncTimeout = setTimeout(async () => {
+    await sb.from('progress').upsert({ user_id: currentUser.id, state, updated_at: new Date().toISOString() });
+  }, 1000);
+}
+
+function updateAuthUI(user) {
+  const signInBtn = document.getElementById('sign-in-btn');
+  const userInfo = document.getElementById('user-info');
+  const avatar = document.getElementById('user-avatar');
+  if (user) {
+    signInBtn.style.display = 'none';
+    userInfo.style.display = 'flex';
+    avatar.textContent = user.email?.[0]?.toUpperCase() ?? '?';
+  } else {
+    signInBtn.style.display = 'block';
+    userInfo.style.display = 'none';
+  }
+}
+
+sb.auth.getSession().then(({ data: { session } }) => {
+  if (session?.user) {
+    currentUser = session.user;
+    updateAuthUI(currentUser);
+    loadRemoteProgress(currentUser.id);
+  } else {
+    updateAuthUI(null);
+  }
+});
+
+sb.auth.onAuthStateChange((_event, session) => {
+  currentUser = session?.user ?? null;
+  updateAuthUI(currentUser);
+  if (currentUser) loadRemoteProgress(currentUser.id);
+});
 
 function arcSlug(name) {
   return 'arc-' + name.replace(/[^a-z0-9]+/gi, '-').toLowerCase().replace(/-+$/,'');
