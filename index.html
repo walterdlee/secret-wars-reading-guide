@@ -695,18 +695,36 @@
     <a class="btn-ghost" href="#about">Learn More</a>
   </div>
 
-  <p id="sync-note" style="
+  <div id="sync-note" style="
     margin-top: 24px;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 8.5px;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    gap: 12px;
     opacity: 0;
     animation: fadeUp 0.9s 1s both;
   ">
-    <span id="sync-note-text">Sign in to sync your reading progress across devices</span>
-  </p>
+    <span id="sync-note-text" style="
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 8.5px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    ">Sign in to sync your reading progress across devices</span>
+    <button id="hero-sign-in-btn" onclick="signIn()" style="
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 8.5px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      padding: 5px 12px;
+      border: 1px solid rgba(200,154,46,0.4);
+      background: transparent;
+      color: var(--gold);
+      cursor: pointer;
+      border-radius: 2px;
+      transition: all 0.2s;
+      flex-shrink: 0;
+    ">Sign In</button>
+  </div>
 
   <div class="hero-scroll"><span>scroll</span></div>
 </div>
@@ -866,16 +884,19 @@
 
   function updateAuthUI(user) {
     const signInBtn = document.getElementById('sign-in-btn');
+    const heroSignInBtn = document.getElementById('hero-sign-in-btn');
     const userInfo = document.getElementById('user-info');
     const avatar = document.getElementById('user-avatar');
     const syncNote = document.getElementById('sync-note-text');
     if (user) {
       signInBtn.style.display = 'none';
+      heroSignInBtn.style.display = 'none';
       userInfo.style.display = 'flex';
       avatar.textContent = user.email?.[0]?.toUpperCase() ?? '?';
       syncNote.textContent = 'Signed in — your progress syncs automatically';
     } else {
       signInBtn.style.display = 'block';
+      heroSignInBtn.style.display = 'block';
       userInfo.style.display = 'none';
       syncNote.textContent = 'Sign in to sync your reading progress across devices';
     }
