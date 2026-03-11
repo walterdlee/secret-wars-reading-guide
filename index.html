@@ -586,6 +586,50 @@
     }
     .reveal.visible { opacity: 1; transform: translateY(0); }
 
+    /* ── AUTH ── */
+    #sign-in-btn {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      padding: 5px 10px;
+      border: 1px solid rgba(200,154,46,0.4);
+      background: transparent;
+      color: var(--gold);
+      cursor: pointer;
+      border-radius: 2px;
+      transition: all 0.2s;
+    }
+    #sign-in-btn:hover { border-color: var(--gold); background: rgba(200,154,46,0.08); }
+    #user-info { display: flex; align-items: center; gap: 8px; }
+    #user-avatar {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: rgba(200,154,46,0.15);
+      border: 1px solid rgba(200,154,46,0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
+      color: var(--gold);
+    }
+    #sign-out-btn {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 4px 8px;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--text-muted);
+      cursor: pointer;
+      border-radius: 2px;
+      transition: all 0.2s;
+    }
+    #sign-out-btn:hover { color: var(--text); border-color: rgba(228,216,192,0.2); }
+
     /* ── RESPONSIVE ── */
     @media (max-width: 820px) {
       nav { padding: 0 20px; }
@@ -600,6 +644,12 @@
       .hero-cta-wrap { flex-direction: column; align-items: center; }
     }
   </style>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script>
+    const SUPABASE_URL = '__SUPABASE_URL__';
+    const SUPABASE_KEY = '__SUPABASE_KEY__';
+    const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+  </script>
 </head>
 <body>
 
@@ -611,6 +661,11 @@
   <div style="display:flex;gap:24px;align-items:center;">
     <a class="nav-link" href="https://github.com/walterdlee/secret-wars-reading-guide" target="_blank" rel="noopener">GitHub</a>
     <a class="nav-link" href="reading-list.html">Reading List →</a>
+    <button id="sign-in-btn" onclick="signIn()" style="display:none">Sign In</button>
+    <div id="user-info" style="display:none">
+      <span id="user-avatar"></span>
+      <button id="sign-out-btn" onclick="signOut()">Sign Out</button>
+    </div>
   </div>
 </nav>
 
@@ -639,6 +694,19 @@
     <a class="btn-primary" href="reading-list.html">Enter the Reading List</a>
     <a class="btn-ghost" href="#about">Learn More</a>
   </div>
+
+  <p id="sync-note" style="
+    margin-top: 24px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8.5px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    opacity: 0;
+    animation: fadeUp 0.9s 1s both;
+  ">
+    <span id="sync-note-text">Sign in to sync your reading progress across devices</span>
+  </p>
 
   <div class="hero-scroll"><span>scroll</span></div>
 </div>
@@ -784,6 +852,38 @@
 </footer>
 
 <script>
+  async function signIn() {
+    await sb.auth.signInWithOAuth({
+      provider: 'google',
+      options: { redirectTo: window.location.href }
+    });
+  }
+
+  async function signOut() {
+    await sb.auth.signOut();
+    updateAuthUI(null);
+  }
+
+  function updateAuthUI(user) {
+    const signInBtn = document.getElementById('sign-in-btn');
+    const userInfo = document.getElementById('user-info');
+    const avatar = document.getElementById('user-avatar');
+    const syncNote = document.getElementById('sync-note-text');
+    if (user) {
+      signInBtn.style.display = 'none';
+      userInfo.style.display = 'flex';
+      avatar.textContent = user.email?.[0]?.toUpperCase() ?? '?';
+      syncNote.textContent = 'Signed in — your progress syncs automatically';
+    } else {
+      signInBtn.style.display = 'block';
+      userInfo.style.display = 'none';
+      syncNote.textContent = 'Sign in to sync your reading progress across devices';
+    }
+  }
+
+  sb.auth.getSession().then(({ data: { session } }) => updateAuthUI(session?.user ?? null));
+  sb.auth.onAuthStateChange((_event, session) => updateAuthUI(session?.user ?? null));
+
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry, i) => {
       if (entry.isIntersecting) {
