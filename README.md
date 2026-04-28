@@ -10,6 +10,8 @@ An interactive digital reading guide and progress tracker for Jonathan Hickman's
 
 This site lets you track your reading progress through Hickman's Marvel run issue by issue. Each issue includes cover art, a link to read it on Marvel Unlimited, and release date metadata. Mark issues as you finish them, track your progress arc by arc, and work your way through all nine story arcs in the correct reading order.
 
+On iOS and Android, comic links open directly in the Marvel Unlimited app if it's installed, with automatic fallback to the web if not.
+
 Sign in with Google to sync your progress across devices — your reading state is saved to the cloud and merged automatically on any device you sign in to. Without an account, progress is stored locally in your browser as before.
 
 ---
