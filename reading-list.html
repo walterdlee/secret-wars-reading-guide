@@ -903,7 +903,8 @@
   <script>
     const SUPABASE_URL = '__SUPABASE_URL__';
     const SUPABASE_KEY = '__SUPABASE_KEY__';
-    const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+    let sb;
+    try { sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY); } catch(e) { sb = null; }
   </script>
 </head>
 <body>
@@ -974,6 +975,26 @@ try { state = JSON.parse(localStorage.getItem(STATE_KEY) || '{}'); } catch(e) {}
 let currentUser = null;
 let syncTimeout = null;
 
+const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+
+function openComicLink(webUrl, issueId, event) {
+  event.stopPropagation();
+  event.preventDefault();
+  if (isIOS && issueId) {
+    const deepLink = `marvelunlimited://comics/issue/${issueId}`;
+    let appOpened = false;
+    const onBlur = () => { appOpened = true; };
+    window.addEventListener('blur', onBlur, { once: true });
+    window.location = deepLink;
+    setTimeout(() => {
+      window.removeEventListener('blur', onBlur);
+      if (!appOpened) window.open(webUrl, '_blank');
+    }, 1500);
+  } else {
+    window.open(webUrl, '_blank');
+  }
+}
+
 function save() {
   localStorage.setItem(STATE_KEY, JSON.stringify(state));
   syncToRemote();
@@ -1029,7 +1050,7 @@ function updateAuthUI(user) {
   }
 }
 
-sb.auth.getSession().then(({ data: { session } }) => {
+sb?.auth.getSession().then(({ data: { session } }) => {
   if (session?.user) {
     currentUser = session.user;
     updateAuthUI(currentUser);
@@ -1039,7 +1060,7 @@ sb.auth.getSession().then(({ data: { session } }) => {
   }
 });
 
-sb.auth.onAuthStateChange((_event, session) => {
+sb?.auth.onAuthStateChange((_event, session) => {
   currentUser = session?.user ?? null;
   updateAuthUI(currentUser);
   if (currentUser) loadRemoteProgress(currentUser.id);
@@ -1247,13 +1268,15 @@ function render() {
 
       const st = shortTitle(issue.title);
 
+      const issueId = issue.url.match(/\/issue\/(\d+)\//)?.[1] || '';
       card.innerHTML = `
         <div class="cover-wrap">
           <img src="${issue.cover}" alt="${issue.title.replace(/"/g, '&quot;')}" loading="lazy"
                onerror="this.style.visibility='hidden'">
           <div class="read-overlay"><span class="check-icon">✓</span></div>
           <a class="ext-link" href="${issue.url}" target="_blank" rel="noopener"
-             onclick="event.stopPropagation()" title="Open on Marvel.com"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
+             onclick="openComicLink('${issue.url}', '${issueId}', event)"
+             title="${isIOS ? 'Open in Marvel Unlimited' : 'Open on Marvel.com'}"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
           ${issue.optional ? '<span class="opt-badge">OPT</span>' : ''}${issue.note ? `<span class="note-badge">${issue.note}</span>` : ''}
         </div>
         <div class="card-info"><span class="card-title">${st}</span>${issue.releaseDate ? `<span class="card-date">${issue.releaseDate}</span>` : ''}</div>
@@ -1321,6 +1344,10 @@ fetch('hickman-reading-list.json')
         document.getElementById(slug)?.classList.add('collapsed');
       }
     });
+  })
+  .catch(err => {
+    document.getElementById('main-content').innerHTML =
+      `<p style="padding:40px;color:#e11d48;font-family:monospace">Failed to load reading list: ${err}</p>`;
   });
   // Zoom slider
   const slider = document.getElementById('zoom-slider');
