@@ -976,6 +976,7 @@ let currentUser = null;
 let syncTimeout = null;
 
 const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+const isAndroid = /Android/i.test(navigator.userAgent);
 
 function openComicLink(webUrl, issueId, event) {
   event.stopPropagation();
@@ -990,6 +991,9 @@ function openComicLink(webUrl, issueId, event) {
       window.removeEventListener('blur', onBlur);
       if (!appOpened) window.open(webUrl, '_blank');
     }, 1500);
+  } else if (isAndroid && issueId) {
+    // Intent URL: opens app if installed, falls back to web URL automatically
+    window.location = `intent://comics/issue/${issueId}#Intent;scheme=marvelunlimited;package=com.marvel.unlimited;S.browser_fallback_url=${encodeURIComponent(webUrl)};end`;
   } else {
     window.open(webUrl, '_blank');
   }
@@ -1276,7 +1280,7 @@ function render() {
           <div class="read-overlay"><span class="check-icon">✓</span></div>
           <a class="ext-link" href="${issue.url}" target="_blank" rel="noopener"
              onclick="openComicLink('${issue.url}', '${issueId}', event)"
-             title="${isIOS ? 'Open in Marvel Unlimited' : 'Open on Marvel.com'}"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
+             title="${(isIOS || isAndroid) ? 'Open in Marvel Unlimited' : 'Open on Marvel.com'}"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
           ${issue.optional ? '<span class="opt-badge">OPT</span>' : ''}${issue.note ? `<span class="note-badge">${issue.note}</span>` : ''}
         </div>
         <div class="card-info"><span class="card-title">${st}</span>${issue.releaseDate ? `<span class="card-date">${issue.releaseDate}</span>` : ''}</div>
